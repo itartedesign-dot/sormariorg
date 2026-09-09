@@ -65,6 +65,7 @@ header.nav{
 .nav-links a:hover{ opacity:1; }
 .nav-links a::after{ content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--bordeaux); transition:width .3s ease; }
 .nav-links a:hover::after{ width:100%; }
+.nav-close-btn{ display:none; }
 .nav-right{ display:flex; align-items:center; gap:18px; }
 .lang-toggle{ display:flex; align-items:center; gap:6px; font-size:.72rem; letter-spacing:1px; border:1px solid var(--line); border-radius:20px; padding:5px 12px; }
 .lang-toggle button{ opacity:.5; font-size:.72rem; letter-spacing:1px; }
@@ -73,6 +74,8 @@ header.nav{
 .burger span{ height:1.5px; background:var(--ink); width:100%; }
 @media (max-width:1080px){
   .nav-links{ position:fixed; top:0; right:0; height:100vh; width:78vw; max-width:320px; background:var(--cream); flex-direction:column; justify-content:center; align-items:flex-start; padding:40px; gap:24px; transform:translateX(100%); transition:transform .45s ease; border-left:1px solid var(--line); }
+  .nav-close-btn{ display:block; position:absolute; top:22px; right:22px; font-size:1.3rem; color:var(--ink); opacity:.7; }
+  .nav-close-btn:hover{ opacity:1; }
   .nav-links.open{ transform:translateX(0); }
   .burger{ display:flex; }
 }
@@ -165,6 +168,10 @@ header.nav{
 .g-card img{ width:100%; height:100%; object-fit:cover; }
 .g-card .g-play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:#fff; background:rgba(0,0,0,.25); text-shadow:0 2px 8px rgba(0,0,0,.6); }
 .gallery-hint{ text-align:center; margin-top:18px; font-size:.72rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
+.carousel-arrows{ display:flex; justify-content:center; align-items:center; gap:26px; margin-top:14px; }
+.carousel-arrows button{ display:flex; align-items:center; justify-content:center; padding:6px; color:var(--ink-soft); opacity:.6; transition:opacity .3s ease, color .3s ease; }
+.carousel-arrows button:hover{ opacity:1; color:var(--bordeaux); }
+.carousel-arrows svg{ width:34px; height:12px; }
 @media (max-width:700px){
   .gallery-stage{ height:360px; }
   .g-card{ width:170px; height:230px; margin:-115px 0 0 -85px; }
@@ -186,7 +193,7 @@ header.nav{
 .partner-logos div{ aspect-ratio:3/2; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--line); font-size:.68rem; letter-spacing:1px; text-transform:uppercase; }
 .partner-tile{ aspect-ratio:auto; flex-direction:column; cursor:pointer; overflow:hidden; transition:border-color .3s ease; }
 .partner-tile:hover{ border-color:var(--bordeaux); }
-.partner-tile img{ width:100%; height:110px; object-fit:cover; }
+.partner-tile img{ width:100%; height:190px; object-fit:cover; }
 .partner-tile .pt-caption{ padding:10px 12px; font-size:.7rem; color:var(--ink-soft); line-height:1.4; text-transform:none; letter-spacing:.2px; }
 @media (max-width:700px){ .partner-logos{ grid-template-columns:1fr 1fr; } }
 
@@ -224,8 +231,8 @@ header.nav{
 .modal-backdrop.show .modal-box{ transform:scale(1); opacity:1; }
 .modal-box.photo-only{ background:#000; align-items:center; justify-content:center; }
 .modal-box.photo-only img{ width:100%; height:auto; max-height:86vh; object-fit:contain; }
-.modal-media{ width:100%; max-height:48vh; overflow:hidden; }
-.modal-media img{ width:100%; height:100%; object-fit:cover; }
+.modal-media{ width:100%; max-height:60vh; overflow:hidden; background:#000; }
+.modal-media img{ width:100%; height:100%; object-fit:contain; }
 .modal-body{ padding:36px 40px 40px; }
 .modal-body .m-tag{ font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold-pale); margin-bottom:14px; }
 .modal-body h2{ color:#f2e9d8; font-size:1.7rem; margin-bottom:16px; }
@@ -249,7 +256,7 @@ header.nav{
 .depth-el{ transition:transform .15s linear, opacity .15s linear; will-change:transform, opacity; }
 
 footer{ background:var(--dark); color:rgba(239,231,214,.6); padding:50px 6vw 30px; text-align:center; }
-footer .flogo{ height:46px; margin:0 auto 20px; opacity:.9; filter:brightness(1.1); }
+footer .flogo{ height:92px; margin:0 auto 20px; opacity:.9; filter:brightness(1.1); }
 footer .fsocial{ display:flex; justify-content:center; margin-bottom:18px; }
 footer .fsocial a{ width:38px; height:38px; border:1px solid rgba(201,166,104,.35); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background .3s ease; }
 footer .fsocial a:hover{ background:var(--bordeaux); }
@@ -300,6 +307,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <header class="nav" id="siteNav">
   <a href="#home" class="nav-logo"><img src="Logo.png" alt="Sormarí"></a>
   <nav class="nav-links" id="navLinks">
+    <button class="nav-close-btn" id="navCloseBtn" aria-label="Close menu">✕</button>
     <a href="#home" class="i18n" data-en="Home" data-el="Αρχική">Home</a>
     <a href="#about" class="i18n" data-en="About" data-el="Σχετικά">About</a>
     <a href="#projects" class="i18n" data-en="Projects" data-el="Έργα">Projects</a>
@@ -323,7 +331,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
   <div class="wrap hero-split">
     <div class="hero-logo-col"><img src="Logo.png" alt="Sormarí"></div>
     <div class="hero-inner">
-      <div class="kicker i18n" data-en="Est. in the vineyard" data-el="Γεννημένοι στ' αμπέλι">Est. in the vineyard</div>
+      <div class="kicker i18n" data-en="Est. 2024" data-el="Ίδρυση 2024">Est. 2024</div>
       <h1 class="i18n" data-en="Welcome to <em>Sormarí</em>." data-el="Καλώς ήρθατε στη <em>Sormarí</em>.">Welcome to <em>Sormarí</em>.</h1>
       <p class="i18n" data-en="Discover a world of oenology, great wine and amazing winemaking experiences. Find all the support and guidance you need to achieve your wine goals! Get to know our philosophy, our work and our complete range of oenological consulting services. We hope that the next wine we make will tell your story." data-el="Ανακαλύψτε έναν κόσμο οινολογίας, εξαιρετικού κρασιού και μοναδικών εμπειριών οινοποίησης. Βρείτε όλη την υποστήριξη και την καθοδήγηση που χρειάζεστε για να πετύχετε τους στόχους σας στο κρασί! Γνωρίστε τη φιλοσοφία μας, τη δουλειά μας και το πλήρες φάσμα των συμβουλευτικών μας υπηρεσιών οινολογίας. Ελπίζουμε το επόμενο κρασί που θα φτιάξουμε να αφηγηθεί τη δική σας ιστορία.">Discover a world of oenology, great wine and amazing winemaking experiences. Find all the support and guidance you need to achieve your wine goals! Get to know our philosophy, our work and our complete range of oenological consulting services. We hope that the next wine we make will tell your story.</p>
       <div class="hero-cta">
@@ -397,6 +405,10 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
       <div class="gallery-ring" id="galleryRing"></div>
     </div>
     <div class="gallery-hint i18n" data-en="Drag to rotate — click a photo to enlarge" data-el="Σύρετε για περιστροφή — πατήστε για μεγέθυνση">Drag to rotate — click a photo to enlarge</div>
+    <div class="carousel-arrows">
+      <button id="galleryPrev" aria-label="Previous"><svg viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1"><line x1="34" y1="6" x2="1" y2="6"/><polyline points="7,1 1,6 7,11"/></svg></button>
+      <button id="galleryNext" aria-label="Next"><svg viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1"><line x1="0" y1="6" x2="33" y2="6"/><polyline points="27,1 33,6 27,11"/></svg></button>
+    </div>
   </div>
 </section>
 <!-- FINE SEZIONE: GALLERY -->
@@ -445,6 +457,10 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
       <div class="gallery-ring" id="filmsRing"></div>
     </div>
     <div class="gallery-hint i18n" data-en="Drag to rotate — click a film to watch" data-el="Σύρετε για περιστροφή — πατήστε για αναπαραγωγή">Drag to rotate — click a film to watch</div>
+    <div class="carousel-arrows">
+      <button id="filmsPrev" aria-label="Previous"><svg viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1"><line x1="34" y1="6" x2="1" y2="6"/><polyline points="7,1 1,6 7,11"/></svg></button>
+      <button id="filmsNext" aria-label="Next"><svg viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1"><line x1="0" y1="6" x2="33" y2="6"/><polyline points="27,1 33,6 27,11"/></svg></button>
+    </div>
   </div>
 </section>
 <!-- FINE SEZIONE: FILM / MEDIA -->
@@ -457,7 +473,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
       <h2 class="i18n" data-en="More than a t-shirt, an idea" data-el="Πάνω από ένα μπλουζάκι, μια ιδέα">More than a t-shirt, an idea</h2>
     </div>
     <div class="merch-row depth-el">
-      <img src="merchandising.jpg" alt="Sormarí merchandising">
+      <img src="merchandising.jpg" alt="Sormarí merchandising" id="merchImg" style="cursor:pointer;">
       <div>
         <div class="merch-quote i18n" data-en="“More than a t-shirt, an idea.”" data-el="«Περισσότερο από ένα μπλουζάκι, μια ιδέα.»">“More than a t-shirt, an idea.”</div>
         <p class="i18n" data-en="Our own line of clothing, carrying the Sormarí mark — currently in the works. A small window display, a big idea." data-el="Η δική μας σειρά ρούχων, με το σήμα Sormarí — αυτή τη στιγμή σε εξέλιξη. Μια μικρή βιτρίνα, μια μεγάλη ιδέα.">Our own line of clothing, carrying the Sormarí mark — currently in the works. A small window display, a big idea.</p>
@@ -526,7 +542,6 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <!-- SEZIONE: FOOTER (unica occorrenza Instagram + copyright) -->
 <footer>
   <img class="flogo" src="Logo.png" alt="Sormarí">
-  <div class="fsocial"><a href="https://www.instagram.com/sormariagriculture?igsh=OW9nY2o4NzQ4bXo3" target="_blank" rel="noopener noreferrer"><img src="instagram.png" alt="Instagram"></a></div>
   <div class="fcopy i18n" data-en="© 2026 - SORMARI AGRICULTURE LTD - ALL RIGHTS RESERVED" data-el="© 2026 - SORMARI AGRICULTURE LTD - ΜΕ ΕΠΙΦΥΛΑΞΗ ΠΑΝΤΟΣ ΔΙΚΑΙΩΜΑΤΟΣ">© 2026 - SORMARI AGRICULTURE LTD - ALL RIGHTS RESERVED</div>
 </footer>
 
@@ -557,6 +572,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
    ============================================================ */
 const siteNav = document.getElementById('siteNav');
 const burgerBtn = document.getElementById('burgerBtn');
+document.getElementById('navCloseBtn').addEventListener('click', ()=> navLinks.classList.remove('open'));
 const navLinks = document.getElementById('navLinks');
 burgerBtn.addEventListener('click', ()=> navLinks.classList.toggle('open'));
 navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navLinks.classList.remove('open')));
@@ -737,22 +753,43 @@ function initCarousel(stageId, ringId, n, buildCardEl){
   }
   function up(){ dragging=false; draggedFar = draggedFarLocal; setTimeout(()=> draggedFar=false, 50); }
 
+  function rotateStep(dir){
+    autoRotate = false;
+    const target = angle + dir*step;
+    const startAngle = angle;
+    const startTime = performance.now();
+    const duration = 480;
+    function animateStep(now){
+      const tt = Math.min(1, (now-startTime)/duration);
+      const eased = 1 - Math.pow(1-tt, 3);
+      angle = startAngle + (target-startAngle)*eased;
+      apply();
+      if(tt<1) requestAnimationFrame(animateStep);
+      else setTimeout(()=>{ autoRotate = true; }, 1200);
+    }
+    requestAnimationFrame(animateStep);
+  }
+
   stage.addEventListener('mousedown', e=> down(e.clientX));
   window.addEventListener('mousemove', e=> move(e.clientX));
   window.addEventListener('mouseup', up);
   stage.addEventListener('touchstart', e=> down(e.touches[0].clientX), {passive:true});
   stage.addEventListener('touchmove', e=> move(e.touches[0].clientX), {passive:true});
   stage.addEventListener('touchend', up);
+
+  return { rotateStep };
 }
 
 function initGallery(){
-  initCarousel('galleryStage', 'galleryRing', GALLERY_IMAGES.length, (i, isDraggedFar)=>{
+  const api = initCarousel('galleryStage', 'galleryRing', GALLERY_IMAGES.length, (i, isDraggedFar)=>{
     const src = GALLERY_IMAGES[i];
     const card = document.createElement('div');
     card.innerHTML = `<img src="${src}" alt="">`;
     card.addEventListener('click', ()=>{ if(!isDraggedFar()) openPhotoModal(src); });
     return card;
   });
+  document.getElementById('galleryPrev').addEventListener('click', ()=> api.rotateStep(-1));
+  document.getElementById('galleryNext').addEventListener('click', ()=> api.rotateStep(1));
 }
 
 /* SEZIONE: FILM — carosello con 2 video reali (Facebook) + 4 schede "Coming Soon" */
@@ -771,7 +808,7 @@ function openVideoModal(item){
   document.body.style.overflow='hidden';
 }
 function initFilms(){
-  initCarousel('filmsStage', 'filmsRing', FILMS.length, (i, isDraggedFar)=>{
+  const api = initCarousel('filmsStage', 'filmsRing', FILMS.length, (i, isDraggedFar)=>{
     const item = FILMS[i];
     const card = document.createElement('div');
     if(item.kind==='soon'){
@@ -783,7 +820,29 @@ function initFilms(){
     }
     return card;
   });
+  document.getElementById('filmsPrev').addEventListener('click', ()=> api.rotateStep(-1));
+  document.getElementById('filmsNext').addEventListener('click', ()=> api.rotateStep(1));
 }
+
+/* SEZIONE: MERCHANDISING — apertura a schermo intero con annuncio bilingue */
+const MERCH_TEXT = {
+  en:"We are currently working on an exclusive clothing line for those who live and work in the wine industry — coming soon.",
+  el:"Αυτή τη στιγμή εργαζόμαστε πάνω σε μια αποκλειστική σειρά ρούχων για όσους ζουν και εργάζονται στον χώρο του κρασιού — έρχεται σύντομα."
+};
+document.getElementById('merchImg').addEventListener('click', ()=>{
+  const lang = document.documentElement.getAttribute('data-lang')||'en';
+  modalBox.className = 'modal-box';
+  modalBox.innerHTML = `
+    <div class="modal-media"><img src="merchandising.jpg" alt="Sormarí merchandising"></div>
+    <div class="modal-body">
+      <div class="m-tag i18n" data-en="Merchandising" data-el="Merchandising">Merchandising</div>
+      <h2 class="i18n" data-en="An exclusive line, coming soon" data-el="Μια αποκλειστική σειρά, σύντομα">An exclusive line, coming soon</h2>
+      <p class="i18n" data-en="${MERCH_TEXT.en}" data-el="${MERCH_TEXT.el}">${MERCH_TEXT[lang]}</p>
+    </div>`;
+  modalBackdrop.classList.add('show');
+  modalClose.classList.add('show');
+  document.body.style.overflow='hidden';
+});
 
 /* SEZIONE: PARTNER ONASSIS — apertura a schermo intero con testo e link esterno */
 const ONASSIS_TEXT = {
