@@ -65,19 +65,42 @@ header.nav{
 .nav-links a:hover{ opacity:1; }
 .nav-links a::after{ content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--bordeaux); transition:width .3s ease; }
 .nav-links a:hover::after{ width:100%; }
-.nav-close-btn{ display:none; }
 .nav-right{ display:flex; align-items:center; gap:18px; }
 .lang-toggle{ display:flex; align-items:center; gap:6px; font-size:.72rem; letter-spacing:1px; border:1px solid var(--line); border-radius:20px; padding:5px 12px; }
 .lang-toggle button{ opacity:.5; font-size:.72rem; letter-spacing:1px; }
 .lang-toggle button.active{ opacity:1; color:var(--bordeaux); font-weight:500; }
-.burger{ display:none; flex-direction:column; gap:5px; width:24px; }
-.burger span{ height:1.5px; background:var(--ink); width:100%; }
+/* il tasto e' sempre una X (non un hamburger): apre e chiude lo stesso pannello */
+.burger{ display:none; position:relative; width:22px; height:22px; }
+.burger span{ position:absolute; top:50%; left:0; width:100%; height:1.5px; background:var(--ink); }
+.burger span:first-child{ transform:rotate(45deg); }
+.burger span:last-child{ transform:rotate(-45deg); }
+
 @media (max-width:1080px){
-  .nav-links{ position:fixed; top:0; right:0; height:100vh; width:78vw; max-width:320px; background:var(--cream); flex-direction:column; justify-content:center; align-items:flex-start; padding:40px; gap:24px; transform:translateX(100%); transition:transform .45s ease; border-left:1px solid var(--line); }
-  .nav-close-btn{ display:block; position:absolute; top:22px; right:22px; font-size:1.3rem; color:var(--ink); opacity:.7; }
-  .nav-close-btn:hover{ opacity:1; }
-  .nav-links.open{ transform:translateX(0); }
-  .burger{ display:flex; }
+  /* SEZIONE: MENU MOBILE A BROCHURE 3D — piega orizzontale, apertura da destra a sinistra */
+  .nav-links{
+    position:fixed; top:0; right:0; height:100vh; width:78vw; max-width:320px;
+    display:block; perspective:1600px; pointer-events:none;
+  }
+  .nav-links.open{ pointer-events:auto; }
+
+  .brochure-panel{
+    position:absolute; top:0; bottom:0; width:50%; height:100%;
+    background:var(--cream);
+    display:flex; flex-direction:column; justify-content:center; gap:22px; padding:26px 22px;
+    backface-visibility:hidden; transform-style:preserve-3d;
+    transition:transform 1.15s cubic-bezier(.65,0,.35,1);
+  }
+  .panel-right{ right:0; border-left:1px solid var(--line); transform-origin:left center; transform:rotateY(105deg); box-shadow:18px 0 40px rgba(0,0,0,.18); }
+  .panel-left{ left:0; border-left:1px solid var(--line); transform-origin:right center; transform:rotateY(-105deg); box-shadow:-18px 0 40px rgba(0,0,0,.18); }
+
+  /* apertura: il pannello destro si dispiega per primo, quello sinistro segue — da destra a sinistra */
+  .nav-links.open .panel-right{ transform:rotateY(0deg); transition-delay:0s; }
+  .nav-links.open .panel-left{ transform:rotateY(0deg); transition-delay:.32s; }
+  /* chiusura: ordine inverso — il sinistro si ripiega per primo, poi il destro — da sinistra a destra */
+  .nav-links:not(.open) .panel-left{ transition-delay:0s; }
+  .nav-links:not(.open) .panel-right{ transition-delay:.28s; }
+
+  .burger{ display:block; }
 }
 
 /* INIZIO SEZIONE: HOME / HERO */
@@ -205,6 +228,13 @@ header.nav{
 .webradio-row{ display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center; }
 .webradio-img img{ width:100%; max-width:380px; margin:0 auto; filter:drop-shadow(0 30px 50px rgba(0,0,0,.25)); }
 @media (max-width:800px){ .webradio-row{ grid-template-columns:1fr; } .webradio-img{ order:-1; } }
+
+.ambient-player{ display:flex; align-items:center; gap:12px; margin-top:28px; }
+.ap-btn{ width:38px; height:38px; flex:0 0 auto; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink-soft); transition:background .3s ease, color .3s ease, border-color .3s ease; }
+.ap-btn:hover{ border-color:var(--bordeaux); color:var(--bordeaux); }
+.ap-btn.active{ background:var(--bordeaux); border-color:var(--bordeaux); color:#fff; }
+.ap-btn svg{ width:15px; height:15px; }
+.ap-label{ font-size:.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
 /* FINE SEZIONE PLACEHOLDER */
 
 /* INIZIO SEZIONE: CONTATTI */
@@ -255,6 +285,15 @@ header.nav{
 
 /* SEZIONE: EFFETTO DI PROFONDITA' ALLO SCROLL — leggero, non invasivo */
 .depth-el{ transition:transform .15s linear, opacity .15s linear; will-change:transform, opacity; }
+
+/* SEZIONE: MOTION BLUR DINAMICO — sfocatura leggera durante scroll/rotazione rapidi */
+/* SEZIONE: SCHIARITURA AI BORDI (sostituisce il blur) — solo alto/basso, centro sempre nitido */
+.edge-fade{ position:fixed; left:0; right:0; height:16vh; pointer-events:none; z-index:950; opacity:0; mix-blend-mode:screen; transition:opacity .22s ease-out; }
+.edge-fade.top{ top:0; background:linear-gradient(to bottom, rgba(255,255,255,.55), transparent); }
+.edge-fade.bottom{ bottom:0; background:linear-gradient(to top, rgba(255,255,255,.55), transparent); }
+.stage-fade{ position:absolute; top:0; bottom:0; width:20%; pointer-events:none; z-index:5; opacity:0; mix-blend-mode:screen; transition:opacity .22s ease-out; }
+.stage-fade.left{ left:0; background:linear-gradient(to right, rgba(255,255,255,.55), transparent); }
+.stage-fade.right{ right:0; background:linear-gradient(to left, rgba(255,255,255,.55), transparent); }
 
 footer{ background:var(--dark); color:rgba(239,231,214,.6); padding:50px 6vw 30px; text-align:center; }
 footer .flogo{ height:92px; margin:0 auto 20px; opacity:.9; filter:brightness(1.1); }
@@ -308,25 +347,31 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <header class="nav" id="siteNav">
   <a href="#home" class="nav-logo"><img src="Logo.png" alt="Sormarí"></a>
   <nav class="nav-links" id="navLinks">
-    <button class="nav-close-btn" id="navCloseBtn" aria-label="Close menu">✕</button>
-    <a href="#home" class="i18n" data-en="Home" data-el="Αρχική">Home</a>
-    <a href="#about" class="i18n" data-en="About" data-el="Σχετικά">About</a>
-    <a href="#projects" class="i18n" data-en="Projects" data-el="Έργα">Projects</a>
-    <a href="#services" class="i18n" data-en="Services" data-el="Υπηρεσίες">Services</a>
-    <a href="#partners" class="i18n" data-en="Partners" data-el="Συνεργάτες">Partners</a>
-    <a href="#merchandising" class="i18n" data-en="Merchandising" data-el="Merchandising">Merchandising</a>
-    <a href="#webradio" class="i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</a>
-    <a href="#contact" class="i18n" data-en="Contact" data-el="Επικοινωνία">Contact</a>
+    <div class="brochure-panel panel-right">
+      <a href="#partners" class="i18n" data-en="Partners" data-el="Συνεργάτες">Partners</a>
+      <a href="#merchandising" class="i18n" data-en="Merchandising" data-el="Merchandising">Merchandising</a>
+      <a href="#webradio" class="i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</a>
+      <a href="#contact" class="i18n" data-en="Contact" data-el="Επικοινωνία">Contact</a>
+    </div>
+    <div class="brochure-panel panel-left">
+      <a href="#home" class="i18n" data-en="Home" data-el="Αρχική">Home</a>
+      <a href="#about" class="i18n" data-en="About" data-el="Σχετικά">About</a>
+      <a href="#projects" class="i18n" data-en="Projects" data-el="Έργα">Projects</a>
+      <a href="#services" class="i18n" data-en="Services" data-el="Υπηρεσίες">Services</a>
+    </div>
   </nav>
   <div class="nav-right">
     <div class="lang-toggle">
       <button data-setlang="en" class="active">EN</button><span style="opacity:.4">/</span><button data-setlang="el">ΕΛ</button>
     </div>
-    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span></button>
   </div>
 </header>
 
 <!-- INIZIO SEZIONE: HOME / HERO -->
+<div class="edge-fade top" id="edgeFadeTop"></div>
+<div class="edge-fade bottom" id="edgeFadeBottom"></div>
+<div id="pageContent">
 <section class="hero" id="home">
   <div class="hero-bg"><img src="IMG_2712.jpeg" alt="Sormarí vineyards"></div>
   <div class="wrap hero-split">
@@ -492,6 +537,29 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
       <div class="kicker i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</div>
       <h2 class="i18n" data-en="Sormarí, on air soon" data-el="Sormarí, σύντομα στον αέρα">Sormarí, on air soon</h2>
       <p class="i18n" data-en="Music, conversations and stories from the vineyard — our web radio is coming soon." data-el="Μουσική, συζητήσεις και ιστορίες από τον αμπελώνα — το web radio μας έρχεται σύντομα.">Music, conversations and stories from the vineyard — our web radio is coming soon.</p>
+      <!--
+        NOTA IMPORTANTE PRIMA DEL LANCIO PUBBLICO:
+        "ambient.mp3" e' un placeholder di sviluppo (un breve tono generato, nessun
+        problema di licenza). Il link diretto di Freesound che mi avevi indicato NON
+        e' incorporabile: il loro server blocca le richieste da altri siti (risposta 403,
+        verificato). Per un suono ambientale vero: scarica una traccia regolarmente
+        licenziata per uso commerciale e caricala su GitHub come "ambient.mp3"
+        (stesso procedimento gia' usato per foto e video del sito).
+      -->
+      <div class="ambient-player" id="ambientPlayer">
+        <button class="ap-btn" id="ambientPlayBtn" aria-label="Play ambient sound">
+          <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <button class="ap-btn" id="ambientMuteBtn" aria-label="Mute">
+          <svg class="icon-vol-on" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg>
+          <svg class="icon-vol-off" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v2.06l1.94 1.94c.04-.25.06-.5.06-.76zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 003.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+        </button>
+        <span class="ap-label i18n" data-en="Ambient atmosphere" data-el="Ηχητική ατμόσφαιρα">Ambient atmosphere</span>
+        <audio id="ambientAudio" loop preload="none">
+          <source src="ambient.mp3" type="audio/mpeg">
+        </audio>
+      </div>
     </div>
     <div class="webradio-img"><img src="mic_wine.png" alt="Web Radio"></div>
   </div>
@@ -539,6 +607,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
   </div>
 </a>
 <!-- FINE SEZIONE: SEDE LEGALE -->
+</div>
 
 <!-- SEZIONE: FOOTER (unica occorrenza Instagram + copyright) -->
 <footer>
@@ -573,7 +642,6 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
    ============================================================ */
 const siteNav = document.getElementById('siteNav');
 const burgerBtn = document.getElementById('burgerBtn');
-document.getElementById('navCloseBtn').addEventListener('click', ()=> navLinks.classList.remove('open'));
 const navLinks = document.getElementById('navLinks');
 burgerBtn.addEventListener('click', ()=> navLinks.classList.toggle('open'));
 navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navLinks.classList.remove('open')));
@@ -719,6 +787,13 @@ function initCarousel(stageId, ringId, n, buildCardEl){
   const step = 360/n;
   let draggedFar = false;
 
+  const fadeLeft = document.createElement('div');
+  fadeLeft.className = 'stage-fade left';
+  const fadeRight = document.createElement('div');
+  fadeRight.className = 'stage-fade right';
+  stage.appendChild(fadeLeft);
+  stage.appendChild(fadeRight);
+
   for(let i=0;i<n;i++){
     const card = buildCardEl(i, ()=> draggedFar);
     card.classList.add('g-card');
@@ -731,11 +806,21 @@ function initCarousel(stageId, ringId, n, buildCardEl){
   let dragging = false;
   let startX = 0, lastX = 0, lastT = 0, vel = 0;
   let draggedFarLocal = false;
+  let stageFadeTimer = null;
 
-  function apply(){ ring.style.transform = `rotateY(${angle}deg)`; }
+  function apply(v){
+    ring.style.transform = `rotateY(${angle}deg)`;
+    const amount = Math.min(1, Math.abs(v||0) * 0.45);
+    if(amount > 0.06){
+      fadeLeft.style.opacity = amount.toFixed(2);
+      fadeRight.style.opacity = amount.toFixed(2);
+      clearTimeout(stageFadeTimer);
+      stageFadeTimer = setTimeout(()=>{ fadeLeft.style.opacity = 0; fadeRight.style.opacity = 0; }, 160);
+    }
+  }
   function tick(){
     if(autoRotate && !dragging){ angle += 0.06; apply(); }
-    else if(!dragging && Math.abs(vel) > 0.01){ angle += vel; vel *= 0.95; apply(); }
+    else if(!dragging && Math.abs(vel) > 0.01){ angle += vel; vel *= 0.95; apply(vel); }
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
@@ -750,7 +835,7 @@ function initCarousel(stageId, ringId, n, buildCardEl){
     const dx = x-lastX; const dt = Math.max(1, now-lastT);
     if(Math.abs(x-startX)>6) draggedFarLocal = true;
     angle += dx*0.4; vel = (dx*0.4)/(dt/16.67);
-    lastX=x; lastT=now; apply();
+    lastX=x; lastT=now; apply(vel);
   }
   function up(){ dragging=false; draggedFar = draggedFarLocal; setTimeout(()=> draggedFar=false, 50); }
 
@@ -977,6 +1062,36 @@ botInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ document.getEleme
 window.addEventListener('scroll', ()=>{ siteNav.style.boxShadow = window.scrollY>10 ? '0 2px 12px rgba(0,0,0,.06)' : 'none'; }, {passive:true});
 
 /* ============================================================
+   PLAYER AUDIO AMBIENTALE — play/pause + muto, loop continuo
+   finché l'utente non lo ferma. Traccia di sviluppo temporanea:
+   vedi nota HTML nella sezione Web Radio prima del lancio.
+   ============================================================ */
+const ambientAudio = document.getElementById('ambientAudio');
+const ambientPlayBtn = document.getElementById('ambientPlayBtn');
+const ambientMuteBtn = document.getElementById('ambientMuteBtn');
+let ambientPlaying = false;
+ambientPlayBtn.addEventListener('click', ()=>{
+  if(ambientPlaying){
+    ambientAudio.pause();
+    ambientPlayBtn.classList.remove('active');
+    ambientPlayBtn.querySelector('.icon-play').style.display = '';
+    ambientPlayBtn.querySelector('.icon-pause').style.display = 'none';
+  } else {
+    ambientAudio.play().catch(()=>{ /* riproduzione autom. bloccata finché non c'e' un'interazione: gia' garantita dal click */ });
+    ambientPlayBtn.classList.add('active');
+    ambientPlayBtn.querySelector('.icon-play').style.display = 'none';
+    ambientPlayBtn.querySelector('.icon-pause').style.display = '';
+  }
+  ambientPlaying = !ambientPlaying;
+});
+ambientMuteBtn.addEventListener('click', ()=>{
+  ambientAudio.muted = !ambientAudio.muted;
+  ambientMuteBtn.classList.toggle('active', ambientAudio.muted);
+  ambientMuteBtn.querySelector('.icon-vol-on').style.display = ambientAudio.muted ? 'none' : '';
+  ambientMuteBtn.querySelector('.icon-vol-off').style.display = ambientAudio.muted ? '' : 'none';
+});
+
+/* ============================================================
    EFFETTO DI PROFONDITA' — le schede in primo piano (al centro
    dello schermo) restano a grandezza piena; quelle sopra/sotto
    si allontanano, rimpicciolendosi leggermente. Semplice, elegante.
@@ -999,6 +1114,33 @@ let depthTicking = false;
 window.addEventListener('scroll', ()=>{ if(!depthTicking){ requestAnimationFrame(()=>{ updateDepth(); depthTicking=false; }); depthTicking=true; } }, {passive:true});
 window.addEventListener('resize', updateDepth);
 setTimeout(updateDepth, 300);
+
+/* ============================================================
+   SCHIARITURA AI BORDI DURANTE LO SCROLL — non piu' un blur
+   uniforme: solo una fascia in alto e una in basso dello schermo
+   si schiarisce leggermente durante lo scroll veloce; il centro
+   resta sempre perfettamente nitido.
+   ============================================================ */
+const edgeFadeTop = document.getElementById('edgeFadeTop');
+const edgeFadeBottom = document.getElementById('edgeFadeBottom');
+let lastBlurY = window.scrollY;
+let lastBlurT = performance.now();
+let blurClearTimer = null;
+function handleScrollBlur(){
+  const now = performance.now();
+  const dt = Math.max(1, now - lastBlurT);
+  const speed = Math.abs(window.scrollY - lastBlurY) / dt; // px per ms
+  const amount = Math.min(1, speed * 3.4);
+  const val = amount > 0.06 ? amount.toFixed(2) : 0;
+  edgeFadeTop.style.opacity = val;
+  edgeFadeBottom.style.opacity = val;
+  lastBlurY = window.scrollY;
+  lastBlurT = now;
+  clearTimeout(blurClearTimer);
+  blurClearTimer = setTimeout(()=>{ edgeFadeTop.style.opacity = 0; edgeFadeBottom.style.opacity = 0; }, 160);
+}
+window.addEventListener('scroll', handleScrollBlur, {passive:true});
 </script>
+
 </body>
 </html>
