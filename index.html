@@ -70,10 +70,14 @@ header.nav{
 .lang-toggle button{ opacity:.5; font-size:.72rem; letter-spacing:1px; }
 .lang-toggle button.active{ opacity:1; color:var(--bordeaux); font-weight:500; }
 /* il tasto e' sempre una X (non un hamburger): apre e chiude lo stesso pannello */
-.burger{ display:none; position:relative; width:22px; height:22px; }
-.burger span{ position:absolute; top:50%; left:0; width:100%; height:1.5px; background:var(--ink); }
-.burger span:first-child{ transform:rotate(45deg); }
-.burger span:last-child{ transform:rotate(-45deg); }
+.burger{ display:none; position:relative; width:22px; height:16px; }
+.burger span{ position:absolute; left:0; width:100%; height:1.5px; background:var(--ink); transition:transform .35s ease, opacity .35s ease, top .35s ease; }
+.burger span:nth-child(1){ top:0; }
+.burger span:nth-child(2){ top:50%; margin-top:-.75px; }
+.burger span:nth-child(3){ top:100%; margin-top:-1.5px; }
+.burger.open span:nth-child(1){ top:50%; margin-top:-.75px; transform:rotate(45deg); }
+.burger.open span:nth-child(2){ opacity:0; }
+.burger.open span:nth-child(3){ top:50%; margin-top:-.75px; transform:rotate(-45deg); }
 
 @media (max-width:1080px){
   /* SEZIONE: MENU MOBILE A BROCHURE 3D — piega orizzontale, apertura da destra a sinistra */
@@ -88,17 +92,17 @@ header.nav{
     background:var(--cream);
     display:flex; flex-direction:column; justify-content:center; gap:22px; padding:26px 22px;
     backface-visibility:hidden; transform-style:preserve-3d;
-    transition:transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:transform 1.8s cubic-bezier(0.45, 0, 0.15, 1);
   }
   .panel-right{ right:0; border-left:1px solid var(--line); transform-origin:left center; transform:rotateY(105deg); box-shadow:18px 0 40px rgba(0,0,0,.18); }
   .panel-left{ left:0; border-left:1px solid var(--line); transform-origin:right center; transform:rotateY(-105deg); box-shadow:-18px 0 40px rgba(0,0,0,.18); }
 
   /* apertura: il pannello destro si dispiega per primo, quello sinistro segue — da destra a sinistra */
   .nav-links.open .panel-right{ transform:rotateY(0deg); transition-delay:0s; }
-  .nav-links.open .panel-left{ transform:rotateY(0deg); transition-delay:.38s; }
+  .nav-links.open .panel-left{ transform:rotateY(0deg); transition-delay:.5s; }
   /* chiusura: ordine inverso — il sinistro si ripiega per primo, poi il destro — da sinistra a destra */
   .nav-links:not(.open) .panel-left{ transition-delay:0s; }
-  .nav-links:not(.open) .panel-right{ transition-delay:.34s; }
+  .nav-links:not(.open) .panel-right{ transition-delay:.45s; }
 
   .burger{ display:block; }
 }
@@ -229,8 +233,12 @@ header.nav{
 .webradio-img img{ width:100%; max-width:380px; margin:0 auto; filter:drop-shadow(0 30px 50px rgba(0,0,0,.25)); }
 @media (max-width:800px){ .webradio-row{ grid-template-columns:1fr; } .webradio-img{ order:-1; } }
 
-.ambient-player{ margin-top:28px; }
-.ambient-player iframe{ border-radius:4px; }
+.ambient-player{ display:flex; align-items:center; gap:12px; margin-top:16px; }
+.ap-btn{ width:38px; height:38px; flex:0 0 auto; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink-soft); transition:background .3s ease, color .3s ease, border-color .3s ease; }
+.ap-btn:hover{ border-color:var(--bordeaux); color:var(--bordeaux); }
+.ap-btn.active{ background:var(--bordeaux); border-color:var(--bordeaux); color:#fff; }
+.ap-btn svg{ width:15px; height:15px; }
+.ap-label{ font-size:.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
 /* FINE SEZIONE PLACEHOLDER */
 
 /* INIZIO SEZIONE: CONTATTI */
@@ -288,8 +296,8 @@ header.nav{
 .edge-fade.top{ top:0; background:linear-gradient(to bottom, rgba(255,255,255,.55), transparent); }
 .edge-fade.bottom{ bottom:0; background:linear-gradient(to top, rgba(255,255,255,.55), transparent); }
 .stage-fade{ position:absolute; top:0; bottom:0; width:20%; pointer-events:none; z-index:5; opacity:0; mix-blend-mode:screen; transition:opacity .22s ease-out; }
-.stage-fade.left{ left:0; background:linear-gradient(to right, rgba(255,255,255,.55), transparent); }
-.stage-fade.right{ right:0; background:linear-gradient(to left, rgba(255,255,255,.55), transparent); }
+.stage-fade.left{ left:0; background:linear-gradient(to right, rgba(255,255,255,.4), transparent); }
+.stage-fade.right{ right:0; background:linear-gradient(to left, rgba(255,255,255,.4), transparent); }
 
 footer{ background:var(--dark); color:rgba(239,231,214,.6); padding:50px 6vw 30px; text-align:center; }
 footer .flogo{ height:92px; margin:0 auto 20px; opacity:.9; filter:brightness(1.1); }
@@ -360,7 +368,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
     <div class="lang-toggle">
       <button data-setlang="en" class="active">EN</button><span style="opacity:.4">/</span><button data-setlang="el">ΕΛ</button>
     </div>
-    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span></button>
+    <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -535,20 +543,26 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
       <p class="i18n" data-en="Music, conversations and stories from the vineyard — our web radio is coming soon." data-el="Μουσική, συζητήσεις και ιστορίες από τον αμπελώνα — το web radio μας έρχεται σύντομα.">Music, conversations and stories from the vineyard — our web radio is coming soon.</p>
       <!--
         NOTA IMPORTANTE PRIMA DEL LANCIO PUBBLICO:
-        questo e' il player UFFICIALE di Freesound per il brano "Fantasy" di
-        SergeQuadrado (l'unico modo che funziona davvero per quella traccia
-        specifica: il file diretto blocca le richieste esterne, verificato).
-        Compromessi da sapere: (1) e' il LORO player, non i pulsanti
-        personalizzati costruiti in precedenza; (2) il brano dura 28.8s e
-        NON si ripete in loop automaticamente (il widget non lo supporta);
-        (3) licenza Attribution-NonCommercial — non utilizzabile su un sito
-        commerciale. Prima del lancio: sostituire con una traccia ambient
-        lunga, in loop, regolarmente licenziata per uso commerciale — a quel
-        punto si puo' ripristinare il player con pulsanti play/pausa/muto
-        personalizzati (codice gia' pronto, vedi versione precedente).
+        "ambient.mp3" e' un placeholder di sviluppo (un tono generato, nessun
+        problema di licenza). La traccia Freesound indicata (SergeQuadrado
+        "Fantasy") NON e' incorporabile come file diretto: il loro server
+        blocca le richieste da altri siti e il download richiede login.
+        Prima del lancio pubblico: sostituire questo file con una traccia
+        ambient regolarmente licenziata per uso commerciale, caricandola su
+        GitHub con lo stesso nome ("ambient.mp3") — nessun'altra modifica al
+        codice sara' necessaria.
       -->
       <div class="ambient-player">
-        <iframe title="Fantasy by SergeQuadrado (Freesound)" frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/654731/simple/medium/" width="481" height="86" style="max-width:100%;"></iframe>
+        <button class="ap-btn ap-play" aria-label="Play ambient sound">
+          <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <button class="ap-btn ap-mute" aria-label="Mute">
+          <svg class="icon-vol-on" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg>
+          <svg class="icon-vol-off" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v2.06l1.94 1.94c.04-.25.06-.5.06-.76zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 003.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+        </button>
+        <span class="ap-label i18n" data-en="Ambient atmosphere" data-el="Ηχητική ατμόσφαιρα">Ambient atmosphere</span>
+        <audio class="ap-audio" loop preload="none"><source src="ambient.mp3" type="audio/mpeg"></audio>
       </div>
     </div>
     <div class="webradio-img"><img src="mic_wine.png" alt="Web Radio"></div>
@@ -633,8 +647,11 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 const siteNav = document.getElementById('siteNav');
 const burgerBtn = document.getElementById('burgerBtn');
 const navLinks = document.getElementById('navLinks');
-burgerBtn.addEventListener('click', ()=> navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navLinks.classList.remove('open')));
+burgerBtn.addEventListener('click', ()=>{
+  navLinks.classList.toggle('open');
+  burgerBtn.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{ navLinks.classList.remove('open'); burgerBtn.classList.remove('open'); }));
 
 const langButtons = document.querySelectorAll('[data-setlang]');
 function setLang(lang){
@@ -808,7 +825,7 @@ function initCarousel(stageId, ringId, n, buildCardEl){
 
   function apply(v){
     ring.style.transform = `rotateY(${angle}deg)`;
-    const amount = Math.min(1, Math.abs(v||0) * 0.45);
+    const amount = Math.min(0.4, Math.abs(v||0) * 0.22);
     if(amount > 0.06){
       fadeLeft.style.opacity = amount.toFixed(2);
       fadeRight.style.opacity = amount.toFixed(2);
@@ -1061,9 +1078,37 @@ botInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ document.getEleme
 
 window.addEventListener('scroll', ()=>{ siteNav.style.boxShadow = window.scrollY>10 ? '0 2px 12px rgba(0,0,0,.06)' : 'none'; }, {passive:true});
 
-/* Player audio: ora e' il widget ufficiale di Freesound incorporato via
-   iframe (vedi nota nell'HTML della sezione Web Radio) — nessun JS
-   necessario qui, la loro interfaccia gestisce play/pausa/volume da sola. */
+/* ============================================================
+   PLAYER AUDIO AMBIENTALE — play/pausa + muto per ciascuna traccia,
+   loop continuo finché l'utente non la ferma. Tracce di sviluppo
+   temporanee: vedi nota HTML nella sezione Web Radio prima del lancio.
+   ============================================================ */
+document.querySelectorAll('.ambient-player').forEach(player=>{
+  const audio = player.querySelector('.ap-audio');
+  const playBtn = player.querySelector('.ap-play');
+  const muteBtn = player.querySelector('.ap-mute');
+  let playing = false;
+  playBtn.addEventListener('click', ()=>{
+    if(playing){
+      audio.pause();
+      playBtn.classList.remove('active');
+      playBtn.querySelector('.icon-play').style.display = '';
+      playBtn.querySelector('.icon-pause').style.display = 'none';
+    } else {
+      audio.play().catch(()=>{});
+      playBtn.classList.add('active');
+      playBtn.querySelector('.icon-play').style.display = 'none';
+      playBtn.querySelector('.icon-pause').style.display = '';
+    }
+    playing = !playing;
+  });
+  muteBtn.addEventListener('click', ()=>{
+    audio.muted = !audio.muted;
+    muteBtn.classList.toggle('active', audio.muted);
+    muteBtn.querySelector('.icon-vol-on').style.display = audio.muted ? 'none' : '';
+    muteBtn.querySelector('.icon-vol-off').style.display = audio.muted ? '' : 'none';
+  });
+});
 
 /* ============================================================
    EFFETTO DI PROFONDITA' — le schede in primo piano (al centro
