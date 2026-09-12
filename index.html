@@ -88,17 +88,17 @@ header.nav{
     background:var(--cream);
     display:flex; flex-direction:column; justify-content:center; gap:22px; padding:26px 22px;
     backface-visibility:hidden; transform-style:preserve-3d;
-    transition:transform 1.15s cubic-bezier(.65,0,.35,1);
+    transition:transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .panel-right{ right:0; border-left:1px solid var(--line); transform-origin:left center; transform:rotateY(105deg); box-shadow:18px 0 40px rgba(0,0,0,.18); }
   .panel-left{ left:0; border-left:1px solid var(--line); transform-origin:right center; transform:rotateY(-105deg); box-shadow:-18px 0 40px rgba(0,0,0,.18); }
 
   /* apertura: il pannello destro si dispiega per primo, quello sinistro segue — da destra a sinistra */
   .nav-links.open .panel-right{ transform:rotateY(0deg); transition-delay:0s; }
-  .nav-links.open .panel-left{ transform:rotateY(0deg); transition-delay:.32s; }
+  .nav-links.open .panel-left{ transform:rotateY(0deg); transition-delay:.38s; }
   /* chiusura: ordine inverso — il sinistro si ripiega per primo, poi il destro — da sinistra a destra */
   .nav-links:not(.open) .panel-left{ transition-delay:0s; }
-  .nav-links:not(.open) .panel-right{ transition-delay:.28s; }
+  .nav-links:not(.open) .panel-right{ transition-delay:.34s; }
 
   .burger{ display:block; }
 }
@@ -229,12 +229,8 @@ header.nav{
 .webradio-img img{ width:100%; max-width:380px; margin:0 auto; filter:drop-shadow(0 30px 50px rgba(0,0,0,.25)); }
 @media (max-width:800px){ .webradio-row{ grid-template-columns:1fr; } .webradio-img{ order:-1; } }
 
-.ambient-player{ display:flex; align-items:center; gap:12px; margin-top:28px; }
-.ap-btn{ width:38px; height:38px; flex:0 0 auto; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink-soft); transition:background .3s ease, color .3s ease, border-color .3s ease; }
-.ap-btn:hover{ border-color:var(--bordeaux); color:var(--bordeaux); }
-.ap-btn.active{ background:var(--bordeaux); border-color:var(--bordeaux); color:#fff; }
-.ap-btn svg{ width:15px; height:15px; }
-.ap-label{ font-size:.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
+.ambient-player{ margin-top:28px; }
+.ambient-player iframe{ border-radius:4px; }
 /* FINE SEZIONE PLACEHOLDER */
 
 /* INIZIO SEZIONE: CONTATTI */
@@ -539,26 +535,20 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
       <p class="i18n" data-en="Music, conversations and stories from the vineyard — our web radio is coming soon." data-el="Μουσική, συζητήσεις και ιστορίες από τον αμπελώνα — το web radio μας έρχεται σύντομα.">Music, conversations and stories from the vineyard — our web radio is coming soon.</p>
       <!--
         NOTA IMPORTANTE PRIMA DEL LANCIO PUBBLICO:
-        "ambient.mp3" e' un placeholder di sviluppo (un breve tono generato, nessun
-        problema di licenza). Il link diretto di Freesound che mi avevi indicato NON
-        e' incorporabile: il loro server blocca le richieste da altri siti (risposta 403,
-        verificato). Per un suono ambientale vero: scarica una traccia regolarmente
-        licenziata per uso commerciale e caricala su GitHub come "ambient.mp3"
-        (stesso procedimento gia' usato per foto e video del sito).
+        questo e' il player UFFICIALE di Freesound per il brano "Fantasy" di
+        SergeQuadrado (l'unico modo che funziona davvero per quella traccia
+        specifica: il file diretto blocca le richieste esterne, verificato).
+        Compromessi da sapere: (1) e' il LORO player, non i pulsanti
+        personalizzati costruiti in precedenza; (2) il brano dura 28.8s e
+        NON si ripete in loop automaticamente (il widget non lo supporta);
+        (3) licenza Attribution-NonCommercial — non utilizzabile su un sito
+        commerciale. Prima del lancio: sostituire con una traccia ambient
+        lunga, in loop, regolarmente licenziata per uso commerciale — a quel
+        punto si puo' ripristinare il player con pulsanti play/pausa/muto
+        personalizzati (codice gia' pronto, vedi versione precedente).
       -->
-      <div class="ambient-player" id="ambientPlayer">
-        <button class="ap-btn" id="ambientPlayBtn" aria-label="Play ambient sound">
-          <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
-        </button>
-        <button class="ap-btn" id="ambientMuteBtn" aria-label="Mute">
-          <svg class="icon-vol-on" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-.77-3.29-2-4.24v8.48c1.23-.95 2-2.47 2-4.24z"/></svg>
-          <svg class="icon-vol-off" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M16.5 12c0-1.77-.77-3.29-2-4.24v2.06l1.94 1.94c.04-.25.06-.5.06-.76zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 003.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-        </button>
-        <span class="ap-label i18n" data-en="Ambient atmosphere" data-el="Ηχητική ατμόσφαιρα">Ambient atmosphere</span>
-        <audio id="ambientAudio" loop preload="none">
-          <source src="ambient.mp3" type="audio/mpeg">
-        </audio>
+      <div class="ambient-player">
+        <iframe title="Fantasy by SergeQuadrado (Freesound)" frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/654731/simple/medium/" width="481" height="86" style="max-width:100%;"></iframe>
       </div>
     </div>
     <div class="webradio-img"><img src="mic_wine.png" alt="Web Radio"></div>
@@ -652,6 +642,14 @@ function setLang(lang){
   document.querySelectorAll('.i18n').forEach(el=>{ const v = el.getAttribute('data-'+lang); if(v) el.innerHTML = v; });
   langButtons.forEach(b=> b.classList.toggle('active', b.dataset.setlang===lang));
   renderProjects(); renderServices();
+}
+/* Applica la lingua corrente a un contenuto appena creato (es. una scheda
+   a schermo intero costruita al volo): senza questo, i nuovi elementi .i18n
+   mostrerebbero sempre l'inglese "di default" finché l'utente non aziona
+   di nuovo il cambio lingua. */
+function applyCurrentLang(container){
+  const lang = document.documentElement.getAttribute('data-lang') || 'en';
+  container.querySelectorAll('.i18n').forEach(el=>{ const v = el.getAttribute('data-'+lang); if(v) el.innerHTML = v; });
 }
 langButtons.forEach(b=> b.addEventListener('click', ()=> setLang(b.dataset.setlang)));
 
@@ -925,6 +923,7 @@ document.getElementById('merchImg').addEventListener('click', ()=>{
       <h2 class="i18n" data-en="An exclusive line, coming soon" data-el="Μια αποκλειστική σειρά, σύντομα">An exclusive line, coming soon</h2>
       <p class="i18n" data-en="${MERCH_TEXT.en}" data-el="${MERCH_TEXT.el}">${MERCH_TEXT[lang]}</p>
     </div>`;
+  applyCurrentLang(modalBox);
   modalBackdrop.classList.add('show');
   modalClose.classList.add('show');
   document.body.style.overflow='hidden';
@@ -946,6 +945,7 @@ document.getElementById('onassisTile').addEventListener('click', ()=>{
       <p class="i18n" data-en="${ONASSIS_TEXT.en}" data-el="${ONASSIS_TEXT.el}">${ONASSIS_TEXT[lang]}</p>
       <a href="https://www.onassis.org" target="_blank" rel="noopener noreferrer" class="btn on-dark i18n" style="margin-top:10px;" data-en="Visit onassis.org" data-el="Επισκεφθείτε το onassis.org">Visit onassis.org</a>
     </div>`;
+  applyCurrentLang(modalBox);
   modalBackdrop.classList.add('show');
   modalClose.classList.add('show');
   document.body.style.overflow='hidden';
@@ -1061,35 +1061,9 @@ botInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ document.getEleme
 
 window.addEventListener('scroll', ()=>{ siteNav.style.boxShadow = window.scrollY>10 ? '0 2px 12px rgba(0,0,0,.06)' : 'none'; }, {passive:true});
 
-/* ============================================================
-   PLAYER AUDIO AMBIENTALE — play/pause + muto, loop continuo
-   finché l'utente non lo ferma. Traccia di sviluppo temporanea:
-   vedi nota HTML nella sezione Web Radio prima del lancio.
-   ============================================================ */
-const ambientAudio = document.getElementById('ambientAudio');
-const ambientPlayBtn = document.getElementById('ambientPlayBtn');
-const ambientMuteBtn = document.getElementById('ambientMuteBtn');
-let ambientPlaying = false;
-ambientPlayBtn.addEventListener('click', ()=>{
-  if(ambientPlaying){
-    ambientAudio.pause();
-    ambientPlayBtn.classList.remove('active');
-    ambientPlayBtn.querySelector('.icon-play').style.display = '';
-    ambientPlayBtn.querySelector('.icon-pause').style.display = 'none';
-  } else {
-    ambientAudio.play().catch(()=>{ /* riproduzione autom. bloccata finché non c'e' un'interazione: gia' garantita dal click */ });
-    ambientPlayBtn.classList.add('active');
-    ambientPlayBtn.querySelector('.icon-play').style.display = 'none';
-    ambientPlayBtn.querySelector('.icon-pause').style.display = '';
-  }
-  ambientPlaying = !ambientPlaying;
-});
-ambientMuteBtn.addEventListener('click', ()=>{
-  ambientAudio.muted = !ambientAudio.muted;
-  ambientMuteBtn.classList.toggle('active', ambientAudio.muted);
-  ambientMuteBtn.querySelector('.icon-vol-on').style.display = ambientAudio.muted ? 'none' : '';
-  ambientMuteBtn.querySelector('.icon-vol-off').style.display = ambientAudio.muted ? '' : 'none';
-});
+/* Player audio: ora e' il widget ufficiale di Freesound incorporato via
+   iframe (vedi nota nell'HTML della sezione Web Radio) — nessun JS
+   necessario qui, la loro interfaccia gestisce play/pausa/volume da sola. */
 
 /* ============================================================
    EFFETTO DI PROFONDITA' — le schede in primo piano (al centro
