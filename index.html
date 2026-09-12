@@ -80,29 +80,53 @@ header.nav{
 .burger.open span:nth-child(3){ top:50%; margin-top:-.75px; transform:rotate(-45deg); }
 
 @media (max-width:1080px){
-  /* SEZIONE: MENU MOBILE A BROCHURE 3D — piega orizzontale, apertura da destra a sinistra */
+  /* SEZIONE: MENU MOBILE "MENU DA RISTORANTE" —
+     1) il libro chiuso (copertina) entra da destra verso sinistra
+     2) la copertina si apre come una vera copertina, verso sinistra, svelando le due pagine
+     3) la X in alto a destra sulla pagina destra richiude con il movimento inverso */
   .nav-links{
-    position:fixed; top:0; right:0; height:100vh; width:78vw; max-width:320px;
-    display:block; perspective:1600px; pointer-events:none;
+    position:fixed; top:6vh; bottom:6vh; right:4vw; height:auto; width:84vw; max-width:340px;
+    display:block; perspective:2000px; pointer-events:none;
+    transform:translateX(130%);
+    transition:transform .65s cubic-bezier(0.5,0,0.2,1);
+    z-index:1;
   }
-  .nav-links.open{ pointer-events:auto; }
+  .nav-links.open{ pointer-events:auto; transform:translateX(0); }
 
-  .brochure-panel{
-    position:absolute; top:0; bottom:0; width:50%; height:100%;
-    background:var(--cream);
-    display:flex; flex-direction:column; justify-content:center; gap:22px; padding:26px 22px;
-    backface-visibility:hidden; transform-style:preserve-3d;
-    transition:transform 1.8s cubic-bezier(0.45, 0, 0.15, 1);
+  .menu-book{ position:relative; width:100%; height:100%; transform-style:preserve-3d; }
+
+  /* Le due pagine interne, rivelate all'apertura della copertina */
+  .book-spread{ position:absolute; inset:0; display:flex; gap:12px; pointer-events:none; }
+  .nav-links.book-open .book-spread{ pointer-events:auto; }
+
+  .book-page{
+    flex:1; min-width:0; border-radius:22px; background:var(--cream);
+    border:1px solid var(--line); box-shadow:0 16px 38px rgba(0,0,0,.22);
+    display:flex; flex-direction:column; justify-content:center; gap:22px;
+    padding:30px 20px; position:relative;
   }
-  .panel-right{ right:0; border-left:1px solid var(--line); transform-origin:left center; transform:rotateY(105deg); box-shadow:18px 0 40px rgba(0,0,0,.18); }
-  .panel-left{ left:0; border-left:1px solid var(--line); transform-origin:right center; transform:rotateY(-105deg); box-shadow:-18px 0 40px rgba(0,0,0,.18); }
+  .book-page-right{ padding-top:56px; }
 
-  /* apertura: il pannello destro si dispiega per primo, quello sinistro segue — da destra a sinistra */
-  .nav-links.open .panel-right{ transform:rotateY(0deg); transition-delay:0s; }
-  .nav-links.open .panel-left{ transform:rotateY(0deg); transition-delay:.5s; }
-  /* chiusura: ordine inverso — il sinistro si ripiega per primo, poi il destro — da sinistra a destra */
-  .nav-links:not(.open) .panel-left{ transition-delay:0s; }
-  .nav-links:not(.open) .panel-right{ transition-delay:.45s; }
+  .book-close{
+    position:absolute; top:12px; right:12px; width:32px; height:32px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.06);
+    font-size:1.3rem; line-height:1; color:var(--ink); cursor:pointer;
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
+  }
+  .nav-links.book-open .book-close{ opacity:1; pointer-events:auto; transition-delay:.35s; }
+
+  /* La copertina: un unico pannello arrotondato, cerniera sul bordo destro */
+  .book-cover{
+    position:absolute; inset:0; border-radius:22px; z-index:5;
+    background:var(--cream); border:1px solid var(--line);
+    box-shadow:0 20px 46px rgba(0,0,0,.3);
+    display:flex; align-items:center; justify-content:center;
+    transform-origin:100% 50%; transform:rotateY(0deg);
+    backface-visibility:hidden;
+    transition:transform 1s cubic-bezier(0.5,0,0.2,1);
+  }
+  .book-cover-logo{ height:64px; width:auto; opacity:.9; }
+  .nav-links.book-open .book-cover{ transform:rotateY(-165deg); }
 
   .burger{ display:block; }
 }
@@ -351,17 +375,25 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <header class="nav" id="siteNav">
   <a href="#home" class="nav-logo"><img src="Logo.png" alt="Sormarí"></a>
   <nav class="nav-links" id="navLinks">
-    <div class="brochure-panel panel-right">
-      <a href="#partners" class="i18n" data-en="Partners" data-el="Συνεργάτες">Partners</a>
-      <a href="#merchandising" class="i18n" data-en="Merchandising" data-el="Merchandising">Merchandising</a>
-      <a href="#webradio" class="i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</a>
-      <a href="#contact" class="i18n" data-en="Contact" data-el="Επικοινωνία">Contact</a>
-    </div>
-    <div class="brochure-panel panel-left">
-      <a href="#home" class="i18n" data-en="Home" data-el="Αρχική">Home</a>
-      <a href="#about" class="i18n" data-en="About" data-el="Σχετικά">About</a>
-      <a href="#projects" class="i18n" data-en="Projects" data-el="Έργα">Projects</a>
-      <a href="#services" class="i18n" data-en="Services" data-el="Υπηρεσίες">Services</a>
+    <div class="menu-book">
+      <div class="book-spread">
+        <div class="book-page book-page-left">
+          <a href="#home" class="i18n" data-en="Home" data-el="Αρχική">Home</a>
+          <a href="#about" class="i18n" data-en="About" data-el="Σχετικά">About</a>
+          <a href="#projects" class="i18n" data-en="Projects" data-el="Έργα">Projects</a>
+          <a href="#services" class="i18n" data-en="Services" data-el="Υπηρεσίες">Services</a>
+        </div>
+        <div class="book-page book-page-right">
+          <button class="book-close" id="bookCloseBtn" aria-label="Chiudi menu">&times;</button>
+          <a href="#partners" class="i18n" data-en="Partners" data-el="Συνεργάτες">Partners</a>
+          <a href="#merchandising" class="i18n" data-en="Merchandising" data-el="Merchandising">Merchandising</a>
+          <a href="#webradio" class="i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</a>
+          <a href="#contact" class="i18n" data-en="Contact" data-el="Επικοινωνία">Contact</a>
+        </div>
+      </div>
+      <div class="book-cover" id="bookCover">
+        <img src="Logo.png" alt="Sormarí" class="book-cover-logo">
+      </div>
     </div>
   </nav>
   <div class="nav-right">
@@ -636,11 +668,42 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 const siteNav = document.getElementById('siteNav');
 const burgerBtn = document.getElementById('burgerBtn');
 const navLinks = document.getElementById('navLinks');
+const bookCover = document.getElementById('bookCover');
+const bookCloseBtn = document.getElementById('bookCloseBtn');
+
+/* Menu "da ristorante" a due tempi:
+   1) il libro (chiuso) scorre da destra verso la sua posizione
+   2) solo a scorrimento terminato la copertina si apre verso sinistra
+   La chiusura avviene con la sequenza esattamente inversa. */
+function openMobileMenu(){
+  if(navLinks.classList.contains('open')) return;
+  burgerBtn.classList.add('open');
+  navLinks.classList.add('open');
+  const onSlideIn = (e)=>{
+    if(e.target !== navLinks || e.propertyName !== 'transform') return;
+    navLinks.removeEventListener('transitionend', onSlideIn);
+    navLinks.classList.add('book-open');
+  };
+  navLinks.addEventListener('transitionend', onSlideIn);
+}
+
+function closeMobileMenu(){
+  if(!navLinks.classList.contains('open')) return;
+  burgerBtn.classList.remove('open');
+  navLinks.classList.remove('book-open');
+  const onCoverClosed = (e)=>{
+    if(e.target !== bookCover || e.propertyName !== 'transform') return;
+    bookCover.removeEventListener('transitionend', onCoverClosed);
+    navLinks.classList.remove('open');
+  };
+  bookCover.addEventListener('transitionend', onCoverClosed);
+}
+
 burgerBtn.addEventListener('click', ()=>{
-  navLinks.classList.toggle('open');
-  burgerBtn.classList.toggle('open');
+  if(navLinks.classList.contains('open')){ closeMobileMenu(); } else { openMobileMenu(); }
 });
-navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{ navLinks.classList.remove('open'); burgerBtn.classList.remove('open'); }));
+bookCloseBtn.addEventListener('click', closeMobileMenu);
+navLinks.querySelectorAll('.book-page a').forEach(a=> a.addEventListener('click', closeMobileMenu));
 
 const langButtons = document.querySelectorAll('[data-setlang]');
 function setLang(lang){
