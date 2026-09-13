@@ -79,32 +79,54 @@ header.nav{
 .burger.open span:nth-child(2){ opacity:0; }
 .burger.open span:nth-child(3){ top:50%; margin-top:-.75px; transform:rotate(-45deg); }
 
+.mobile-menu-panel{ display:none; }
+
 @media (max-width:1080px){
-  /* SEZIONE: MENU MOBILE A BROCHURE 3D — piega orizzontale, apertura da destra a sinistra */
-  .nav-links{
-    position:fixed; top:0; right:0; height:100vh; width:78vw; max-width:320px;
-    display:block; perspective:1600px; pointer-events:none;
+  /* SEZIONE: MENU MOBILE — "copertina di menu da ristorante" con bordi
+     arrotondati: 1) il pannello chiuso arriva da destra verso sinistra,
+     2) una volta in posizione si apre come una vera copertina (cardine
+     a sinistra) rivelando i tasti. Chiusura: sequenza esattamente inversa.
+     Elemento completamente separato dal nav desktop, per evitare che le
+     regole dell'uno interferiscano con l'altro. */
+  .nav-links{ display:none; }
+  .mobile-menu-panel{
+    display:block;
+    position:fixed; top:0; right:0; height:100vh; width:82vw; max-width:340px;
+    perspective:1800px; pointer-events:none;
+    transform:translateX(105%);
+    transition:transform .55s cubic-bezier(0.45, 0, 0.15, 1);
+    z-index:1100;
   }
-  .nav-links.open{ pointer-events:auto; }
+  .mobile-menu-panel.open{ transform:translateX(0%); transition-delay:0s; pointer-events:auto; }
+  .mobile-menu-panel:not(.open){ transition-delay:1s; }
 
-  .brochure-panel{
-    position:absolute; top:0; bottom:0; width:50%; height:100%;
-    background:var(--cream);
-    display:flex; flex-direction:column; justify-content:center; gap:22px; padding:26px 22px;
-    backface-visibility:hidden; transform-style:preserve-3d;
-    transition:transform 1.8s cubic-bezier(0.45, 0, 0.15, 1);
+  .menu-content, .menu-cover{
+    position:absolute; inset:14px; border-radius:26px; overflow:hidden;
+    box-shadow:0 30px 70px rgba(0,0,0,.35);
   }
-  .panel-right{ right:0; border-left:1px solid var(--line); transform-origin:left center; transform:rotateY(105deg); box-shadow:18px 0 40px rgba(0,0,0,.18); }
-  .panel-left{ left:0; border-left:1px solid var(--line); transform-origin:right center; transform:rotateY(-105deg); box-shadow:-18px 0 40px rgba(0,0,0,.18); }
+  .menu-content{
+    background:var(--cream); z-index:1;
+    display:flex; flex-direction:column; justify-content:center; gap:20px; padding:34px 30px;
+  }
+  .menu-cover{
+    z-index:2; background:linear-gradient(155deg, var(--bordeaux-bright), var(--bordeaux-deep) 70%);
+    transform-style:preserve-3d; backface-visibility:hidden;
+    transform-origin:left center; transform:rotateY(0deg);
+    transition:transform 1s cubic-bezier(0.45, 0, 0.15, 1);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .menu-cover img{ width:38%; max-width:110px; opacity:.92; filter:drop-shadow(0 6px 16px rgba(0,0,0,.4)); }
+  .mobile-menu-panel.open .menu-cover{ transform:rotateY(-165deg); transition-delay:.55s; }
+  .mobile-menu-panel:not(.open) .menu-cover{ transition-delay:0s; }
 
-  /* apertura: il pannello destro si dispiega per primo, quello sinistro segue — da destra a sinistra */
-  .nav-links.open .panel-right{ transform:rotateY(0deg); transition-delay:0s; }
-  .nav-links.open .panel-left{ transform:rotateY(0deg); transition-delay:.5s; }
-  /* chiusura: ordine inverso — il sinistro si ripiega per primo, poi il destro — da sinistra a destra */
-  .nav-links:not(.open) .panel-left{ transition-delay:0s; }
-  .nav-links:not(.open) .panel-right{ transition-delay:.45s; }
+  .menu-content{ pointer-events:none; }
+  .mobile-menu-panel.revealed .menu-content{ pointer-events:auto; }
+  .menu-content a{ font-size:.72rem; letter-spacing:1.4px; text-transform:uppercase; color:var(--ink); opacity:.85; }
+  .menu-close-x{ position:absolute; top:18px; right:18px; z-index:3; font-size:1.15rem; color:var(--ink); opacity:.7; }
+  .menu-close-x:hover{ opacity:1; }
 
-  .burger{ display:block; }
+  .burger{ display:block; transition:opacity .2s ease; }
+  .burger.menu-open-hide{ opacity:0; pointer-events:none; }
 }
 
 /* INIZIO SEZIONE: HOME / HERO */
@@ -112,7 +134,7 @@ header.nav{
 .hero-bg{ position:absolute; inset:0; z-index:0; }
 .hero-bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.25) brightness(.62); }
 .hero-bg::after{ content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(20,16,13,.92), rgba(20,16,13,.35) 55%, rgba(20,16,13,.15)); }
-.hero-split{ position:relative; z-index:2; display:grid; grid-template-columns:.85fr 1.15fr; gap:4vw; align-items:center; }
+.hero-split{ position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:4vw; align-items:center; }
 .hero-logo-col{ display:flex; justify-content:center; align-items:center; }
 .hero-logo-col img{ width:min(360px, 88%); height:auto; filter:drop-shadow(0 20px 50px rgba(0,0,0,.5)); }
 .hero-inner{ text-align:center; }
@@ -223,7 +245,7 @@ header.nav{
 .partner-logos .partner-tile{ cursor:pointer; transition:border-color .3s ease; }
 .partner-logos .partner-tile:hover{ border-color:var(--bordeaux); }
 .partner-logos .partner-tile img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-.partner-logos .partner-tile .pt-caption{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding:10px 12px; font-size:.66rem; line-height:1.35; color:#fff; text-transform:none; letter-spacing:.2px; text-align:left; background:linear-gradient(to top, rgba(0,0,0,.8), transparent); }
+.partner-logos .partner-tile .pt-caption{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding:10px 12px; font-size:.66rem; line-height:1.35; color:#fff; text-transform:none; letter-spacing:.2px; text-align:left; background:rgba(0,0,0,.82); }
 
 .merch-row{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
 .merch-row img{ width:100%; border-radius:2px; }
@@ -351,18 +373,14 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <header class="nav" id="siteNav">
   <a href="#home" class="nav-logo"><img src="Logo.png" alt="Sormarí"></a>
   <nav class="nav-links" id="navLinks">
-    <div class="brochure-panel panel-right">
-      <a href="#partners" class="i18n" data-en="Partners" data-el="Συνεργάτες">Partners</a>
-      <a href="#merchandising" class="i18n" data-en="Merchandising" data-el="Merchandising">Merchandising</a>
-      <a href="#webradio" class="i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</a>
-      <a href="#contact" class="i18n" data-en="Contact" data-el="Επικοινωνία">Contact</a>
-    </div>
-    <div class="brochure-panel panel-left">
-      <a href="#home" class="i18n" data-en="Home" data-el="Αρχική">Home</a>
-      <a href="#about" class="i18n" data-en="About" data-el="Σχετικά">About</a>
-      <a href="#projects" class="i18n" data-en="Projects" data-el="Έργα">Projects</a>
-      <a href="#services" class="i18n" data-en="Services" data-el="Υπηρεσίες">Services</a>
-    </div>
+    <a href="#home" class="i18n" data-en="Home" data-el="Αρχική">Home</a>
+    <a href="#about" class="i18n" data-en="About" data-el="Σχετικά">About</a>
+    <a href="#projects" class="i18n" data-en="Projects" data-el="Έργα">Projects</a>
+    <a href="#services" class="i18n" data-en="Services" data-el="Υπηρεσίες">Services</a>
+    <a href="#partners" class="i18n" data-en="Partners" data-el="Συνεργάτες">Partners</a>
+    <a href="#merchandising" class="i18n" data-en="Merchandising" data-el="Merchandising">Merchandising</a>
+    <a href="#webradio" class="i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</a>
+    <a href="#contact" class="i18n" data-en="Contact" data-el="Επικοινωνία">Contact</a>
   </nav>
   <div class="nav-right">
     <div class="lang-toggle">
@@ -372,14 +390,29 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
   </div>
 </header>
 
+<!-- SEZIONE: PANNELLO MENU MOBILE (copertina 3D) — elemento indipendente dal nav desktop -->
+<nav class="mobile-menu-panel" id="mobileMenuPanel">
+  <div class="menu-cover"><img src="Logo.png" alt="Sormarí"></div>
+  <div class="menu-content">
+    <button class="menu-close-x" id="menuCloseX" aria-label="Close menu">✕</button>
+    <a href="#home" class="i18n" data-en="Home" data-el="Αρχική">Home</a>
+    <a href="#about" class="i18n" data-en="About" data-el="Σχετικά">About</a>
+    <a href="#projects" class="i18n" data-en="Projects" data-el="Έργα">Projects</a>
+    <a href="#services" class="i18n" data-en="Services" data-el="Υπηρεσίες">Services</a>
+    <a href="#partners" class="i18n" data-en="Partners" data-el="Συνεργάτες">Partners</a>
+    <a href="#merchandising" class="i18n" data-en="Merchandising" data-el="Merchandising">Merchandising</a>
+    <a href="#webradio" class="i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</a>
+    <a href="#contact" class="i18n" data-en="Contact" data-el="Επικοινωνία">Contact</a>
+  </div>
+</nav>
+
 <!-- INIZIO SEZIONE: HOME / HERO -->
 <div class="edge-fade top" id="edgeFadeTop"></div>
 <div class="edge-fade bottom" id="edgeFadeBottom"></div>
 <div id="pageContent">
 <section class="hero" id="home">
-  <div class="hero-bg"><img src="IMG_2712.jpeg" alt="Sormarí vineyards"></div>
+  <div class="hero-bg"><img src="harvest_crate.jpg" alt="Sormarí grape harvest"></div>
   <div class="wrap hero-split">
-    <div class="hero-logo-col"><img src="Logo.png" alt="Sormarí"></div>
     <div class="hero-inner">
       <div class="kicker i18n" data-en="Est. 2024" data-el="Ίδρυση 2024">Est. 2024</div>
       <h1 class="i18n" data-en="Welcome to <em>Sormarí</em>." data-el="Καλώς ήρθατε στη <em>Sormarí</em>.">Welcome to <em>Sormarí</em>.</h1>
@@ -389,6 +422,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
         <a href="#contact" class="btn on-dark i18n" data-en="Get in touch" data-el="Επικοινωνήστε">Get in touch</a>
       </div>
     </div>
+    <div class="hero-logo-col"><img src="Logo.png" alt="Sormarí"></div>
   </div>
 </section>
 <!-- FINE SEZIONE: HOME / HERO -->
@@ -636,11 +670,27 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 const siteNav = document.getElementById('siteNav');
 const burgerBtn = document.getElementById('burgerBtn');
 const navLinks = document.getElementById('navLinks');
+const mobileMenuPanel = document.getElementById('mobileMenuPanel');
+
+/* Sequenza: 1) il pannello (chiuso) scorre da destra verso sinistra;
+   2) una volta in posizione, la copertina si apre verso sinistra
+   rivelando i tasti. Chiusura: esattamente l'inverso. */
+function openMenu(){
+  mobileMenuPanel.classList.add('open');
+  burgerBtn.classList.add('menu-open-hide');
+  setTimeout(()=> mobileMenuPanel.classList.add('revealed'), 1600); // dopo scorrimento + apertura copertina
+}
+function closeMenu(){
+  mobileMenuPanel.classList.remove('revealed');
+  mobileMenuPanel.classList.remove('open');
+  setTimeout(()=> burgerBtn.classList.remove('menu-open-hide'), 1550); // riappare solo a chiusura completata
+}
 burgerBtn.addEventListener('click', ()=>{
-  navLinks.classList.toggle('open');
-  burgerBtn.classList.toggle('open');
+  mobileMenuPanel.classList.contains('open') ? closeMenu() : openMenu();
 });
-navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=>{ navLinks.classList.remove('open'); burgerBtn.classList.remove('open'); }));
+document.getElementById('menuCloseX').addEventListener('click', closeMenu);
+mobileMenuPanel.querySelectorAll('a').forEach(a=> a.addEventListener('click', closeMenu));
+navLinks.querySelectorAll('a').forEach(a=> a.addEventListener('click', ()=> navLinks.classList.remove('open')));
 
 const langButtons = document.querySelectorAll('[data-setlang]');
 function setLang(lang){
@@ -884,9 +934,9 @@ function initGallery(){
 
 /* SEZIONE: FILM — carosello con 2 video reali (Facebook) + 4 schede "Coming Soon" */
 const FILMS = [
-  { kind:'video', poster:'bacchus_poster.jpg', embed:'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent('https://m.facebook.com/story.php?story_fbid=pfbid0qsj7HYGQWtKPtQRGrBF8bnXCAfaqekEP4kXkjPVKj1LTE941ekau4j6smrfPMcq5l&id=100064591725891') + '&show_text=false',
+  { kind:'video', poster:'bacchus_poster.jpg', embed:'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent('https://fb.watch/v/7DcDylCG1/') + '&show_text=false',
     title:{en:'Bacchus', el:'Βάκχος'} },
-  { kind:'video', poster:'fondazione_poster.jpg', embed:'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent('https://fb.watch/v/7DcDylCG1/') + '&show_text=false',
+  { kind:'video', poster:'fondazione_poster.jpg', embed:'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent('https://m.facebook.com/story.php?story_fbid=pfbid0r1NdFuJ8hdKLaPh3Xp6HNevRog6UY7bE6FmwfmUpAqpCJtJUXFNWQGEqJJFdUKvDl&id=100064591725891') + '&show_text=false',
     title:{en:'Foundation', el:'Θεμελίωση'} },
   { kind:'soon' }, { kind:'soon' }, { kind:'soon' }, { kind:'soon' }
 ];
@@ -949,7 +999,10 @@ document.getElementById('onassisTile').addEventListener('click', ()=>{
       <div class="m-tag i18n" data-en="Partnership" data-el="Συνεργασία">Partnership</div>
       <h2 class="i18n" data-en="Sormarí Agriculture — Official Partner of the Onassis Group, Athens" data-el="Sormarí Agriculture — Επίσημος Συνεργάτης του Ομίλου Ωνάση, Αθήνα">Sormarí Agriculture — Official Partner of the Onassis Group, Athens</h2>
       <p class="i18n" data-en="${ONASSIS_TEXT.en}" data-el="${ONASSIS_TEXT.el}">${ONASSIS_TEXT[lang]}</p>
-      <a href="https://www.onassis.org" target="_blank" rel="noopener noreferrer" class="btn on-dark i18n" style="margin-top:10px;" data-en="Visit onassis.org" data-el="Επισκεφθείτε το onassis.org">Visit onassis.org</a>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:10px;">
+        <a href="https://www.onassis.org" target="_blank" rel="noopener noreferrer" class="btn on-dark i18n" data-en="Visit onassis.org" data-el="Επισκεφθείτε το onassis.org">Visit onassis.org</a>
+        <a href="https://fb.watch/v/7DcDylCG1/" target="_blank" rel="noopener noreferrer" class="btn on-dark i18n" data-en="Watch the video" data-el="Δείτε το βίντεο">Watch the video</a>
+      </div>
     </div>`;
   applyCurrentLang(modalBox);
   modalBackdrop.classList.add('show');
