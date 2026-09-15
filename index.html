@@ -133,10 +133,12 @@ header.nav{
 .hero{ position:relative; min-height:88vh; display:flex; align-items:center; padding:150px 0 70px; overflow:hidden; }
 .hero-bg{ position:absolute; inset:0; z-index:0; }
 .hero-bg img{ width:100%; height:100%; object-fit:cover; filter:grayscale(.25) brightness(.62); }
-.hero-bg::after{ content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(20,16,13,.92), rgba(20,16,13,.35) 55%, rgba(20,16,13,.15)); }
+.hero-bg::after{ content:''; position:absolute; inset:0; background:
+  linear-gradient(to right, rgba(20,16,13,.88) 0%, rgba(20,16,13,.55) 45%, rgba(20,16,13,.15) 78%, rgba(20,16,13,.05) 100%),
+  linear-gradient(to top, rgba(20,16,13,.75), rgba(20,16,13,.25) 55%, rgba(20,16,13,.1)); }
 .hero-split{ position:relative; z-index:2; display:grid; grid-template-columns:1.15fr .85fr; gap:4vw; align-items:center; }
 .hero-logo-col{ display:flex; justify-content:center; align-items:center; }
-.hero-logo-col img{ width:min(360px, 88%); height:auto; filter:drop-shadow(0 20px 50px rgba(0,0,0,.5)); }
+.hero-logo-col img{ width:min(440px, 92%); height:auto; filter:drop-shadow(0 20px 50px rgba(0,0,0,.5)); }
 .hero-inner{ text-align:center; }
 .hero-inner .kicker{ color:var(--gold-pale); justify-content:center; }
 .hero-inner h1{ font-size:clamp(2.2rem,4.4vw,3.6rem); color:#fff; line-height:1.1; }
@@ -145,7 +147,7 @@ header.nav{
 .hero-cta{ margin-top:34px; display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
 @media (max-width:900px){
   .hero-split{ grid-template-columns:1fr; text-align:center; }
-  .hero-logo-col img{ width:190px; }
+  .hero-logo-col img{ width:280px; }
 }
 /* FINE SEZIONE: HOME / HERO */
 
@@ -170,11 +172,19 @@ header.nav{
 @media (max-width:900px){ .pillars-grid{ grid-template-columns:1fr 1fr; } }
 @media (max-width:560px){ .pillars-grid{ grid-template-columns:1fr; } }
 
-.ceo-block{ display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:center; max-width:640px; margin-bottom:80px; }
-.ceo-block img{ width:88px; height:88px; border-radius:50%; object-fit:cover; filter:grayscale(1); }
-.ceo-block .quote{ font-family:var(--serif); font-style:italic; font-size:1.25rem; line-height:1.5; margin-bottom:10px; }
-.ceo-block .who{ font-size:.78rem; letter-spacing:1px; text-transform:uppercase; color:var(--gold); }
-.ceo-block .who b{ color:var(--ink); font-family:var(--serif); font-style:normal; font-size:.95rem; letter-spacing:0; text-transform:none; display:block; margin-bottom:2px; }
+.ceo-standalone{ padding:0; overflow:hidden; }
+.ceo-standalone-grid{ display:grid; grid-template-columns:1fr 1fr; align-items:stretch; min-height:520px; }
+.ceo-photo-col{ position:relative; min-height:420px; }
+.ceo-photo-col img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 20%; }
+.ceo-text-col{ display:flex; flex-direction:column; justify-content:center; padding:60px 8vw; }
+.ceo-text-col .quote{ font-family:var(--serif); font-style:italic; font-size:1.7rem; line-height:1.5; margin-bottom:18px; color:var(--cream); }
+.ceo-text-col .who{ font-size:.78rem; letter-spacing:1px; text-transform:uppercase; color:var(--gold-pale); }
+.ceo-text-col .who b{ color:var(--cream); font-family:var(--serif); font-style:normal; font-size:1.1rem; letter-spacing:0; text-transform:none; display:block; margin-bottom:4px; }
+@media (max-width:800px){
+  .ceo-standalone-grid{ grid-template-columns:1fr; }
+  .ceo-photo-col{ min-height:340px; }
+  .ceo-text-col{ padding:40px 8vw; }
+}
 
 .contrast-row{ display:grid; grid-template-columns:1fr 1fr; gap:0; }
 .contrast-col{ position:relative; min-height:380px; }
@@ -246,6 +256,9 @@ header.nav{
 .partner-logos .partner-tile:hover{ border-color:var(--bordeaux); }
 .partner-logos .partner-tile img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .partner-logos .partner-tile .pt-caption{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding:10px 12px; font-size:.66rem; line-height:1.35; color:#fff; text-transform:none; letter-spacing:.2px; text-align:left; background:rgba(0,0,0,.82); }
+.partner-logos .partner-tile.logo-tile{ background:#fff; }
+.partner-logos .partner-tile.logo-tile img{ inset:0 0 26px 0; object-fit:contain; padding:16px; }
+.partner-logos .partner-tile.logo-tile .pt-caption{ background:#fff; color:var(--ink-soft); text-align:center; height:26px; display:flex; align-items:center; justify-content:center; }
 
 .merch-row{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
 .merch-row img{ width:100%; border-radius:2px; }
@@ -262,6 +275,12 @@ header.nav{
 .ap-btn svg{ width:15px; height:15px; }
 .ap-label{ font-size:.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
 /* FINE SEZIONE PLACEHOLDER */
+
+/* SEZIONE: ISTITUTIONAL PARTNERS — stesso layout della sezione CEO */
+.inst-logos{ display:flex; flex-direction:column; gap:20px; align-items:flex-start; }
+.inst-logo-tile{ background:#fff; border-radius:4px; width:220px; height:90px; padding:14px 20px; display:flex; align-items:center; justify-content:center; transition:transform .3s ease; }
+.inst-logo-tile:hover{ transform:translateY(-3px); }
+.inst-logo-tile img{ width:100%; height:100%; object-fit:contain; }
 
 /* INIZIO SEZIONE: CONTATTI */
 .contact-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:70px; }
@@ -443,14 +462,6 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
       <div class="pillar depth-el"><span class="p-num">04</span><h3 class="i18n" data-en="Sustainable" data-el="Βιώσιμοι">Sustainable</h3><p class="i18n" data-en="Respect for nature, respect for nature, respect for nature. We cannot repeat this enough." data-el="Σεβασμός στη φύση, σεβασμός στη φύση, σεβασμός στη φύση. Δεν μπορούμε να το επαναλάβουμε αρκετά.">Respect for nature, respect for nature, respect for nature. We cannot repeat this enough.</p></div>
     </div>
 
-    <div class="ceo-block depth-el">
-      <img src="CEO.jpeg" alt="Mario Sorbello">
-      <div>
-        <div class="quote i18n" data-en="“We have to be close to nature. Intervene as little as possible.”" data-el="«Πρέπει να είμαστε κοντά στη φύση. Να παρεμβαίνουμε όσο το δυνατόν λιγότερο.»">“We have to be close to nature. Intervene as little as possible.”</div>
-        <div class="who"><b>Mario Sorbello</b><span class="i18n" data-en="Founder &amp; Head Oenologist" data-el="Ιδρυτής &amp; Επικεφαλής Οινολόγος">Founder &amp; Head Oenologist</span></div>
-      </div>
-    </div>
-
     <div class="contrast-row">
       <div class="contrast-col tradition depth-el">
         <img src="IMG_2726.jpeg" alt="Tradition">
@@ -465,12 +476,24 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 </section>
 <!-- FINE SEZIONE: CHI SIAMO -->
 
+<!-- INIZIO SEZIONE: CEO (a se stante, sfondo scuro) -->
+<section class="section dark ceo-standalone">
+  <div class="ceo-standalone-grid">
+    <div class="ceo-photo-col"><img src="ceo_mario.jpg" alt="Mario Sorbello"></div>
+    <div class="ceo-text-col">
+      <div class="quote i18n" data-en="“We have to be close to nature. Intervene as little as possible.”" data-el="«Πρέπει να είμαστε κοντά στη φύση. Να παρεμβαίνουμε όσο το δυνατόν λιγότερο.»">“We have to be close to nature. Intervene as little as possible.”</div>
+      <div class="who"><b>Mario Sorbello</b><span class="i18n" data-en="Founder &amp; Head Oenologist" data-el="Ιδρυτής &amp; Επικεφαλής Οινολόγος">Founder &amp; Head Oenologist</span></div>
+    </div>
+  </div>
+</section>
+<!-- FINE SEZIONE: CEO -->
+
 <!-- INIZIO SEZIONE: PROGETTI -->
 <section class="section" id="projects">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Projects" data-el="Έργα">Projects</div>
-      <h2 class="i18n" data-en="From the Cyclades to Argentina" data-el="Από τις Κυκλάδες έως την Αργεντινή">From the Cyclades to Argentina</h2>
+      <h2 class="i18n" data-en="From Santorini Island to Ningxia — China" data-el="Από τη Σαντορίνη έως τη Νινγκσιά — Κίνα">From Santorini Island to Ningxia — China</h2>
       <p class="i18n" data-en="From unexplored volcanic varieties to centenarian, ungrafted vines — from scratch to success." data-el="Από ανεξερεύνητες ηφαιστειογενείς ποικιλίες έως εκατοντάχρονα, μη εμβολιασμένα κλήματα — από το μηδέν έως την επιτυχία.">From unexplored volcanic varieties to centenarian, ungrafted vines — from scratch to success.</p>
     </div>
     <div id="projectsList"></div>
@@ -510,8 +533,27 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 </section>
 <!-- FINE SEZIONE: SERVIZI -->
 
+<!-- INIZIO SEZIONE: TEST WINE (carosello rotante, foto laboratorio/analisi) -->
+<section class="section alt" id="testwine">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker i18n" data-en="Test Wine" data-el="Test Wine">Test Wine</div>
+      <h2 class="i18n" data-en="Test Wine" data-el="Test Wine">Test Wine</h2>
+    </div>
+    <div class="gallery-stage" id="testwineStage">
+      <div class="gallery-ring" id="testwineRing"></div>
+    </div>
+    <div class="gallery-hint i18n" data-en="Drag to rotate — click a photo to enlarge" data-el="Σύρετε για περιστροφή — πατήστε για μεγέθυνση">Drag to rotate — click a photo to enlarge</div>
+    <div class="carousel-arrows">
+      <button id="testwinePrev" aria-label="Previous"><svg viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1"><line x1="34" y1="6" x2="1" y2="6"/><polyline points="7,1 1,6 7,11"/></svg></button>
+      <button id="testwineNext" aria-label="Next"><svg viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1"><line x1="0" y1="6" x2="33" y2="6"/><polyline points="27,1 33,6 27,11"/></svg></button>
+    </div>
+  </div>
+</section>
+<!-- FINE SEZIONE: TEST WINE -->
+
 <!-- INIZIO SEZIONE: PARTNERS -->
-<section class="section alt" id="partners">
+<section class="section" id="partners">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Partners" data-el="Συνεργάτες">Partners</div>
@@ -523,14 +565,25 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
         <img src="onassis.jpg" alt="Onassis Group">
         <div class="pt-caption i18n" data-en="New partnership with the Onassis Group, Athens." data-el="Νέα συνεργασία με τον Όμιλο Ωνάση, Αθήνα.">New partnership with the Onassis Group, Athens.</div>
       </div>
-      <div>—</div><div>—</div><div>—</div>
+      <div class="partner-tile logo-tile" id="cyprusTile">
+        <img src="partner_cyprus.jpg" alt="Cyprus Oenophile Association">
+        <div class="pt-caption i18n" data-en="Cyprus Oenophile Association" data-el="Όμιλος Οινοφίλων Κύπρου">Cyprus Oenophile Association</div>
+      </div>
+      <div class="partner-tile logo-tile" id="velillaTile">
+        <img src="partner_velilla.jpg" alt="Velilla Group">
+        <div class="pt-caption i18n" data-en="Velilla Group" data-el="Velilla Group">Velilla Group</div>
+      </div>
+      <div class="partner-tile logo-tile" id="phoenixTile">
+        <img src="partner_phoenix.jpg" alt="Phoenix Lebanon">
+        <div class="pt-caption i18n" data-en="Phoenix Lebanon" data-el="Phoenix Lebanon">Phoenix Lebanon</div>
+      </div>
     </div>
   </div>
 </section>
 <!-- FINE SEZIONE: PARTNERS -->
 
 <!-- INIZIO SEZIONE: FILM / MEDIA (carosello rotante, come la fotogallery) -->
-<section class="section" id="films">
+<section class="section alt" id="films">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Our films" data-el="Οι ταινίες μας">Our films</div>
@@ -550,7 +603,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <!-- FINE SEZIONE: FILM / MEDIA -->
 
 <!-- INIZIO SEZIONE: MERCHANDISING -->
-<section class="section alt" id="merchandising">
+<section class="section" id="merchandising">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Merchandising" data-el="Merchandising">Merchandising</div>
@@ -569,7 +622,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <!-- FINE SEZIONE: MERCHANDISING -->
 
 <!-- INIZIO SEZIONE: WEB RADIO -->
-<section class="section" id="webradio">
+<section class="section alt" id="webradio">
   <div class="wrap webradio-row">
     <div class="section-head" style="margin-bottom:0;">
       <div class="kicker i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</div>
@@ -592,6 +645,21 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
   </div>
 </section>
 <!-- FINE SEZIONE: WEB RADIO -->
+
+<!-- INIZIO SEZIONE: ISTITUTIONAL PARTNERS -->
+<section class="section dark ceo-standalone">
+  <div class="ceo-standalone-grid">
+    <div class="ceo-photo-col"><img src="ceo_statue.jpg" alt="Sormarí"></div>
+    <div class="ceo-text-col">
+      <div class="kicker i18n" data-en="Institutional Partners" data-el="Θεσμικοί Συνεργάτες" style="color:var(--gold-pale);">Institutional Partners</div>
+      <div class="inst-logos">
+        <a href="https://www.asi.info" target="_blank" rel="noopener noreferrer" class="inst-logo-tile"><img src="asi_logo.png" alt="ASI — Association de la Sommellerie Internationale"></a>
+        <a href="https://www.oiv.int" target="_blank" rel="noopener noreferrer" class="inst-logo-tile"><img src="oiv_logo.png" alt="OIV — International Organisation of Vine and Wine"></a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FINE SEZIONE: ISTITUTIONAL PARTNERS -->
 
 <!-- INIZIO SEZIONE: CONTATTI -->
 <section class="section" id="contact">
@@ -718,15 +786,12 @@ function scrollToId(id){
    CONTENUTI
    ============================================================ */
 const PROJECTS = [
-  { img:'IMG_2732.jpeg', tag:{en:'Case Study',el:'Μελέτη Περίπτωσης'}, title:{en:'Cyclades — Ungrafted Vines',el:'Κυκλάδες — Μη Εμβολιασμένα Κλήματα'},
-    body:{en:"On volcanic soil, phylloxera never took hold — some of these vines are over a century old, still ungrafted, still bush-trained low against the wind. Our role: bring modern winemaking only where it helps the grape, never where it fights it.",
-          el:"Στο ηφαιστειογενές έδαφος, η φυλλοξήρα δεν κατάφερε ποτέ να εγκατασταθεί — μερικά κλήματα είναι πάνω από εκατό ετών, ακόμα μη εμβολιασμένα."} },
-  { img:'IMG_2710.jpeg', tag:{en:'Case Study',el:'Μελέτη Περίπτωσης'}, title:{en:'Argentina — From Bare Land',el:'Αργεντινή — Από Ακαλλιέργητη Γη'},
-    body:{en:"A high-altitude valley, no vines yet planted. We walked the site, mapped the soil, chose the varieties, and stayed on through the first harvests — the whole 360° service, in one project.",
-          el:"Μια κοιλάδα σε μεγάλο υψόμετρο, χωρίς κλήματα ακόμα. Χαρτογραφήσαμε το έδαφος και μείναμε έως τους πρώτους τρύγους."} },
-  { img:'IMG_2712.jpeg', tag:{en:'Case Study',el:'Μελέτη Περίπτωσης'}, title:{en:'Santorini — Coastal Terraces',el:'Σαντορίνη — Παράκτιες Αναβαθμίδες'},
-    body:{en:"Vertiginous caldera cliffs, terraces cut into pumice, and vines that survive on sea mist alone through the dry summer months. Low intervention, careful timing, deep respect for the landscape.",
-          el:"Απόκρημνοι βράχοι της καλδέρας, αναβαθμίδες σκαμμένες στην ελαφρόπετρα, ελάχιστη παρέμβαση."} }
+  { video:'https://drive.google.com/file/d/1qKiW14Yk8cvm_WW4a7kOx3ItVXp3UYmz/preview', tag:{en:'Region Spotlight',el:'Ανάδειξη Περιοχής'}, title:{en:'Ningxia — China',el:'Νινγκσιά — Κίνα'},
+    body:{en:"With over 18,000 hectares of vineyards, a Bordeaux-inspired classification, and a growing interest in wine tourism, Ningxia represents the modern and dynamic face of Chinese wine: a region still to be discovered, but already determined to make its mark on the world's tables.",
+          el:"Με πάνω από 18.000 εκτάρια αμπελώνων, μια ταξινόμηση εμπνευσμένη από το Μπορντό, και ένα αυξανόμενο ενδιαφέρον για τον οινοτουρισμό, η Νινγκσιά αντιπροσωπεύει το σύγχρονο και δυναμικό πρόσωπο του κινέζικου κρασιού: μια περιοχή που παραμένει προς ανακάλυψη, αλλά είναι ήδη αποφασισμένη να αφήσει το στίγμα της στα τραπέζια του κόσμου."} },
+  { img:'IMG_2732.jpeg', tag:{en:'Case Study',el:'Μελέτη Περίπτωσης'}, title:{en:'Santorini - Kingdom of Assyrtiko Autochthonous Grapes',el:'Σαντορίνη - Το Βασίλειο του Αυτόχθονου Ασύρτικου'},
+    body:{en:"Viticulture in Santorini Island is a clear representation of how, in a volcanic soil where phylloxera never took hold, vines remain still ungrafted, still bush-trained low against the wind. The Assyrtiko Autochthonous Grapes are sourced from vines that are typically 100-120 years old, ensuring a rich flavor profile with notes of lemon, grapefruit, and peach. Our role: bring modern winemaking only where it helps the grape, never where it fights it.",
+          el:"Η αμπελουργία στη Σαντορίνη είναι μια σαφής απεικόνιση του πώς, σε ένα ηφαιστειογενές έδαφος όπου η φυλλοξήρα δεν κατάφερε ποτέ να εγκατασταθεί, τα κλήματα παραμένουν ακόμα μη εμβολιασμένα, καλλιεργούμενα χαμηλά σαν θάμνοι ενάντια στον άνεμο. Τα αυτόχθονα σταφύλια Ασύρτικο προέρχονται από κλήματα ηλικίας συνήθως 100-120 ετών, εξασφαλίζοντας ένα πλούσιο προφίλ γεύσης με νότες λεμονιού, γκρέιπφρουτ και ροδάκινου. Ο ρόλος μας: να φέρουμε τη σύγχρονη οινοποίηση μόνο εκεί όπου βοηθά το σταφύλι, ποτέ εκεί όπου το αντιμάχεται."} }
 ];
 
 const SERVICES = [
@@ -754,6 +819,7 @@ const SERVICES = [
 ];
 
 const GALLERY_IMAGES = ['IMG_2714.jpeg','IMG_2715.jpeg','IMG_2716.jpeg','IMG_2718.jpeg','IMG_2719.jpeg','IMG_2720.jpeg','IMG_2722.jpeg','IMG_2723.jpeg'];
+const TESTWINE_IMAGES = ['testwine1.jpg','testwine2.jpg','testwine3.jpg','testwine4.jpg','testwine5.jpg','testwine6.jpg','testwine7.jpg','testwine8.jpg','testwine9.jpg'];
 
 function t(f){ const lang = document.documentElement.getAttribute('data-lang')||'en'; return f?f[lang]:''; }
 
@@ -765,8 +831,11 @@ const modalBox = document.getElementById('modalBox');
 const modalClose = document.getElementById('modalClose');
 function openTextModal(item){
   modalBox.className = 'modal-box';
+  const mediaHtml = item.video
+    ? `<iframe src="${item.video}" allow="autoplay; fullscreen" allowfullscreen style="width:100%; height:100%; border:0;"></iframe>`
+    : `<img src="${item.img}" alt="">`;
   modalBox.innerHTML = `
-    <div class="modal-media"><img src="${item.img}" alt=""></div>
+    <div class="modal-media">${mediaHtml}</div>
     <div class="modal-body">
       <div class="m-tag">${t(item.tag)}</div>
       <h2>${t(item.title)}</h2>
@@ -801,8 +870,11 @@ function renderProjects(){
   PROJECTS.forEach((p,i)=>{
     const row = document.createElement('div');
     row.className = 'proj-row depth-el' + (i%2===1 ? ' rev' : '');
+    const mediaHtml = p.video
+      ? `<iframe src="${p.video}" allow="autoplay" style="width:100%; height:100%; border:0;"></iframe>`
+      : `<img src="${p.img}" alt="">`;
     row.innerHTML = `
-      <div class="proj-media"><img src="${p.img}" alt=""></div>
+      <div class="proj-media">${mediaHtml}</div>
       <div>
         <div class="proj-tag">${t(p.tag)}</div>
         <h3>${t(p.title)}</h3>
@@ -932,20 +1004,30 @@ function initGallery(){
   document.getElementById('galleryNext').addEventListener('click', ()=> api.rotateStep(1));
 }
 
+function initTestWine(){
+  const api = initCarousel('testwineStage', 'testwineRing', TESTWINE_IMAGES.length, (i, isDraggedFar)=>{
+    const src = TESTWINE_IMAGES[i];
+    const card = document.createElement('div');
+    card.innerHTML = `<img src="${src}" alt="">`;
+    card.addEventListener('click', ()=>{ if(!isDraggedFar()) openPhotoModal(src); });
+    return card;
+  });
+  document.getElementById('testwinePrev').addEventListener('click', ()=> api.rotateStep(-1));
+  document.getElementById('testwineNext').addEventListener('click', ()=> api.rotateStep(1));
+}
+
 /* SEZIONE: FILM — carosello con 2 video reali (Facebook) + 4 schede "Coming Soon" */
 const FILMS = [
-  { kind:'video', poster:'bacchus_poster.jpg', embed:'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent('https://fb.watch/v/7DcDylCG1/') + '&show_text=false',
+  { kind:'video', poster:'bacchus_poster.jpg', url:'https://fb.watch/v/7DcDylCG1/',
     title:{en:'Bacchus', el:'Βάκχος'} },
-  { kind:'video', poster:'fondazione_poster.jpg', embed:'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent('https://m.facebook.com/story.php?story_fbid=pfbid0r1NdFuJ8hdKLaPh3Xp6HNevRog6UY7bE6FmwfmUpAqpCJtJUXFNWQGEqJJFdUKvDl&id=100064591725891') + '&show_text=false',
+  { kind:'video', poster:'fondazione_poster.jpg', url:'https://m.facebook.com/story.php?story_fbid=pfbid0r1NdFuJ8hdKLaPh3Xp6HNevRog6UY7bE6FmwfmUpAqpCJtJUXFNWQGEqJJFdUKvDl&id=100064591725891',
     title:{en:'Foundation', el:'Θεμελίωση'} },
-  { kind:'soon' }, { kind:'soon' }, { kind:'soon' }, { kind:'soon' }
+  { kind:'video', poster:'thirdvideo_poster.jpg', url:'https://fb.watch/v/1znGKCFB1e/',
+    title:{en:'Sormarí', el:'Sormarí'} },
+  { kind:'soon' }, { kind:'soon' }, { kind:'soon' }
 ];
 function openVideoModal(item){
-  modalBox.className = 'modal-box photo-only';
-  modalBox.innerHTML = `<iframe src="${item.embed}" style="width:min(900px,92vw); height:min(506px,52vw); border:none; overflow:hidden;" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>`;
-  modalBackdrop.classList.add('show');
-  modalClose.classList.add('show');
-  document.body.style.overflow='hidden';
+  window.open(item.url, '_blank', 'noopener,noreferrer');
 }
 function initFilms(){
   const api = initCarousel('filmsStage', 'filmsRing', FILMS.length, (i, isDraggedFar)=>{
@@ -1010,9 +1092,28 @@ document.getElementById('onassisTile').addEventListener('click', ()=>{
   document.body.style.overflow='hidden';
 });
 
+/* SEZIONE: NUOVI PARTNER (Cyprus Oenophile Association, Velilla Group, Phoenix Lebanon) */
+function openPartnerModal(imgSrc, nameEn, nameEl, url){
+  modalBox.className = 'modal-box';
+  modalBox.innerHTML = `
+    <div class="modal-media"><img src="${imgSrc}" alt="${nameEn}" style="object-fit:contain; padding:5%;"></div>
+    <div class="modal-body" style="text-align:center;">
+      <h2 class="i18n" data-en="Official Partner ${nameEn}" data-el="Επίσημος Συνεργάτης ${nameEl}">Official Partner ${nameEn}</h2>
+      <a href="${url}" target="_blank" rel="noopener noreferrer" class="btn on-dark i18n" style="margin-top:14px;" data-en="Visit website" data-el="Επισκεφθείτε τον ιστότοπο">Visit website</a>
+    </div>`;
+  applyCurrentLang(modalBox);
+  modalBackdrop.classList.add('show');
+  modalClose.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+document.getElementById('cyprusTile').addEventListener('click', ()=> openPartnerModal('partner_cyprus.jpg', 'Cyprus Oenophile Association', 'Όμιλος Οινοφίλων Κύπρου', 'https://cyprusoenophileassociation.com'));
+document.getElementById('velillaTile').addEventListener('click', ()=> openPartnerModal('partner_velilla.jpg', 'Velilla Group', 'Velilla Group', 'https://www.velilla-group.com'));
+document.getElementById('phoenixTile').addEventListener('click', ()=> openPartnerModal('partner_phoenix.jpg', 'Phoenix', 'Phoenix', 'https://phoenixlebanon.com'));
+
 renderProjects();
 renderServices();
 initGallery();
+initTestWine();
 initFilms();
 
 /* ============================================================
