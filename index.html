@@ -195,6 +195,17 @@ header.nav{
 .contrast-col h4{ color:#fff; font-size:1.5rem; font-style:italic; }
 .contrast-col p{ color:rgba(255,255,255,.8); font-size:.88rem; margin-top:8px; max-width:32ch; }
 @media (max-width:760px){ .contrast-row{ grid-template-columns:1fr; } }
+/* SEZIONE: WINEMAKING PHILOSOPHY (dentro About) */
+.philosophy-head{ margin:70px 0 30px; text-align:center; }
+.philosophy-head h3{ font-family:var(--serif); font-size:1.9rem; }
+.phil-row{ display:grid; grid-template-columns:.85fr 1.15fr; gap:5vw; align-items:center; padding:36px 0; border-bottom:1px solid var(--line); }
+.phil-row.rev{ direction:rtl; }
+.phil-row.rev > *{ direction:ltr; }
+.phil-media img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
+.phil-text h4{ font-family:var(--serif); font-size:1.35rem; margin-bottom:14px; }
+.phil-text p{ color:var(--ink-soft); line-height:1.7; }
+@media (max-width:800px){ .phil-row, .phil-row.rev{ grid-template-columns:1fr; direction:ltr; } }
+
 /* FINE SEZIONE: CHI SIAMO */
 
 /* INIZIO SEZIONE: PROGETTI */
@@ -431,11 +442,11 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <div class="edge-fade bottom" id="edgeFadeBottom"></div>
 <div id="pageContent">
 <section class="hero" id="home">
-  <div class="hero-bg"><img src="harvest_crate.jpg" alt="Sormarí grape harvest"></div>
+  <div class="hero-bg"><img src="hat_man.jpg" alt="Sormarí vineyard worker"></div>
   <div class="wrap hero-split">
     <div class="hero-inner">
       <div class="kicker i18n" data-en="Est. 2024" data-el="Ίδρυση 2024">Est. 2024</div>
-      <h1 class="i18n" data-en="Welcome to <em>Sormari.org</em>" data-el="Καλώς ήρθατε στη <em>Sormari.org</em>">Welcome to <em>Sormari.org</em></h1>
+      <h1 class="i18n" data-en="Welcome to <em>Sormarí.org</em>" data-el="Καλώς ήρθατε στη <em>Sormarí.org</em>">Welcome to <em>Sormarí.org</em></h1>
       <p class="i18n" data-en="Discover a world of oenology, great wine and amazing winemaking experiences. Find all the support and guidance you need to achieve your wine goals!<br><br>Get to know our philosophy, our work and our complete range of oenological consulting services. We hope that the next wine we make will tell your story." data-el="Ανακαλύψτε έναν κόσμο οινολογίας, εξαιρετικού κρασιού και μοναδικών εμπειριών οινοποίησης. Βρείτε όλη την υποστήριξη και την καθοδήγηση που χρειάζεστε για να πετύχετε τους στόχους σας στο κρασί!<br><br>Γνωρίστε τη φιλοσοφία μας, τη δουλειά μας και το πλήρες φάσμα των συμβουλευτικών μας υπηρεσιών οινολογίας. Ελπίζουμε το επόμενο κρασί που θα φτιάξουμε να αφηγηθεί τη δική σας ιστορία.">Discover a world of oenology, great wine and amazing winemaking experiences. Find all the support and guidance you need to achieve your wine goals!<br><br>Get to know our philosophy, our work and our complete range of oenological consulting services. We hope that the next wine we make will tell your story.</p>
       <div class="hero-cta">
         <a href="#services" class="btn solid i18n" data-en="Our services" data-el="Οι υπηρεσίες μας">Our services</a>
@@ -473,6 +484,34 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
         <div class="cc-inner"><h4 class="i18n" data-en="Innovation" data-el="Καινοτομία">Innovation</h4><p class="i18n" data-en="Precision viticulture, adapted to every terroir." data-el="Αμπελουργία ακριβείας, προσαρμοσμένη σε κάθε terroir.">Precision viticulture, adapted to every terroir.</p></div>
       </div>
     </div>
+
+    <div class="philosophy-head">
+      <h3 class="i18n" data-en="Winemaking philosophy" data-el="Φιλοσοφία Οινοποίησης">Winemaking philosophy</h3>
+    </div>
+
+    <div class="phil-row">
+      <div class="phil-media"><img src="principles_hand.jpg" alt="Our principles"></div>
+      <div class="phil-text">
+        <h4 class="i18n" data-en="Our principles" data-el="Οι αρχές μας">Our principles</h4>
+        <p class="i18n" data-en="We believe in doing as little as possible, and only when it truly matters. Throughout the whole journey from grape to bottle, we stay close — watching, checking, tasting. Our role is to be ready: present with scientific know-how, stepping in only when nature calls for it.<br><br>Think of the winery as a delivery room, and the wine as a newborn finding its own way into the world.<br><br>This respect for nature's own process is what shapes the wines we make: organic, no-intervention, and biodynamic." data-el="Πιστεύουμε στο να παρεμβαίνουμε όσο το δυνατόν λιγότερο, και μόνο όταν χρειάζεται πραγματικά. Σε όλη τη διαδρομή από το σταφύλι έως το μπουκάλι, μένουμε κοντά — παρατηρώντας, ελέγχοντας, δοκιμάζοντας. Ο ρόλος μας είναι να είμαστε έτοιμοι: παρόντες με επιστημονική γνώση, παρεμβαίνοντας μόνο όταν το ζητήσει η φύση.<br><br>Φανταστείτε το οινοποιείο σαν αίθουσα τοκετού, και το κρασί σαν ένα νεογέννητο που βρίσκει μόνο του τον δρόμο του στον κόσμο.<br><br>Αυτός ο σεβασμός στη φυσική διαδικασία είναι που διαμορφώνει τα κρασιά που φτιάχνουμε: βιολογικά, χωρίς παρέμβαση, και βιοδυναμικά.">We believe in doing as little as possible, and only when it truly matters. Throughout the whole journey from grape to bottle, we stay close — watching, checking, tasting. Our role is to be ready: present with scientific know-how, stepping in only when nature calls for it.<br><br>Think of the winery as a delivery room, and the wine as a newborn finding its own way into the world.<br><br>This respect for nature's own process is what shapes the wines we make: organic, no-intervention, and biodynamic.</p>
+      </div>
+    </div>
+
+    <div class="phil-row rev">
+      <div class="phil-media"><img src="aim_leaf.jpg" alt="Our aim"></div>
+      <div class="phil-text">
+        <h4 class="i18n" data-en="Our aim" data-el="Ο στόχος μας">Our aim</h4>
+        <p class="i18n" data-en="Our goal is simple to state, demanding to achieve: the best wine a place is capable of giving. We work to reveal the terroir — its hidden character, its quiet strengths — so the result reflects both the land and the ambitions of the people behind it.<br><br>No two places are the same, and we treat none of them as if they were. That is why every wine we help create is one of a kind.<br><br>As singular as where it comes from. As singular as you are." data-el="Ο στόχος μας είναι απλός να τον πούμε, απαιτητικός να τον πετύχουμε: το καλύτερο κρασί που μπορεί να δώσει ένας τόπος. Δουλεύουμε για να αναδείξουμε το terroir — τον κρυφό του χαρακτήρα, τις σιωπηλές του δυνάμεις — ώστε το αποτέλεσμα να αντανακλά και τη γη και τις φιλοδοξίες των ανθρώπων πίσω από αυτήν.<br><br>Δεν υπάρχουν δύο ίδιοι τόποι, και δεν αντιμετωπίζουμε κανέναν σαν να ήταν. Γι' αυτό κάθε κρασί που βοηθάμε να δημιουργηθεί είναι μοναδικό.<br><br>Τόσο μοναδικό όσο η προέλευσή του. Τόσο μοναδικό όσο εσείς.">Our goal is simple to state, demanding to achieve: the best wine a place is capable of giving. We work to reveal the terroir — its hidden character, its quiet strengths — so the result reflects both the land and the ambitions of the people behind it.<br><br>No two places are the same, and we treat none of them as if they were. That is why every wine we help create is one of a kind.<br><br>As singular as where it comes from. As singular as you are.</p>
+      </div>
+    </div>
+
+    <div class="phil-row">
+      <div class="phil-media"><img src="process_harvest.jpg" alt="Our winemaking process"></div>
+      <div class="phil-text">
+        <h4 class="i18n" data-en="Our winemaking process" data-el="Η διαδικασία οινοποίησής μας">Our winemaking process</h4>
+        <p class="i18n" data-en="Step 1 — Nature does the first work, ripening the grape in its own time.<br><br>Step 2 — We harvest by hand, carrying each cluster to the winery with the same care it grew with.<br><br>Step 3 — From there, science takes its turn: present, attentive, guiding the grape as it becomes wine.<br><br>A wine is a living thing — born in the vineyard, raised in the cellar. Fittingly, the French call this stage “élevage”, the Spanish “crianza”: both words that simply mean, to raise." data-el="Βήμα 1 — Η φύση κάνει την πρώτη δουλειά, ωριμάζοντας το σταφύλι στον δικό του χρόνο.<br><br>Βήμα 2 — Τρυγάμε με το χέρι, μεταφέροντας κάθε τσαμπί στο οινοποιείο με την ίδια φροντίδα με την οποία μεγάλωσε.<br><br>Βήμα 3 — Από εκεί, η επιστήμη αναλαμβάνει: παρούσα, προσεκτική, καθοδηγώντας το σταφύλι καθώς γίνεται κρασί.<br><br>Το κρασί είναι κάτι ζωντανό — γεννιέται στον αμπελώνα, μεγαλώνει στο κελάρι. Δεν είναι τυχαίο που οι Γάλλοι ονομάζουν αυτό το στάδιο «élevage» και οι Ισπανοί «crianza»: και οι δύο λέξεις σημαίνουν απλά, ανατροφή.">Step 1 — Nature does the first work, ripening the grape in its own time.<br><br>Step 2 — We harvest by hand, carrying each cluster to the winery with the same care it grew with.<br><br>Step 3 — From there, science takes its turn: present, attentive, guiding the grape as it becomes wine.<br><br>A wine is a living thing — born in the vineyard, raised in the cellar. Fittingly, the French call this stage “élevage”, the Spanish “crianza”: both words that simply mean, to raise.</p>
+      </div>
+    </div>
   </div>
 </section>
 <!-- FINE SEZIONE: CHI SIAMO -->
@@ -483,7 +522,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
     <div class="ceo-photo-col"><img src="ceo_mario.jpg" alt="Mario Sorbello" id="marioPhoto"></div>
     <div class="ceo-text-col">
       <div class="quote i18n" data-en="“We have to be close to nature. Intervene as little as possible.”" data-el="«Πρέπει να είμαστε κοντά στη φύση. Να παρεμβαίνουμε όσο το δυνατόν λιγότερο.»">“We have to be close to nature. Intervene as little as possible.”</div>
-      <div class="who"><b>Mario Sorbello</b><span class="i18n" data-en="Founder &amp; Head Oenologist" data-el="Ιδρυτής &amp; Επικεφαλής Οινολόγος">Founder &amp; Head Oenologist</span></div>
+      <div class="who"><b>Mario Sorbello</b><span class="i18n" data-en="CEO Sormari Agriculture LTD" data-el="CEO Sormari Agriculture LTD">CEO Sormari Agriculture LTD</span></div>
     </div>
   </div>
 </section>
@@ -576,7 +615,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
         <div class="pt-caption i18n" data-en="Velilla Group" data-el="Velilla Group">Velilla Group</div>
       </div>
       <div class="partner-tile logo-tile" id="phoenixTile">
-        <img src="partner_phoenix.png" alt="Phoenix Lebanon">
+        <img src="partner_phoenix_black.jpg" alt="Phoenix Lebanon">
         <div class="pt-caption i18n" data-en="Phoenix Lebanon" data-el="Phoenix Lebanon">Phoenix Lebanon</div>
       </div>
     </div>
@@ -590,7 +629,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
     <div class="section-head">
       <div class="kicker i18n" data-en="Our films" data-el="Οι ταινίες μας">Our films</div>
       <h2 class="i18n" data-en="Stories, told in motion" data-el="Ιστορίες σε κίνηση">Stories, told in motion</h2>
-      <p class="i18n" data-en="Two short films from the Sormarí world — with more to come." data-el="Δύο σύντομες ταινίες από τον κόσμο της Sormarí — κι άλλες θα ακολουθήσουν.">Two short films from the Sormarí world — with more to come.</p>
+      <p class="i18n" data-en="Short films from the Sormarí world — with more to come." data-el="Σύντομες ταινίες από τον κόσμο της Sormarí — κι άλλες θα ακολουθήσουν.">Short films from the Sormarí world — with more to come.</p>
     </div>
     <div class="gallery-stage" id="filmsStage">
       <div class="gallery-ring" id="filmsRing"></div>
@@ -791,18 +830,21 @@ const PROJECTS = [
   { video:'https://drive.google.com/file/d/19kB2tiPoWRTNLVt3BMtOGrVAVxxVub3e/preview', tag:{en:'Region Spotlight',el:'Ανάδειξη Περιοχής'}, title:{en:'Ningxia — China',el:'Νινγκσιά — Κίνα'},
     body:{en:"With over 18,000 hectares of vineyards, a Bordeaux-inspired classification, and a growing interest in wine tourism, Ningxia represents the modern and dynamic face of Chinese wine: a region still to be discovered, but already determined to make its mark on the world's tables.",
           el:"Με πάνω από 18.000 εκτάρια αμπελώνων, μια ταξινόμηση εμπνευσμένη από το Μπορντό, και ένα αυξανόμενο ενδιαφέρον για τον οινοτουρισμό, η Νινγκσιά αντιπροσωπεύει το σύγχρονο και δυναμικό πρόσωπο του κινέζικου κρασιού: μια περιοχή που παραμένει προς ανακάλυψη, αλλά είναι ήδη αποφασισμένη να αφήσει το στίγμα της στα τραπέζια του κόσμου."} },
-  { img:'ungrafted_roots.jpg', tag:{en:'',el:''}, title:{en:'Ungrafted vines',el:'Μη εμβολιασμένα κλήματα'},
+  { img:'ungrafted_roots.jpg', tag:{en:'',el:''}, title:{en:'Ungrafted',el:'Χωρίς εμβολιασμό'},
     body:{en:"Untouched by the phylloxera pest. Many of them, more than a century old. Deeper complex root system thus less affected by climate changes. Old hence wise enough to give fewer crops for richer, more concentrated taste. Purer expressions of terroir. Rare, precious, unique.<br><br>It is no coincidence the French call them “franc de pied”. That is, true, honest, authentic, genuine, frank from their “feet”, from their roots. Their “frankness” spreads all the way up to the crops, to their taste… to you.",
           el:"Ανέγγιχτα από τη φυλλοξήρα. Πολλά από αυτά, άνω των εκατό ετών. Βαθύτερο, πιο σύνθετο ριζικό σύστημα, άρα λιγότερο επηρεασμένα από τις κλιματικές αλλαγές. Τόσο παλιά που δίνουν, σοφά, λιγότερη σοδειά για μια πλουσιότερη, πιο συμπυκνωμένη γεύση. Πιο καθαρές εκφράσεις του terroir. Σπάνια, πολύτιμα, μοναδικά.<br><br>Δεν είναι τυχαίο που οι Γάλλοι τα αποκαλούν «franc de pied» — δηλαδή αληθινά, ειλικρινή, αυθεντικά, γνήσια, ντόπια από τα «πόδια» τους, από τις ρίζες τους. Η «ειλικρίνειά» τους φτάνει έως τη σοδειά, τη γεύση… έως εσάς."} },
-  { img:'greek_miracles.jpg', tag:{en:'',el:''}, title:{en:'Greek miracles',el:'Ελληνικά θαύματα'},
+  { img:'greek_miracles.jpg', tag:{en:'',el:''}, title:{en:'Unharmed',el:'Ανέγγιχτα'},
     body:{en:"When at the end of the 19th and throughout the 20th century phylloxera destroyed all European vineyards, the island of Santorini with its sandy, volcanic soil, resisted. Its vines survive today and offer us unique wine, famous all over the world.<br><br>Nowadays, we find a small number of ungrafted vines in many of the Cyclades, in Cephalonia, as well as in some areas of Mainland Greece, like in Naoussa and Nemea.",
           el:"Όταν στα τέλη του 19ου και καθ' όλη τη διάρκεια του 20ού αιώνα η φυλλοξήρα κατέστρεψε όλους τους ευρωπαϊκούς αμπελώνες, το νησί της Σαντορίνης, με το αμμώδες, ηφαιστειογενές έδαφός του, αντιστάθηκε. Τα κλήματά της επιβιώνουν έως σήμερα και μας χαρίζουν ένα μοναδικό κρασί, διάσημο σε όλο τον κόσμο.<br><br>Σήμερα, βρίσκουμε έναν μικρό αριθμό μη εμβολιασμένων κλημάτων σε πολλά νησιά των Κυκλάδων, στην Κεφαλονιά, καθώς και σε ορισμένες περιοχές της ηπειρωτικής Ελλάδας, όπως στη Νάουσα και τη Νεμέα."} },
-  { img:'ungrafted_story.jpg', tag:{en:'',el:''}, title:{en:'Our ungrafted story',el:'Η δική μας ιστορία χωρίς εμβολιασμό'},
+  { img:'ungrafted_story.jpg', tag:{en:'',el:''}, title:{en:'Unmatched',el:'Απαράμιλλα'},
     body:{en:"Oddly enough, our interest in ungrafted vines started in Argentina. A country undamaged by phylloxera. It is there we discovered the authentic taste of old vines. Thus, we set off to find our own roots in Greece.",
           el:"Όσο περίεργο κι αν ακούγεται, το ενδιαφέρον μας για τα μη εμβολιασμένα κλήματα ξεκίνησε στην Αργεντινή — μια χώρα που δεν επλήγη ποτέ από τη φυλλοξήρα. Εκεί ανακαλύψαμε την αυθεντική γεύση των παλιών κλημάτων. Έτσι, ξεκινήσαμε να αναζητούμε τις δικές μας ρίζες στην Ελλάδα."} },
   { img:'santorini_field.jpg', tag:{en:'Case Study',el:'Μελέτη Περίπτωσης'}, title:{en:'Santorini - Kingdom of Assyrtiko Autochthonous Grapes',el:'Σαντορίνη - Το Βασίλειο του Αυτόχθονου Ασύρτικου'},
     body:{en:"Viticulture in Santorini Island is a clear representation of how, in a volcanic soil where phylloxera never took hold, vines remain still ungrafted, still bush-trained low against the wind. The Assyrtiko Autochthonous Grapes are sourced from vines that are typically 100-120 years old, ensuring a rich flavor profile with notes of lemon, grapefruit, and peach. Our role: bring modern winemaking only where it helps the grape, never where it fights it.",
-          el:"Η αμπελουργία στη Σαντορίνη είναι μια σαφής απεικόνιση του πώς, σε ένα ηφαιστειογενές έδαφος όπου η φυλλοξήρα δεν κατάφερε ποτέ να εγκατασταθεί, τα κλήματα παραμένουν ακόμα μη εμβολιασμένα, καλλιεργούμενα χαμηλά σαν θάμνοι ενάντια στον άνεμο. Τα αυτόχθονα σταφύλια Ασύρτικο προέρχονται από κλήματα ηλικίας συνήθως 100-120 ετών, εξασφαλίζοντας ένα πλούσιο προφίλ γεύσης με νότες λεμονιού, γκρέιπφρουτ και ροδάκινου. Ο ρόλος μας: να φέρουμε τη σύγχρονη οινοποίηση μόνο εκεί όπου βοηθά το σταφύλι, ποτέ εκεί όπου το αντιμάχεται."} }
+          el:"Η αμπελουργία στη Σαντορίνη είναι μια σαφής απεικόνιση του πώς, σε ένα ηφαιστειογενές έδαφος όπου η φυλλοξήρα δεν κατάφερε ποτέ να εγκατασταθεί, τα κλήματα παραμένουν ακόμα μη εμβολιασμένα, καλλιεργούμενα χαμηλά σαν θάμνοι ενάντια στον άνεμο. Τα αυτόχθονα σταφύλια Ασύρτικο προέρχονται από κλήματα ηλικίας συνήθως 100-120 ετών, εξασφαλίζοντας ένα πλούσιο προφίλ γεύσης με νότες λεμονιού, γκρέιπφρουτ και ροδάκινου. Ο ρόλος μας: να φέρουμε τη σύγχρονη οινοποίηση μόνο εκεί όπου βοηθά το σταφύλι, ποτέ εκεί όπου το αντιμάχεται."} },
+  { img:'rose_glass.jpg', tag:{en:'Case Study',el:'Μελέτη Περίπτωσης'}, title:{en:'Rosé. A success story.',el:'Ροζέ. Μια ιστορία επιτυχίας.'},
+    body:{en:"In a red-and-white-only world, we took the risk to go pink. We are proud to be the first team of oenologists that, in 2012, dared to reintroduce, redefine and establish rosé wines in Greece. By making them as great as can be.<br><br>Create premium Provence style rosé from Greek varieties? Challenge accepted!<br><br>We shared with local winemakers our love for Provence style rosé. For its pale, almost white color, light taste, for its flavors, aromas and refreshing character that reflect the temperate climate and the rejuvenating nature of the Mediterranean.<br><br>Today, rosé is a favorite choice everywhere. In local wineries, wine bars, wine lists, cellars, shops, orders, palates.",
+          el:"Σε έναν κόσμο μόνο κόκκινου και λευκού, ρισκάραμε να πάμε στο ροζ. Είμαστε περήφανοι που ήμασταν η πρώτη ομάδα οινολόγων που, το 2012, τόλμησε να επανεισάγει, να επαναπροσδιορίσει και να καθιερώσει τα ροζέ κρασιά στην Ελλάδα. Φτιάχνοντάς τα όσο πιο εξαιρετικά γίνεται.<br><br>Να δημιουργήσουμε ροζέ στο πρότυπο της Προβηγκίας, από ελληνικές ποικιλίες; Πρόκληση αποδεκτή!<br><br>Μοιραστήκαμε με τους τοπικούς οινοποιούς την αγάπη μας για το ροζέ τύπου Προβηγκίας. Για το χλωμό, σχεδόν λευκό του χρώμα, την ελαφριά γεύση, τα αρώματα και τον δροσερό χαρακτήρα του που αντανακλά το εύκρατο κλίμα και την αναζωογονητική φύση της Μεσογείου.<br><br>Σήμερα, το ροζέ είναι αγαπημένη επιλογή παντού. Σε τοπικά οινοποιεία, wine bar, λίστες κρασιών, κάβες, καταστήματα, παραγγελίες, ουρανίσκους."} }
 ];
 
 const SERVICES = [
@@ -1119,7 +1161,7 @@ function openPartnerModal(imgSrc, nameEn, nameEl, url){
 }
 document.getElementById('cyprusTile').addEventListener('click', ()=> openPartnerModal('partner_cyprus.jpg', 'Cyprus Oenophile Association', 'Όμιλος Οινοφίλων Κύπρου', 'https://cyprusoenophileassociation.com'));
 document.getElementById('velillaTile').addEventListener('click', ()=> openPartnerModal('partner_velilla.jpg', 'Velilla Group', 'Velilla Group', 'https://www.velilla-group.com'));
-document.getElementById('phoenixTile').addEventListener('click', ()=> openPartnerModal('partner_phoenix.png', 'Phoenix', 'Phoenix', 'https://phoenixlebanon.com'));
+document.getElementById('phoenixTile').addEventListener('click', ()=> openPartnerModal('partner_phoenix_black.jpg', 'Phoenix Lebanon', 'Phoenix Lebanon', 'https://phoenixlebanon.com'));
 
 renderProjects();
 renderServices();
