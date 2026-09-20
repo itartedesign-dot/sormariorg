@@ -269,6 +269,7 @@ header.nav{
 .partner-logos .partner-tile img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .partner-logos .partner-tile .pt-caption{ position:absolute; left:0; right:0; bottom:0; z-index:2; padding:10px 12px; font-size:.66rem; line-height:1.35; color:#fff; text-transform:none; letter-spacing:.2px; text-align:left; background:rgba(0,0,0,.82); }
 .partner-logos .partner-tile.logo-tile{ background:#fff; }
+#phoenixTile{ background:#0b0705; }
 .partner-logos .partner-tile.logo-tile img{ inset:0 0 26px 0; object-fit:contain; padding:16px; }
 .partner-logos .partner-tile.logo-tile .pt-caption{ background:#fff; color:var(--ink-soft); text-align:center; height:26px; display:flex; align-items:center; justify-content:center; }
 
@@ -387,6 +388,11 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 .bot-goto{ display:inline-block; margin-top:8px; font-size:.68rem; letter-spacing:1px; text-transform:uppercase; color:var(--bordeaux); border-bottom:1px solid var(--bordeaux); cursor:pointer; }
 .bot-chip-row{ display:flex; flex-wrap:wrap; gap:6px; padding:0 18px 12px; }
 .bot-chip{ font-size:.68rem; letter-spacing:.5px; border:1px solid var(--line); border-radius:14px; padding:6px 11px; color:var(--ink-soft); }
+.bot-results{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.bot-result-chip{ font-size:.72rem; letter-spacing:.3px; border:1px solid var(--bordeaux); border-radius:14px; padding:7px 13px; color:var(--bordeaux); background:#fff; transition:background .25s ease, color .25s ease; }
+.bot-result-chip:hover{ background:var(--bordeaux); color:#fff; }
+mark.search-hit{ background:var(--gold-pale); color:var(--dark); padding:1px 3px; border-radius:2px; transition:background-color .7s ease, color .7s ease; }
+mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 .bot-chip:hover{ border-color:var(--bordeaux); color:var(--bordeaux); }
 .bot-input-row{ display:flex; border-top:1px solid var(--line); }
 .bot-input-row input{ flex:1; border:none; padding:14px 16px; font-family:var(--sans); font-size:.86rem; background:#fff; }
@@ -517,7 +523,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <!-- FINE SEZIONE: CHI SIAMO -->
 
 <!-- INIZIO SEZIONE: CEO (a se stante, sfondo scuro) -->
-<section class="section dark ceo-standalone">
+<section class="section dark ceo-standalone" id="philosophy">
   <div class="ceo-standalone-grid">
     <div class="ceo-photo-col"><img src="ceo_mario.jpg" alt="Mario Sorbello" id="marioPhoto"></div>
     <div class="ceo-text-col">
@@ -688,7 +694,7 @@ footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
 <!-- FINE SEZIONE: WEB RADIO -->
 
 <!-- INIZIO SEZIONE: ISTITUTIONAL PARTNERS -->
-<section class="section dark ceo-standalone">
+<section class="section dark ceo-standalone" id="instpartners">
   <div class="ceo-standalone-grid">
     <div class="ceo-photo-col"><img src="ceo_statue.jpg" alt="Sormarí"></div>
     <div class="ceo-text-col">
@@ -1185,36 +1191,78 @@ document.getElementById('cfSendBtn').addEventListener('click', ()=>{
 /* ============================================================
    BOT FINTO — risposte basate sui contenuti reali del sito
    ============================================================ */
-const BOT_KB = [
-  { keys:['service','servizi','consult','oenolog','vinif'], goto:'services',
-    a:{en:"We offer 360° oenological consulting — from choosing your vineyard to bottling and labelling your wine, including viticultural consulting and administrative support.", el:"Προσφέρουμε συμβουλευτική οινολογίας 360° — από την επιλογή του αμπελώνα έως την εμφιάλωση και επισήμανση του κρασιού σας."} },
-  { keys:['garage'], goto:'services',
-    a:{en:"Garage Wine is a small, private, high-quality production unit — at your place, your field, your garden. We guide you step by step to create your own private label.", el:"Το Garage Wine είναι μια μικρή, ιδιωτική, υψηλής ποιότητας μονάδα παραγωγής — στο σπίτι σας ή στο χωράφι σας."} },
-  { keys:['project','cyclad','santorini','argentina','κυκλαδ','αργεντιν'], goto:'projects',
-    a:{en:"Our projects span the volcanic soils of the Cyclades to a vineyard built from bare land in Argentina — real 360° consulting stories.", el:"Τα έργα μας εκτείνονται από τα ηφαιστειογενή εδάφη των Κυκλάδων έως έναν αμπελώνα από το μηδέν στην Αργεντινή."} },
-  { keys:['who','oenolog','team','sormar','mario','about','ποιοι','οινολ'], goto:'about',
-    a:{en:"We are a team of oenologists with muddy hands and shoes, led by Mario Sorbello, working as close to the vines as possible.", el:"Είμαστε μια ομάδα οινολόγων με λασπωμένα χέρια, με επικεφαλής τον Mario Sorbello."} },
-  { keys:['contact','email','phone','address','τηλεφ','επικοιν','διευθυν'], goto:'contact',
-    a:{en:"You can reach us by phone at +357 95 968096 or by email at sormaricy25@gmail.com. Our registered office is on Makariou Avenue, Nicosia, Cyprus.", el:"Μπορείτε να επικοινωνήσετε στο +357 95 968096 ή στο sormaricy25@gmail.com. Η έδρα μας είναι στη Λεωφόρο Μακαρίου, Λευκωσία."} },
-  { keys:['merch','shirt','maglietta','clothes','ρουχ'], goto:'merchandising',
-    a:{en:"Our own line of clothing carrying the Sormarí mark is coming soon — more than a t-shirt, an idea.", el:"Η δική μας σειρά ρούχων με το σήμα Sormarí έρχεται σύντομα."} },
-  { keys:['radio'], goto:'webradio',
-    a:{en:"Our web radio — music, conversations and stories from the vineyard — is coming soon.", el:"Το web radio μας έρχεται σύντομα."} },
-  { keys:['partner','συνεργ'], goto:'partners',
-    a:{en:"We are building relationships with wineries, distributors and institutions across the region — our partner network will be presented soon.", el:"Χτίζουμε σχέσεις με οινοποιεία και φορείς — το δίκτυο συνεργατών μας θα παρουσιαστεί σύντομα."} },
-  { keys:['film','video','bacchus','βακχ','ταιν'], goto:'films',
-    a:{en:"We have two short films — Bacchus and Foundation — with more on the way.", el:"Έχουμε δύο σύντομες ταινίες — Βάκχος και Θεμελίωση — κι άλλες έρχονται."} },
-  { keys:['gallery','photo','φωτο','εικον'], goto:'gallery',
-    a:{en:"Take a look at our rotating photo gallery — life among the vines, harvest after harvest.", el:"Ρίξτε μια ματιά στη συλλογή φωτογραφιών μας — η ζωή ανάμεσα στ' αμπέλια."} },
-  { keys:['sustain','nature','organic','biodynam','βιωσιμ','φυσ'], goto:'about',
-    a:{en:"Respect for nature guides everything we do — from organic and biodynamic techniques to low-intervention winemaking.", el:"Ο σεβασμός στη φύση καθοδηγεί ό,τι κάνουμε — από τη βιολογική έως τη βιοδυναμική καλλιέργεια."} },
+const SEARCH_SECTIONS = [
+  {id:'home', label:{en:'Home',el:'Αρχική'}},
+  {id:'about', label:{en:'About',el:'Σχετικά'}},
+  {id:'philosophy', label:{en:'Winemaking Philosophy',el:'Φιλοσοφία Οινοποίησης'}},
+  {id:'projects', label:{en:'Projects',el:'Έργα'}},
+  {id:'gallery', label:{en:'Gallery',el:'Συλλογή Φωτογραφιών'}},
+  {id:'services', label:{en:'Services',el:'Υπηρεσίες'}},
+  {id:'testwine', label:{en:'Laboratory',el:'Εργαστήριο'}},
+  {id:'partners', label:{en:'Partners',el:'Συνεργάτες'}},
+  {id:'films', label:{en:'Films',el:'Ταινίες'}},
+  {id:'merchandising', label:{en:'Merchandising',el:'Merchandising'}},
+  {id:'webradio', label:{en:'Web Radio',el:'Web Radio'}},
+  {id:'instpartners', label:{en:'Institutional Partners',el:'Θεσμικοί Συνεργάτες'}},
+  {id:'contact', label:{en:'Contact',el:'Επικοινωνία'}}
 ];
-const BOT_FALLBACK = {en:"I couldn't find anything specific on that. Try asking about our services, projects, or how to reach us.", el:"Δεν βρήκα κάτι συγκεκριμένο. Ρωτήστε με για τις υπηρεσίες, τα έργα ή πώς να επικοινωνήσετε μαζί μας."};
-const BOT_GREETING = {en:"Hello! I'm the Sormarí assistant. Ask me about our wines, services or projects — I'll point you to the right section.", el:"Γεια σας! Είμαι ο βοηθός της Sormarí. Ρωτήστε με για τα κρασιά, τις υπηρεσίες ή τα έργα μας."};
+function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function searchSite(query){
+  const q = query.trim().toLowerCase();
+  if(!q) return [];
+  const results = [];
+  SEARCH_SECTIONS.forEach(sec=>{
+    const el = document.getElementById(sec.id);
+    if(!el) return;
+    const text = (el.innerText || el.textContent || '').toLowerCase();
+    if(text.includes(q)) results.push(sec);
+  });
+  return results;
+}
+function highlightInSection(sectionEl, query){
+  const q = query.trim();
+  if(!q || !sectionEl) return;
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp('(' + escaped + ')', 'gi');
+  const walker = document.createTreeWalker(sectionEl, NodeFilter.SHOW_TEXT, null);
+  const nodes = [];
+  let node;
+  while(node = walker.nextNode()){
+    const p = node.parentElement;
+    if(p && p.tagName!=='SCRIPT' && p.tagName!=='STYLE' && regex.test(node.nodeValue)) nodes.push(node);
+    regex.lastIndex = 0;
+  }
+  const marks = [];
+  nodes.forEach(n=>{
+    const frag = document.createDocumentFragment();
+    const parts = n.nodeValue.split(regex);
+    parts.forEach((part,i)=>{
+      if(i % 2 === 1){
+        const mark = document.createElement('mark');
+        mark.className = 'search-hit';
+        mark.textContent = part;
+        frag.appendChild(mark);
+        marks.push(mark);
+      } else if(part){
+        frag.appendChild(document.createTextNode(part));
+      }
+    });
+    n.parentNode.replaceChild(frag, n);
+  });
+  if(marks.length) marks[0].scrollIntoView({behavior:'smooth', block:'center'});
+  setTimeout(()=>{
+    marks.forEach(m=> m.classList.add('fade-out'));
+    setTimeout(()=>{
+      marks.forEach(m=>{ const parent=m.parentNode; if(parent){ parent.replaceChild(document.createTextNode(m.textContent), m); parent.normalize(); } });
+    }, 700);
+  }, 2800);
+}
+const BOT_FALLBACK = {en:"I couldn't find that anywhere on the site. Try a different word.", el:"Δεν το βρήκα πουθενά στον ιστότοπο. Δοκιμάστε μια άλλη λέξη."};
+const BOT_GREETING = {en:"Hello! I'm the Sormarí assistant. Type any word and I'll search the whole site for it.", el:"Γεια σας! Είμαι ο βοηθός της Sormarí. Γράψτε οποιαδήποτε λέξη και θα την αναζητήσω σε όλον τον ιστότοπο."};
 const BOT_CHIPS = [
-  {en:'Services',el:'Υπηρεσίες', k:'services'},
-  {en:'Projects',el:'Έργα', k:'projects'},
-  {en:'Contact',el:'Επικοινωνία', k:'contact'},
+  {en:'wine',el:'κρασί', k:'wine'},
+  {en:'services',el:'υπηρεσίες', k:'services'},
+  {en:'contact',el:'επικοινωνία', k:'contact'},
 ];
 
 const botFab = document.getElementById('botFab');
@@ -1247,12 +1295,35 @@ function renderBotChips(){
 }
 function handleBotQuery(query){
   const lang = document.documentElement.getAttribute('data-lang')||'en';
-  botAddMessage(query, 'user');
-  const q = query.toLowerCase();
-  const match = BOT_KB.find(item=> item.keys.some(k=> q.includes(k)));
+  botAddMessage(escapeHtml(query), 'user');
   setTimeout(()=>{
-    if(match) botAddMessage(match.a[lang], 'bot', match.goto);
-    else botAddMessage(BOT_FALLBACK[lang], 'bot');
+    const results = searchSite(query);
+    if(results.length === 0){
+      botAddMessage(BOT_FALLBACK[lang], 'bot');
+      return;
+    }
+    const intro = lang==='el'
+      ? `Βρήκα «${escapeHtml(query)}» σε ${results.length} ${results.length===1?'ενότητα':'ενότητες'}:`
+      : `I found “${escapeHtml(query)}” in ${results.length} section${results.length===1?'':'s'}:`;
+    const div = document.createElement('div');
+    div.className = 'bot-msg bot';
+    div.innerHTML = `<div>${intro}</div>`;
+    const wrap = document.createElement('div');
+    wrap.className = 'bot-results';
+    results.forEach(sec=>{
+      const btn = document.createElement('button');
+      btn.className = 'bot-result-chip';
+      btn.textContent = sec.label[lang];
+      btn.addEventListener('click', ()=>{
+        botPanel.classList.remove('open');
+        scrollToId(sec.id);
+        setTimeout(()=> highlightInSection(document.getElementById(sec.id), query), 550);
+      });
+      wrap.appendChild(btn);
+    });
+    div.appendChild(wrap);
+    botMessages.appendChild(div);
+    botMessages.scrollTop = botMessages.scrollHeight;
   }, 300);
 }
 botFab.addEventListener('click', ()=>{
