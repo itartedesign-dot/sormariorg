@@ -228,33 +228,27 @@ header.nav{
 
 /* INIZIO SEZIONE: GALLERY — unica meccanica "a schede rotanti" superstite */
 .gallery-stage{
-  position:relative; height:400px; margin-top:20px;
+  position:relative; height:460px; margin-top:20px;
   perspective:1200px; display:flex; align-items:center; justify-content:center;
   overflow:hidden; cursor:grab; touch-action:pan-y;
 }
 .gallery-stage:active{ cursor:grabbing; }
 .gallery-ring{ position:relative; width:1px; height:1px; transform-style:preserve-3d; will-change:transform; }
 .g-card{
-  position:absolute; top:50%; left:50%; width:300px; height:188px; margin:-94px 0 0 -150px;
-  border-radius:3px; overflow:hidden; cursor:pointer; background:#0b0b0b; box-shadow:0 20px 45px rgba(0,0,0,.6);
-  border:1px solid rgba(255,255,255,.16);
+  position:absolute; top:50%; left:50%; width:230px; height:310px; margin:-155px 0 0 -115px;
+  border-radius:3px; overflow:hidden; cursor:pointer; box-shadow:0 20px 45px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.5);
 }
-.g-card img{ display:block; width:100%; height:100%; object-fit:cover; }
-.g-card img.portrait{ object-fit:contain; } /* foto verticali: intere, con fondo scuro ai lati */
+.g-card img{ width:100%; height:100%; object-fit:cover; }
 .g-card .g-play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:#fff; background:rgba(0,0,0,.25); text-shadow:0 2px 8px rgba(0,0,0,.6); }
 .gallery-hint{ text-align:center; margin-top:18px; font-size:.72rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
 .carousel-arrows{ display:flex; justify-content:center; align-items:center; gap:26px; margin-top:14px; }
 .carousel-arrows button{ display:flex; align-items:center; justify-content:center; padding:6px; color:var(--ink-soft); opacity:.6; transition:opacity .3s ease, color .3s ease; }
 .carousel-arrows button:hover{ opacity:1; color:var(--bordeaux); }
 .carousel-arrows svg{ width:34px; height:12px; }
-/* Sezioni con caroselli: fondo grigio scurissimo, quasi nero */
-.section.dark.carousel-dark{ background:#121212; }
-.carousel-dark .gallery-hint{ color:rgba(239,231,214,.55); }
-.carousel-dark .carousel-arrows button{ color:rgba(239,231,214,.85); }
-.carousel-dark .carousel-arrows button:hover{ color:var(--gold-pale); }
 @media (max-width:700px){
-  .gallery-stage{ height:300px; }
-  .g-card{ width:210px; height:131px; margin:-66px 0 0 -105px; }
+  .gallery-stage{ height:360px; }
+  .g-card{ width:170px; height:230px; margin:-115px 0 0 -85px; }
 }
 /* FINE SEZIONE: GALLERY */
 
@@ -575,7 +569,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 <!-- FINE SEZIONE: PROGETTI -->
 
 <!-- INIZIO SEZIONE: GALLERY (schede rotanti, confinate qui) -->
-<section class="section dark carousel-dark" id="gallery">
+<section class="section alt" id="gallery">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Gallery" data-el="Συλλογή Φωτογραφιών">Gallery</div>
@@ -607,7 +601,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 <!-- FINE SEZIONE: SERVIZI -->
 
 <!-- INIZIO SEZIONE: TEST WINE (carosello rotante, foto laboratorio/analisi) -->
-<section class="section dark carousel-dark" id="testwine">
+<section class="section alt" id="testwine">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Test Wine" data-el="Test Wine">Test Wine</div>
@@ -657,7 +651,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 <!-- FINE SEZIONE: PARTNERS -->
 
 <!-- INIZIO SEZIONE: FILM / MEDIA (carosello rotante, come la fotogallery) -->
-<section class="section dark carousel-dark" id="films">
+<section class="section alt" id="films">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Our films" data-el="Οι ταινίες μας">Our films</div>
@@ -902,20 +896,20 @@ const SERVICES = [
     body:{en:"We are there for you, every step of the way. From choosing and acquiring your vineyard to affixing the labels on your wine bottles.<br><br>A complete range of services, as flexible as you need.",
           el:"Είμαστε δίπλα σας σε κάθε βήμα.<br><br>Ένα πλήρες φάσμα υπηρεσιών, τόσο ευέλικτο όσο χρειάζεστε."} },
   { tag:{en:'Grape to bottle',el:'Από το σταφύλι στο μπουκάλι'}, title:{en:'Oenological consulting',el:'Οινολογική Συμβουλευτική'},
-    body:{en:"Guidance throughout the whole process, from harvesting the grape to bottling your wine:<br>- Oenological analyses<br>- Wine monitoring<br>- Vinification, aging, stabilization, bottling<br>- Modern techniques: organic, biodynamic, experimental, low SO₂, wild fermentation<br>- Winery management<br>- Grape sourcing and supplier negotiations",
-          el:"Καθοδήγηση σε όλη τη διαδικασία, από τη συγκομιδή έως την εμφιάλωση:<br>- Οινολογικές αναλύσεις<br>- Παρακολούθηση κρασιού<br>- Οινοποίηση, ωρίμανση, σταθεροποίηση, εμφιάλωση<br>- Σύγχρονες τεχνικές: βιολογική, βιοδυναμική, πειραματική, χαμηλή χρήση SO₂, αυθόρμητη ζύμωση<br>- Διαχείριση οινοποιείου<br>- Προμήθεια σταφυλιών και διαπραγμάτευση με προμηθευτές"} },
+    body:{en:"Guidance throughout the procedure followed from harvesting the grape, to bottling your wine. Specifically:<br>- Oenological analyses<br>- Wine monitoring<br>- Vinification, aging, stabilization, bottling.<br>- Modern and innovative vinification techniques:<br>&nbsp;&nbsp;&nbsp;&nbsp;– Organic<br>&nbsp;&nbsp;&nbsp;&nbsp;– Biodynamic<br>&nbsp;&nbsp;&nbsp;&nbsp;– Experimental<br>&nbsp;&nbsp;&nbsp;&nbsp;– No or low SO₂ added<br>&nbsp;&nbsp;&nbsp;&nbsp;– Wild fermentation<br>- Winery management<br>- Grape sourcing<br>- Dealing and negotiating with suppliers.",
+          el:"Καθοδήγηση καθ' όλη τη διαδικασία, από τον τρύγο του σταφυλιού έως την εμφιάλωση του κρασιού σας. Συγκεκριμένα:<br>- Οινολογικές αναλύσεις<br>- Παρακολούθηση κρασιού<br>- Οινοποίηση, παλαίωση, σταθεροποίηση, εμφιάλωση.<br>- Σύγχρονες και καινοτόμες τεχνικές οινοποίησης:<br>&nbsp;&nbsp;&nbsp;&nbsp;– Βιολογική<br>&nbsp;&nbsp;&nbsp;&nbsp;– Βιοδυναμική<br>&nbsp;&nbsp;&nbsp;&nbsp;– Πειραματική<br>&nbsp;&nbsp;&nbsp;&nbsp;– Χωρίς ή με χαμηλή προσθήκη SO₂<br>&nbsp;&nbsp;&nbsp;&nbsp;– Αυθόρμητη ζύμωση<br>- Διαχείριση οινοποιείου<br>- Προμήθεια σταφυλιών<br>- Διαπραγμάτευση και συναλλαγές με προμηθευτές."} },
   { tag:{en:'In the field',el:'Στο χωράφι'}, title:{en:'Viticultural consulting',el:'Αμπελουργική Συμβουλευτική'},
-    body:{en:"Ongoing, year-round cultivation guidance until harvest — precision viticulture, adapted to the terroir:<br>- Vine monitoring<br>- Viticulture management<br>- Plant protection<br>- Irrigation management<br>- Conversion to organic or biodynamic",
-          el:"Ετήσια, καθημερινή συμβουλευτική καλλιέργειας έως τον τρύγο — αμπελουργία ακριβείας, προσαρμοσμένη στο terroir:<br>- Παρακολούθηση κλήματος<br>- Διαχείριση αμπελουργίας<br>- Φυτοπροστασία<br>- Διαχείριση άρδευσης<br>- Μετατροπή σε βιολογική ή βιοδυναμική"} },
-  { tag:{en:'From scratch',el:'Από το μηδέν'}, title:{en:'Vineyard &amp; winery installation-optimization',el:'Εγκατάσταση Αμπελώνα &amp; Οινοποιείου'},
-    body:{en:"Advice on finding and acquiring the right field, and building the winery around it:<br>- Vineyard installation study — variety selection, soil preparation, cost evaluation, irrigation<br>- Design and construction of a fully equipped winery, tailored to your needs<br>- Full project management, handling the oenological requirements from start to finish",
-          el:"Συμβουλές για την εύρεση και απόκτηση του κατάλληλου χωραφιού, και την ανάπτυξη του οινοποιείου γύρω του:<br>- Μελέτη εγκατάστασης αμπελώνα — επιλογή ποικιλίας, προετοιμασία εδάφους, αξιολόγηση κόστους, άρδευση<br>- Σχεδιασμός και κατασκευή πλήρως εξοπλισμένου οινοποιείου<br>- Πλήρης διαχείριση έργου, από τις οινολογικές απαιτήσεις έως το τελικό αποτέλεσμα"} },
+    body:{en:"Yearly, everyday cultivation consulting, until grape harvest. Precision viticulture, adapted to the terroir.<br>- Vine monitoring<br>- Viticulture management<br>- Plant protection management<br>- Irrigation management<br>- Conversion of vineyard into organic or biodynamic",
+          el:"Ετήσια, καθημερινή συμβουλευτική καλλιέργειας, έως τον τρύγο. Αμπελουργία ακριβείας, προσαρμοσμένη στο terroir.<br>- Παρακολούθηση κλήματος<br>- Διαχείριση αμπελουργίας<br>- Διαχείριση φυτοπροστασίας<br>- Διαχείριση άρδευσης<br>- Μετατροπή αμπελώνα σε βιολογικό ή βιοδυναμικό"} },
+  { tag:{en:'From scratch',el:'Από το μηδέν'}, title:{en:'Vineyard and winery installation-optimization',el:'Εγκατάσταση Αμπελώνα &amp; Οινοποιείου'},
+    body:{en:"- Advice on finding and purchasing the right field.<br>- Vineyard installation study:<br>&nbsp;&nbsp;&nbsp;&nbsp;– Vine variety selection<br>&nbsp;&nbsp;&nbsp;&nbsp;– Soil preparation<br>&nbsp;&nbsp;&nbsp;&nbsp;– Cost evaluation<br>&nbsp;&nbsp;&nbsp;&nbsp;– Irrigation<br>- Design &amp; construction of a fully equipped winery, tailored to your needs.<br>- Project management:<br>We undertake all the necessary actions, regarding the oenological requirements of the project, in order to deliver to you a fully functional and productive vineyard and/or winery.",
+          el:"- Συμβουλές για την εύρεση και αγορά του κατάλληλου χωραφιού.<br>- Μελέτη εγκατάστασης αμπελώνα:<br>&nbsp;&nbsp;&nbsp;&nbsp;– Επιλογή ποικιλίας<br>&nbsp;&nbsp;&nbsp;&nbsp;– Προετοιμασία εδάφους<br>&nbsp;&nbsp;&nbsp;&nbsp;– Αξιολόγηση κόστους<br>&nbsp;&nbsp;&nbsp;&nbsp;– Άρδευση<br>- Σχεδιασμός &amp; κατασκευή πλήρως εξοπλισμένου οινοποιείου, προσαρμοσμένου στις ανάγκες σας.<br>- Διαχείριση έργου:<br>Αναλαμβάνουμε όλες τις απαραίτητες ενέργειες, σχετικά με τις οινολογικές απαιτήσεις του έργου, ώστε να σας παραδώσουμε έναν πλήρως λειτουργικό και παραγωγικό αμπελώνα ή/και οινοποιείο."} },
   { tag:{en:'Assistance',el:'Υποστήριξη'}, title:{en:'Assistance with wine collections',el:'Υποστήριξη Συλλογών Κρασιού'},
-    body:{en:"For those who already love wine, or want to start collecting it properly:<br>- Evaluation of wines or existing collections<br>- Building a personal collection for ageing, with our guidance",
-          el:"Για όσους αγαπούν ήδη το κρασί, ή θέλουν να ξεκινήσουν σωστά μια συλλογή:<br>- Αξιολόγηση κρασιών ή υπαρχουσών συλλογών<br>- Δημιουργία προσωπικής συλλογής παλαίωσης, με τη δική μας καθοδήγηση"} },
+    body:{en:"- Evaluation of wines or wine collections<br>- Build a personal wine collection for ageing, with our help.",
+          el:"- Αξιολόγηση κρασιών ή συλλογών κρασιού<br>- Δημιουργία προσωπικής συλλογής κρασιού για παλαίωση, με τη βοήθειά μας."} },
   { tag:{en:'Paperwork, handled',el:'Το χαρτί, τακτοποιημένο'}, title:{en:'Administrative support',el:'Διοικητική Υποστήριξη'},
-    body:{en:"We take on the official paperwork your project requires, from an oenological standpoint:<br>- Applications for plantation rights and production declarations<br>- Subsidy dossiers, prepared and submitted<br>- Certification procedures for organic and biodynamic compliance",
-          el:"Αναλαμβάνουμε τη γραφειοκρατία που απαιτεί το έργο σας, από οινολογική σκοπιά:<br>- Αιτήσεις δικαιωμάτων φύτευσης και δηλώσεις παραγωγής<br>- Φάκελοι επιδοτήσεων, προετοιμασία και υποβολή<br>- Διαδικασίες πιστοποίησης για συμμόρφωση με βιολογικά και βιοδυναμικά πρότυπα"} },
+    body:{en:"- We take on all the official-legal paperwork that your project requires, from an oenological point of view. For example, applications for plantation rights and production declarations.<br>- Subsidy dossiers implementation and submission.<br>- Vineyard and winery certification procedures, as to compliance with organic and biodynamic official standards.",
+          el:"- Αναλαμβάνουμε όλη την επίσημη-νομική γραφειοκρατία που απαιτεί το έργο σας, από οινολογική σκοπιά. Για παράδειγμα, αιτήσεις δικαιωμάτων φύτευσης και δηλώσεις παραγωγής.<br>- Εφαρμογή και υποβολή φακέλων επιδοτήσεων.<br>- Διαδικασίες πιστοποίησης αμπελώνα και οινοποιείου, ως προς τη συμμόρφωση με τα επίσημα βιολογικά και βιοδυναμικά πρότυπα."} },
   { tag:{en:'A small jewel',el:'Ένα μικρό κόσμημα'}, title:{en:'Garage Wine',el:'Garage Wine'},
     body:{en:"The term 'garage wine' refers to a small, private, high-quality wine production unit, that is not necessarily set up in a garage but at your place, your field, your gardens! If you aspire to make your own private label, let us guide you step by step.<br><br>With the right partner and know-how, creating such a small winery very much resembles creating a small jewel!",
           el:"Ο όρος «garage wine» αναφέρεται σε μια μικρή, ιδιωτική, υψηλής ποιότητας μονάδα παραγωγής κρασιού, στο σπίτι σας, στο χωράφι σας, στον κήπο σας!<br><br>Αφήστε μας να σας καθοδηγήσουμε βήμα-βήμα."} }
@@ -1035,10 +1029,7 @@ function renderServices(){
 function initCarousel(stageId, ringId, n, buildCardEl){
   const ring = document.getElementById(ringId);
   const stage = document.getElementById(stageId);
-  const isMobile = window.innerWidth < 700;
-  const cardW = isMobile ? 210 : 300;                       /* deve coincidere con .g-card */
-  const minRadius = Math.ceil((cardW + 24) / (2*Math.sin(Math.PI/n)));  /* le schede non si sovrappongono */
-  const radius = Math.max(isMobile ? 260 : 400, minRadius);
+  const radius = window.innerWidth < 700 ? 260 : 400;
   const step = 360/n;
   let draggedFar = false;
 
@@ -1052,10 +1043,6 @@ function initCarousel(stageId, ringId, n, buildCardEl){
   for(let i=0;i<n;i++){
     const card = buildCardEl(i, ()=> draggedFar);
     card.classList.add('g-card');
-    card.querySelectorAll('img').forEach(img=>{
-      const fit = ()=>{ if(img.naturalWidth && img.naturalWidth/img.naturalHeight < 1.15) img.classList.add('portrait'); };
-      if(img.complete) fit(); else img.addEventListener('load', fit);
-    });
     card.style.transform = `rotateY(${i*step}deg) translateZ(${radius}px)`;
     ring.appendChild(card);
   }
@@ -1151,13 +1138,13 @@ function initTestWine(){
 
 /* SEZIONE: FILM — carosello con 2 video reali (Facebook) + 4 schede "Coming Soon" */
 const FILMS = [
-  { kind:'video', poster:'poster_bacchus_statue.jpg', url:'https://fb.watch/v/aCPT5t000/?fs=e',
+  { kind:'video', poster:'poster_bacchus_statue_v2.jpg', url:'https://fb.watch/v/aCPT5t000/?fs=e',
     title:{en:'Bacchus', el:'Βάκχος'} },
   { kind:'video', poster:'fondazione_poster.jpg', url:'https://www.facebook.com/sormariagricultureltd/videos/1805735126962822/?idorvanity=1607126637782057',
     title:{en:'Foundation', el:'Θεμελίωση'} },
   { kind:'video', poster:'thirdvideo_poster.jpg', url:'https://fb.watch/v/1znGKCFB1e/',
     title:{en:'Sormarí', el:'Sormarí'} },
-  { kind:'video', poster:'poster_webradio.jpg', url:'https://fb.watch/v/9buaddFI8/',
+  { kind:'video', poster:'poster_bacchus_scene.jpg', url:'https://fb.watch/v/9buaddFI8/',
     title:{en:'Sormarí', el:'Sormarí'} },
   { kind:'soon' }, { kind:'soon' }
 ];
@@ -1169,7 +1156,7 @@ function initFilms(){
     const item = FILMS[i];
     const card = document.createElement('div');
     if(item.kind==='soon'){
-      card.innerHTML = `<img src="coming_soon_landscape.jpg" alt="Sormarí — Coming Soon">`;
+      card.innerHTML = `<img src="coming_soon_sormari.jpg" alt="Sormarí — Coming Soon">`;
       card.style.cursor = 'default';
     } else {
       card.innerHTML = `<img src="${item.poster}" alt=""><div class="g-play">▶</div>`;
