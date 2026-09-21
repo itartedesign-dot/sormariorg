@@ -228,27 +228,33 @@ header.nav{
 
 /* INIZIO SEZIONE: GALLERY — unica meccanica "a schede rotanti" superstite */
 .gallery-stage{
-  position:relative; height:460px; margin-top:20px;
+  position:relative; height:400px; margin-top:20px;
   perspective:1200px; display:flex; align-items:center; justify-content:center;
   overflow:hidden; cursor:grab; touch-action:pan-y;
 }
 .gallery-stage:active{ cursor:grabbing; }
 .gallery-ring{ position:relative; width:1px; height:1px; transform-style:preserve-3d; will-change:transform; }
 .g-card{
-  position:absolute; top:50%; left:50%; width:230px; height:310px; margin:-155px 0 0 -115px;
-  border-radius:3px; overflow:hidden; cursor:pointer; box-shadow:0 20px 45px rgba(0,0,0,.35);
-  border:1px solid rgba(255,255,255,.5);
+  position:absolute; top:50%; left:50%; width:300px; height:188px; margin:-94px 0 0 -150px;
+  border-radius:3px; overflow:hidden; cursor:pointer; background:#0b0b0b; box-shadow:0 20px 45px rgba(0,0,0,.6);
+  border:1px solid rgba(255,255,255,.16);
 }
-.g-card img{ width:100%; height:100%; object-fit:cover; }
+.g-card img{ display:block; width:100%; height:100%; object-fit:cover; }
+.g-card img.portrait{ object-fit:contain; } /* foto verticali: intere, con fondo scuro ai lati */
 .g-card .g-play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:#fff; background:rgba(0,0,0,.25); text-shadow:0 2px 8px rgba(0,0,0,.6); }
 .gallery-hint{ text-align:center; margin-top:18px; font-size:.72rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
 .carousel-arrows{ display:flex; justify-content:center; align-items:center; gap:26px; margin-top:14px; }
 .carousel-arrows button{ display:flex; align-items:center; justify-content:center; padding:6px; color:var(--ink-soft); opacity:.6; transition:opacity .3s ease, color .3s ease; }
 .carousel-arrows button:hover{ opacity:1; color:var(--bordeaux); }
 .carousel-arrows svg{ width:34px; height:12px; }
+/* Sezioni con caroselli: fondo grigio scurissimo, quasi nero */
+.section.dark.carousel-dark{ background:#121212; }
+.carousel-dark .gallery-hint{ color:rgba(239,231,214,.55); }
+.carousel-dark .carousel-arrows button{ color:rgba(239,231,214,.85); }
+.carousel-dark .carousel-arrows button:hover{ color:var(--gold-pale); }
 @media (max-width:700px){
-  .gallery-stage{ height:360px; }
-  .g-card{ width:170px; height:230px; margin:-115px 0 0 -85px; }
+  .gallery-stage{ height:300px; }
+  .g-card{ width:210px; height:131px; margin:-66px 0 0 -105px; }
 }
 /* FINE SEZIONE: GALLERY */
 
@@ -569,7 +575,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 <!-- FINE SEZIONE: PROGETTI -->
 
 <!-- INIZIO SEZIONE: GALLERY (schede rotanti, confinate qui) -->
-<section class="section alt" id="gallery">
+<section class="section dark carousel-dark" id="gallery">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Gallery" data-el="Συλλογή Φωτογραφιών">Gallery</div>
@@ -601,7 +607,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 <!-- FINE SEZIONE: SERVIZI -->
 
 <!-- INIZIO SEZIONE: TEST WINE (carosello rotante, foto laboratorio/analisi) -->
-<section class="section alt" id="testwine">
+<section class="section dark carousel-dark" id="testwine">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Test Wine" data-el="Test Wine">Test Wine</div>
@@ -651,7 +657,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 <!-- FINE SEZIONE: PARTNERS -->
 
 <!-- INIZIO SEZIONE: FILM / MEDIA (carosello rotante, come la fotogallery) -->
-<section class="section alt" id="films">
+<section class="section dark carousel-dark" id="films">
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Our films" data-el="Οι ταινίες μας">Our films</div>
@@ -1029,7 +1035,10 @@ function renderServices(){
 function initCarousel(stageId, ringId, n, buildCardEl){
   const ring = document.getElementById(ringId);
   const stage = document.getElementById(stageId);
-  const radius = window.innerWidth < 700 ? 260 : 400;
+  const isMobile = window.innerWidth < 700;
+  const cardW = isMobile ? 210 : 300;                       /* deve coincidere con .g-card */
+  const minRadius = Math.ceil((cardW + 24) / (2*Math.sin(Math.PI/n)));  /* le schede non si sovrappongono */
+  const radius = Math.max(isMobile ? 260 : 400, minRadius);
   const step = 360/n;
   let draggedFar = false;
 
@@ -1043,6 +1052,10 @@ function initCarousel(stageId, ringId, n, buildCardEl){
   for(let i=0;i<n;i++){
     const card = buildCardEl(i, ()=> draggedFar);
     card.classList.add('g-card');
+    card.querySelectorAll('img').forEach(img=>{
+      const fit = ()=>{ if(img.naturalWidth && img.naturalWidth/img.naturalHeight < 1.15) img.classList.add('portrait'); };
+      if(img.complete) fit(); else img.addEventListener('load', fit);
+    });
     card.style.transform = `rotateY(${i*step}deg) translateZ(${radius}px)`;
     ring.appendChild(card);
   }
@@ -1138,13 +1151,13 @@ function initTestWine(){
 
 /* SEZIONE: FILM — carosello con 2 video reali (Facebook) + 4 schede "Coming Soon" */
 const FILMS = [
-  { kind:'video', poster:'bacchus_poster.jpg', url:'https://fb.watch/v/aCPT5t000/?fs=e',
+  { kind:'video', poster:'poster_bacchus_statue.jpg', url:'https://fb.watch/v/aCPT5t000/?fs=e',
     title:{en:'Bacchus', el:'Βάκχος'} },
   { kind:'video', poster:'fondazione_poster.jpg', url:'https://www.facebook.com/sormariagricultureltd/videos/1805735126962822/?idorvanity=1607126637782057',
     title:{en:'Foundation', el:'Θεμελίωση'} },
   { kind:'video', poster:'thirdvideo_poster.jpg', url:'https://fb.watch/v/1znGKCFB1e/',
     title:{en:'Sormarí', el:'Sormarí'} },
-  { kind:'video', poster:'video4_poster.jpg', url:'https://fb.watch/v/9buaddFI8/',
+  { kind:'video', poster:'poster_webradio.jpg', url:'https://fb.watch/v/9buaddFI8/',
     title:{en:'Sormarí', el:'Sormarí'} },
   { kind:'soon' }, { kind:'soon' }
 ];
@@ -1156,7 +1169,7 @@ function initFilms(){
     const item = FILMS[i];
     const card = document.createElement('div');
     if(item.kind==='soon'){
-      card.innerHTML = `<img src="coming_soon_sormari.jpg" alt="Sormarí — Coming Soon">`;
+      card.innerHTML = `<img src="coming_soon_landscape.jpg" alt="Sormarí — Coming Soon">`;
       card.style.cursor = 'default';
     } else {
       card.innerHTML = `<img src="${item.poster}" alt=""><div class="g-play">▶</div>`;
@@ -1196,9 +1209,9 @@ const ONASSIS_TEXT = {
 };
 document.getElementById('onassisTile').addEventListener('click', ()=>{
   const lang = document.documentElement.getAttribute('data-lang')||'en';
-  modalBox.className = 'modal-box';
+  modalBox.className = 'modal-box card-photo';
   modalBox.innerHTML = `
-    <div class="modal-media"><img src="onassis.jpg" alt="Onassis Group"></div>
+    <div class="modal-media site-frame" style="aspect-ratio:3/2;"><img src="onassis.jpg" alt="Onassis Group"></div>
     <div class="modal-body">
       <div class="m-tag i18n" data-en="Partnership" data-el="Συνεργασία">Partnership</div>
       <h2 class="i18n" data-en="Sormarí Agriculture — Official Partner of the Onassis Group, Athens" data-el="Sormarí Agriculture — Επίσημος Συνεργάτης του Ομίλου Ωνάση, Αθήνα">Sormarí Agriculture — Official Partner of the Onassis Group, Athens</h2>
@@ -1215,10 +1228,11 @@ document.getElementById('onassisTile').addEventListener('click', ()=>{
 });
 
 /* SEZIONE: NUOVI PARTNER (Cyprus Oenophile Association, Velilla Group, Phoenix Lebanon) */
-function openPartnerModal(imgSrc, nameEn, nameEl, url){
-  modalBox.className = 'modal-box';
+function openPartnerModal(imgSrc, nameEn, nameEl, url, bg){
+  /* stessa inquadratura della tessera nel sito: 3:2, logo intero con margine, fondo bianco (o nero per Phoenix) */
+  modalBox.className = 'modal-box card-photo';
   modalBox.innerHTML = `
-    <div class="modal-media"><img src="${imgSrc}" alt="${nameEn}" style="object-fit:contain; padding:5%;"></div>
+    <div class="modal-media site-frame" style="aspect-ratio:3/2; background:${bg||'#fff'};"><img src="${imgSrc}" alt="${nameEn}" style="object-fit:contain; padding:6%; box-sizing:border-box;"></div>
     <div class="modal-body" style="text-align:center;">
       <h2 class="i18n" data-en="Official Partner ${nameEn}" data-el="Επίσημος Συνεργάτης ${nameEl}">Official Partner ${nameEn}</h2>
       <a href="${url}" target="_blank" rel="noopener noreferrer" class="btn on-dark i18n" style="margin-top:14px;" data-en="Visit website" data-el="Επισκεφθείτε τον ιστότοπο">Visit website</a>
@@ -1230,7 +1244,7 @@ function openPartnerModal(imgSrc, nameEn, nameEl, url){
 }
 document.getElementById('cyprusTile').addEventListener('click', ()=> openPartnerModal('partner_cyprus.jpg', 'Cyprus Oenophile Association', 'Όμιλος Οινοφίλων Κύπρου', 'https://cyprusoenophileassociation.com'));
 document.getElementById('velillaTile').addEventListener('click', ()=> openPartnerModal('partner_velilla.jpg', 'Velilla Group', 'Velilla Group', 'https://www.velilla-group.com'));
-document.getElementById('phoenixTile').addEventListener('click', ()=> openPartnerModal('partner_phoenix_black.jpg', 'Phoenix Lebanon', 'Phoenix Lebanon', 'https://phoenixlebanon.com'));
+document.getElementById('phoenixTile').addEventListener('click', ()=> openPartnerModal('partner_phoenix_black.jpg', 'Phoenix Lebanon', 'Phoenix Lebanon', 'https://phoenixlebanon.com', '#0b0705'));
 
 renderProjects();
 renderServices();
