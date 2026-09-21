@@ -203,6 +203,8 @@ header.nav{
 .phil-row.rev > *{ direction:ltr; }
 .phil-media img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
 .phil-text h4{ font-family:var(--serif); font-size:1.35rem; margin-bottom:14px; }
+.phil-row{ cursor:pointer; }
+.phil-more{ margin-top:18px; }
 .phil-text p{ color:var(--ink-soft); line-height:1.7; }
 @media (max-width:800px){ .phil-row, .phil-row.rev{ grid-template-columns:1fr; direction:ltr; } }
 
@@ -218,6 +220,7 @@ header.nav{
 .proj-row:hover .proj-media img{ transform:scale(1.04); }
 .proj-tag{ font-size:.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
 .proj-row h3{ font-size:1.7rem; margin-bottom:12px; }
+.proj-sub{ font-family:var(--serif); font-style:italic; font-size:1.08rem; line-height:1.4; color:var(--bordeaux); margin:-4px 0 14px; }
 .proj-row p{ color:var(--ink-soft); margin-bottom:18px; }
 .proj-link{ font-size:.78rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--bordeaux); border-bottom:1px solid var(--bordeaux); padding-bottom:2px; }
 @media (max-width:800px){ .proj-row, .proj-row.rev{ grid-template-columns:1fr; direction:ltr; gap:24px; } }
@@ -281,6 +284,12 @@ header.nav{
 .webradio-row{ display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center; }
 .webradio-img img{ width:100%; max-width:380px; margin:0 auto; filter:drop-shadow(0 30px 50px rgba(0,0,0,.25)); }
 @media (max-width:800px){ .webradio-row{ grid-template-columns:1fr; } .webradio-img{ order:-1; } }
+/* SEZIONE: VIDEO sotto Web Radio — nera, stessa altezza della Web Radio (riquadro 16:9 alto 380px) */
+.section.video-band{ background:#000; padding:74px 0; }
+.video-band-inner{ display:flex; flex-direction:column; align-items:center; gap:22px; }
+.video-frame{ position:relative; box-sizing:border-box; width:min(675px,100%); aspect-ratio:16/9; background:#000; border:1px solid rgba(201,166,104,.28); box-shadow:0 30px 60px rgba(0,0,0,.55); }
+.video-frame .video-ph{ position:absolute; left:50%; top:50%; width:110px; height:110px; transform:translate(-50%,-50%); opacity:.85; pointer-events:none; }
+.video-frame iframe{ position:relative; z-index:1; display:block; width:100%; height:100%; border:0; }
 
 .ambient-player{ display:flex; align-items:center; gap:12px; margin-top:16px; }
 .ap-btn{ width:38px; height:38px; flex:0 0 auto; border-radius:50%; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; color:var(--ink-soft); transition:background .3s ease, color .3s ease, border-color .3s ease; }
@@ -329,6 +338,12 @@ header.nav{
 .modal-body .m-tag{ font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold-pale); margin-bottom:14px; }
 .modal-body h2{ color:#f2e9d8; font-size:1.7rem; margin-bottom:16px; }
 .modal-body p{ color:rgba(242,233,216,.85); margin-bottom:12px; font-size:.96rem; }
+.modal-body .m-sub{ font-family:var(--serif); font-style:italic; font-size:1.08rem; line-height:1.4; color:var(--gold-pale); margin:-6px 0 18px; }
+/* Schede con foto (progetti + philosophy): stessa inquadratura 4:3 del sito, mai rimpicciolita dal testo lungo */
+.modal-box.card-photo{ width:min(700px,92vw); }
+.modal-box.card-photo .m-tag:empty{ display:none; }
+.modal-media.site-frame{ position:relative; height:auto; aspect-ratio:4/3; flex-shrink:0; }
+.modal-media.site-frame img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .modal-close{ position:fixed; top:26px; right:26px; z-index:3010; width:44px; height:44px; border-radius:50%; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.3); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.1rem; opacity:0; pointer-events:none; transition:opacity .3s ease, transform .3s ease, background .3s ease; }
 .modal-close.show{ opacity:1; pointer-events:auto; }
 .modal-close:hover{ background:var(--bordeaux); transform:rotate(90deg); }
@@ -503,6 +518,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
       <div class="phil-text">
         <h4 class="i18n" data-en="Our principles" data-el="Οι αρχές μας">Our principles</h4>
         <p class="i18n" data-en="We believe in doing as little as possible, and only when it truly matters. Throughout the whole journey from grape to bottle, we stay close — watching, checking, tasting. Our role is to be ready: present with scientific know-how, stepping in only when nature calls for it.<br><br>Think of the winery as a delivery room, and the wine as a newborn finding its own way into the world.<br><br>This respect for nature's own process is what shapes the wines we make: organic, no-intervention, and biodynamic." data-el="Πιστεύουμε στο να παρεμβαίνουμε όσο το δυνατόν λιγότερο, και μόνο όταν χρειάζεται πραγματικά. Σε όλη τη διαδρομή από το σταφύλι έως το μπουκάλι, μένουμε κοντά — παρατηρώντας, ελέγχοντας, δοκιμάζοντας. Ο ρόλος μας είναι να είμαστε έτοιμοι: παρόντες με επιστημονική γνώση, παρεμβαίνοντας μόνο όταν το ζητήσει η φύση.<br><br>Φανταστείτε το οινοποιείο σαν αίθουσα τοκετού, και το κρασί σαν ένα νεογέννητο που βρίσκει μόνο του τον δρόμο του στον κόσμο.<br><br>Αυτός ο σεβασμός στη φυσική διαδικασία είναι που διαμορφώνει τα κρασιά που φτιάχνουμε: βιολογικά, χωρίς παρέμβαση, και βιοδυναμικά.">We believe in doing as little as possible, and only when it truly matters. Throughout the whole journey from grape to bottle, we stay close — watching, checking, tasting. Our role is to be ready: present with scientific know-how, stepping in only when nature calls for it.<br><br>Think of the winery as a delivery room, and the wine as a newborn finding its own way into the world.<br><br>This respect for nature's own process is what shapes the wines we make: organic, no-intervention, and biodynamic.</p>
+        <div class="phil-more"><span class="proj-link i18n" data-en="Discover" data-el="Ανακαλύψτε">Discover</span></div>
       </div>
     </div>
 
@@ -511,6 +527,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
       <div class="phil-text">
         <h4 class="i18n" data-en="Our aim" data-el="Ο στόχος μας">Our aim</h4>
         <p class="i18n" data-en="Our goal is simple to state, demanding to achieve: the best wine a place is capable of giving. We work to reveal the terroir — its hidden character, its quiet strengths — so the result reflects both the land and the ambitions of the people behind it.<br><br>No two places are the same, and we treat none of them as if they were. That is why every wine we help create is one of a kind.<br><br>As singular as where it comes from. As singular as you are." data-el="Ο στόχος μας είναι απλός να τον πούμε, απαιτητικός να τον πετύχουμε: το καλύτερο κρασί που μπορεί να δώσει ένας τόπος. Δουλεύουμε για να αναδείξουμε το terroir — τον κρυφό του χαρακτήρα, τις σιωπηλές του δυνάμεις — ώστε το αποτέλεσμα να αντανακλά και τη γη και τις φιλοδοξίες των ανθρώπων πίσω από αυτήν.<br><br>Δεν υπάρχουν δύο ίδιοι τόποι, και δεν αντιμετωπίζουμε κανέναν σαν να ήταν. Γι' αυτό κάθε κρασί που βοηθάμε να δημιουργηθεί είναι μοναδικό.<br><br>Τόσο μοναδικό όσο η προέλευσή του. Τόσο μοναδικό όσο εσείς.">Our goal is simple to state, demanding to achieve: the best wine a place is capable of giving. We work to reveal the terroir — its hidden character, its quiet strengths — so the result reflects both the land and the ambitions of the people behind it.<br><br>No two places are the same, and we treat none of them as if they were. That is why every wine we help create is one of a kind.<br><br>As singular as where it comes from. As singular as you are.</p>
+        <div class="phil-more"><span class="proj-link i18n" data-en="Discover" data-el="Ανακαλύψτε">Discover</span></div>
       </div>
     </div>
 
@@ -519,6 +536,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
       <div class="phil-text">
         <h4 class="i18n" data-en="Our winemaking process" data-el="Η διαδικασία οινοποίησής μας">Our winemaking process</h4>
         <p class="i18n" data-en="Step 1 — Nature does the first work, ripening the grape in its own time.<br><br>Step 2 — We harvest by hand, carrying each cluster to the winery with the same care it grew with.<br><br>Step 3 — From there, science takes its turn: present, attentive, guiding the grape as it becomes wine.<br><br>A wine is a living thing — born in the vineyard, raised in the cellar. Fittingly, the French call this stage “élevage”, the Spanish “crianza”: both words that simply mean, to raise." data-el="Βήμα 1 — Η φύση κάνει την πρώτη δουλειά, ωριμάζοντας το σταφύλι στον δικό του χρόνο.<br><br>Βήμα 2 — Τρυγάμε με το χέρι, μεταφέροντας κάθε τσαμπί στο οινοποιείο με την ίδια φροντίδα με την οποία μεγάλωσε.<br><br>Βήμα 3 — Από εκεί, η επιστήμη αναλαμβάνει: παρούσα, προσεκτική, καθοδηγώντας το σταφύλι καθώς γίνεται κρασί.<br><br>Το κρασί είναι κάτι ζωντανό — γεννιέται στον αμπελώνα, μεγαλώνει στο κελάρι. Δεν είναι τυχαίο που οι Γάλλοι ονομάζουν αυτό το στάδιο «élevage» και οι Ισπανοί «crianza»: και οι δύο λέξεις σημαίνουν απλά, ανατροφή.">Step 1 — Nature does the first work, ripening the grape in its own time.<br><br>Step 2 — We harvest by hand, carrying each cluster to the winery with the same care it grew with.<br><br>Step 3 — From there, science takes its turn: present, attentive, guiding the grape as it becomes wine.<br><br>A wine is a living thing — born in the vineyard, raised in the cellar. Fittingly, the French call this stage “élevage”, the Spanish “crianza”: both words that simply mean, to raise.</p>
+        <div class="phil-more"><span class="proj-link i18n" data-en="Discover" data-el="Ανακαλύψτε">Discover</span></div>
       </div>
     </div>
   </div>
@@ -691,10 +709,22 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
         <audio class="ap-audio" loop preload="none"><source src="brezza_foglie.mp3" type="audio/mpeg"></audio>
       </div>
     </div>
-    <div class="webradio-img"><img src="webradio_logo.png" alt="Sormarí Web Radio"></div>
+    <div class="webradio-img"><img src="webradio_logo_v2.png" alt="Sormarí Web Radio"></div>
   </div>
 </section>
 <!-- FINE SEZIONE: WEB RADIO -->
+
+<!-- INIZIO SEZIONE: VIDEO (sotto Web Radio, sfondo nero, video Facebook incorporato) -->
+<section class="section video-band" id="sormarivideo" aria-label="Sormarí video">
+  <div class="wrap video-band-inner">
+    <div class="video-frame">
+      <img class="video-ph" src="Logo.png" alt="">
+      <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Ffb.watch%2Fv%2F9buaddFI8%2F&amp;show_text=false&amp;width=734&amp;t=0" title="Sormarí video" loading="lazy" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+    </div>
+    <a class="btn on-dark i18n" href="https://fb.watch/v/9buaddFI8/" target="_blank" rel="noopener noreferrer" data-en="Watch on Facebook" data-el="Δείτε στο Facebook">Watch on Facebook</a>
+  </div>
+</section>
+<!-- FINE SEZIONE: VIDEO -->
 
 <!-- INIZIO SEZIONE: ISTITUTIONAL PARTNERS -->
 <section class="section dark ceo-standalone" id="instpartners">
@@ -729,6 +759,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
         <div class="socials-inline">
           <a href="https://www.instagram.com/sormariagriculture?igsh=OW9nY2o4NzQ4bXo3" target="_blank" rel="noopener noreferrer"><img src="instagram.png" alt="Instagram"></a>
           <a href="https://www.facebook.com/profile.php?id=100064591725891" target="_blank" rel="noopener noreferrer"><img src="facebook.png" alt="Facebook"></a>
+          <a href="https://www.tiktok.com/@sormariagriculture?_r=1&amp;_t=ZN-99uqyLqfiw2" target="_blank" rel="noopener noreferrer"><img src="tiktok.png" alt="TikTok"></a>
         </div>
       </div>
       <form class="contact-form" onsubmit="return false;">
@@ -841,12 +872,15 @@ const PROJECTS = [
     body:{en:"With over 18,000 hectares of vineyards, a Bordeaux-inspired classification, and a growing interest in wine tourism, Ningxia represents the modern and dynamic face of Chinese wine: a region still to be discovered, but already determined to make its mark on the world's tables.",
           el:"Με πάνω από 18.000 εκτάρια αμπελώνων, μια ταξινόμηση εμπνευσμένη από το Μπορντό, και ένα αυξανόμενο ενδιαφέρον για τον οινοτουρισμό, η Νινγκσιά αντιπροσωπεύει το σύγχρονο και δυναμικό πρόσωπο του κινέζικου κρασιού: μια περιοχή που παραμένει προς ανακάλυψη, αλλά είναι ήδη αποφασισμένη να αφήσει το στίγμα της στα τραπέζια του κόσμου."} },
   { img:'ungrafted_roots.jpg', tag:{en:'',el:''}, title:{en:'Ungrafted',el:'Χωρίς εμβολιασμό'},
+    sub:{en:'Ungrafted vines',el:'Μη εμβολιασμένα κλήματα'},
     body:{en:"Untouched by the phylloxera pest. Many of them, more than a century old. Deeper complex root system thus less affected by climate changes. Old hence wise enough to give fewer crops for richer, more concentrated taste. Purer expressions of terroir. Rare, precious, unique.<br><br>It is no coincidence the French call them “franc de pied”. That is, true, honest, authentic, genuine, frank from their “feet”, from their roots. Their “frankness” spreads all the way up to the crops, to their taste… to you.",
           el:"Ανέγγιχτα από τη φυλλοξήρα. Πολλά από αυτά, άνω των εκατό ετών. Βαθύτερο, πιο σύνθετο ριζικό σύστημα, άρα λιγότερο επηρεασμένα από τις κλιματικές αλλαγές. Τόσο παλιά που δίνουν, σοφά, λιγότερη σοδειά για μια πλουσιότερη, πιο συμπυκνωμένη γεύση. Πιο καθαρές εκφράσεις του terroir. Σπάνια, πολύτιμα, μοναδικά.<br><br>Δεν είναι τυχαίο που οι Γάλλοι τα αποκαλούν «franc de pied» — δηλαδή αληθινά, ειλικρινή, αυθεντικά, γνήσια, ντόπια από τα «πόδια» τους, από τις ρίζες τους. Η «ειλικρίνειά» τους φτάνει έως τη σοδειά, τη γεύση… έως εσάς."} },
   { img:'greek_miracles.jpg', tag:{en:'',el:''}, title:{en:'Unharmed',el:'Ανέγγιχτα'},
-    body:{en:"When at the end of the 19th and throughout the 20th century phylloxera destroyed all European vineyards, the island of Santorini with its sandy, volcanic soil, resisted. Its vines survive today and offer us unique wine, famous all over the world.<br><br>Nowadays, we find a small number of ungrafted vines in many of the Cyclades, in Cephalonia, as well as in some areas of Mainland Greece, like in Naoussa and Nemea.",
-          el:"Όταν στα τέλη του 19ου και καθ' όλη τη διάρκεια του 20ού αιώνα η φυλλοξήρα κατέστρεψε όλους τους ευρωπαϊκούς αμπελώνες, το νησί της Σαντορίνης, με το αμμώδες, ηφαιστειογενές έδαφός του, αντιστάθηκε. Τα κλήματά της επιβιώνουν έως σήμερα και μας χαρίζουν ένα μοναδικό κρασί, διάσημο σε όλο τον κόσμο.<br><br>Σήμερα, βρίσκουμε έναν μικρό αριθμό μη εμβολιασμένων κλημάτων σε πολλά νησιά των Κυκλάδων, στην Κεφαλονιά, καθώς και σε ορισμένες περιοχές της ηπειρωτικής Ελλάδας, όπως στη Νάουσα και τη Νεμέα."} },
+    sub:{en:'Greek miracles: Nemea and Peloponnese<br>The Kingdom of Greek Viticulture',el:'Ελληνικά θαύματα: Νεμέα και Πελοπόννησος<br>Το Βασίλειο της Ελληνικής Αμπελουργίας'},
+    body:{en:"When at the end of the 19th and throughout the 20th century phylloxera destroyed all European vineyards, the island of Santorini with its sandy, volcanic soil, resisted. Its vines survive today and offer us unique wine, famous all over the world.<br><br>Nowadays, we find a small number of ungrafted vines in many of the Cyclades, in Cephalonia, as well as in some areas of Mainland Greece, like in Naoussa and Nemea.<br><br>Nemea and the Peloponnese are not just wine-producing regions; they are the heart of Greek viticulture, where ancient traditions and modern winemaking converge. The Nemea region, known for its Agiorgitiko grape, is the largest red wine PDO in Greece, producing wines that range from light, fruity expressions to full-bodied, age-worthy reds. The Peloponnese, with its mountainous terrain and Mediterranean climate, offers a unique backdrop for winemaking, creating wines that are both historically significant and critically acclaimed.<br><br>The region's wineries, many of which are open to visitors, showcase the best of Greek viticulture, from the vineyards to the tastings. The Peloponnese's wineries are open to visitors, offering a glimpse into the ancient world of winemaking and the modern techniques that have transformed this once-overlooked area into a world-class wine destination.",
+          el:"Όταν στα τέλη του 19ου και καθ' όλη τη διάρκεια του 20ού αιώνα η φυλλοξήρα κατέστρεψε όλους τους ευρωπαϊκούς αμπελώνες, το νησί της Σαντορίνης, με το αμμώδες, ηφαιστειογενές έδαφός του, αντιστάθηκε. Τα κλήματά της επιβιώνουν έως σήμερα και μας χαρίζουν ένα μοναδικό κρασί, διάσημο σε όλο τον κόσμο.<br><br>Σήμερα, βρίσκουμε έναν μικρό αριθμό μη εμβολιασμένων κλημάτων σε πολλά νησιά των Κυκλάδων, στην Κεφαλονιά, καθώς και σε ορισμένες περιοχές της ηπειρωτικής Ελλάδας, όπως στη Νάουσα και τη Νεμέα.<br><br>Η Νεμέα και η Πελοπόννησος δεν είναι απλώς περιοχές παραγωγής κρασιού· είναι η καρδιά της ελληνικής αμπελουργίας, όπου οι αρχαίες παραδόσεις συναντούν τη σύγχρονη οινοποίηση. Η περιοχή της Νεμέας, γνωστή για την ποικιλία Αγιωργίτικο, είναι η μεγαλύτερη ΠΟΠ ερυθρού κρασιού στην Ελλάδα και παράγει κρασιά που κυμαίνονται από ελαφριές, φρουτώδεις εκφράσεις έως γεμάτα κόκκινα κατάλληλα για παλαίωση. Η Πελοπόννησος, με το ορεινό της ανάγλυφο και το μεσογειακό της κλίμα, προσφέρει ένα μοναδικό σκηνικό για την οινοποίηση, δημιουργώντας κρασιά που είναι ταυτόχρονα ιστορικά σημαντικά και εξαιρετικά αναγνωρισμένα από τους κριτικούς.<br><br>Τα οινοποιεία της περιοχής, πολλά από τα οποία δέχονται επισκέπτες, αναδεικνύουν ό,τι καλύτερο έχει να προσφέρει η ελληνική αμπελουργία, από τους αμπελώνες έως τις γευσιγνωσίες. Τα οινοποιεία της Πελοποννήσου είναι ανοιχτά στους επισκέπτες και προσφέρουν μια ματιά στον αρχαίο κόσμο της οινοποίησης και στις σύγχρονες τεχνικές που μετέτρεψαν αυτή την κάποτε παραμελημένη περιοχή σε έναν οινικό προορισμό παγκόσμιου επιπέδου."} },
   { img:'ungrafted_story.jpg', tag:{en:'',el:''}, title:{en:'Unmatched',el:'Απαράμιλλα'},
+    sub:{en:'Our ungrafted story',el:'Η δική μας ιστορία των μη εμβολιασμένων κλημάτων'},
     body:{en:"Oddly enough, our interest in ungrafted vines started in Argentina. A country undamaged by phylloxera. It is there we discovered the authentic taste of old vines. Thus, we set off to find our own roots in Greece.",
           el:"Όσο περίεργο κι αν ακούγεται, το ενδιαφέρον μας για τα μη εμβολιασμένα κλήματα ξεκίνησε στην Αργεντινή — μια χώρα που δεν επλήγη ποτέ από τη φυλλοξήρα. Εκεί ανακαλύψαμε την αυθεντική γεύση των παλιών κλημάτων. Έτσι, ξεκινήσαμε να αναζητούμε τις δικές μας ρίζες στην Ελλάδα."} },
   { img:'santorini_field.jpg', tag:{en:'Case Study',el:'Μελέτη Περίπτωσης'}, title:{en:'Santorini - Kingdom of Assyrtiko Autochthonous Grapes',el:'Σαντορίνη - Το Βασίλειο του Αυτόχθονου Ασύρτικου'},
@@ -893,17 +927,22 @@ const modalBackdrop = document.getElementById('modalBackdrop');
 const modalBox = document.getElementById('modalBox');
 const modalClose = document.getElementById('modalClose');
 function openTextModal(item){
-  modalBox.className = 'modal-box';
+  /* Foto: stessa inquadratura (4:3) che si vede nel sito, a tutta larghezza della scheda.
+     Il video (Ningxia) mantiene il proprio riquadro. */
+  const isPhoto = !item.video;
+  modalBox.className = 'modal-box' + (isPhoto ? ' card-photo' : '');
   const mediaHtml = item.video
     ? `<iframe src="${item.video}" allow="autoplay; fullscreen" allowfullscreen style="width:100%; height:100%; border:0;"></iframe>`
     : `<img src="${item.img}" alt="">`;
   modalBox.innerHTML = `
-    <div class="modal-media">${mediaHtml}</div>
+    <div class="modal-media${isPhoto ? ' site-frame' : ''}">${mediaHtml}</div>
     <div class="modal-body">
       <div class="m-tag">${t(item.tag)}</div>
       <h2>${t(item.title)}</h2>
+      ${item.sub ? `<div class="m-sub">${t(item.sub)}</div>` : ''}
       <p>${t(item.body)}</p>
     </div>`;
+  modalBox.scrollTop = 0;
   modalBackdrop.classList.add('show');
   modalClose.classList.add('show');
   document.body.style.overflow='hidden';
@@ -941,6 +980,7 @@ function renderProjects(){
       <div>
         <div class="proj-tag">${t(p.tag)}</div>
         <h3>${t(p.title)}</h3>
+        ${p.sub ? `<div class="proj-sub">${t(p.sub)}</div>` : ''}
         <p>${t(p.body)}</p>
         <span class="proj-link i18n" data-en="Discover" data-el="Ανακαλύψτε">Discover</span>
       </div>`;
@@ -948,6 +988,23 @@ function renderProjects(){
     host.appendChild(row);
   });
 }
+
+/* WINEMAKING PHILOSOPHY — "Discover" apre la scheda con la stessa foto del sito (foto sopra, testo sotto).
+   Foto e testi vengono letti dalla riga stessa, quindi restano sempre allineati al sito (EN/EL). */
+function openPhilModal(row){
+  const img = row.querySelector('.phil-media img');
+  const h4  = row.querySelector('.phil-text h4');
+  const p   = row.querySelector('.phil-text p');
+  openTextModal({
+    img: img.getAttribute('src'),
+    tag:   { en:'Winemaking philosophy', el:'Φιλοσοφία Οινοποίησης' },
+    title: { en:h4.dataset.en, el:h4.dataset.el },
+    body:  { en:p.dataset.en,  el:p.dataset.el }
+  });
+}
+document.querySelectorAll('.phil-row').forEach(row=>{
+  row.addEventListener('click', ()=> openPhilModal(row));
+});
 
 /* ============================================================
    SERVIZI (lista editoriale)
@@ -1081,13 +1138,15 @@ function initTestWine(){
 
 /* SEZIONE: FILM — carosello con 2 video reali (Facebook) + 4 schede "Coming Soon" */
 const FILMS = [
-  { kind:'video', poster:'bacchus_poster.jpg', url:'https://fb.watch/v/7DcDylCG1/',
+  { kind:'video', poster:'bacchus_poster.jpg', url:'https://fb.watch/v/aCPT5t000/?fs=e',
     title:{en:'Bacchus', el:'Βάκχος'} },
-  { kind:'video', poster:'fondazione_poster.jpg', url:'https://m.facebook.com/story.php?story_fbid=pfbid0r1NdFuJ8hdKLaPh3Xp6HNevRog6UY7bE6FmwfmUpAqpCJtJUXFNWQGEqJJFdUKvDl&id=100064591725891',
+  { kind:'video', poster:'fondazione_poster.jpg', url:'https://www.facebook.com/sormariagricultureltd/videos/1805735126962822/?idorvanity=1607126637782057',
     title:{en:'Foundation', el:'Θεμελίωση'} },
   { kind:'video', poster:'thirdvideo_poster.jpg', url:'https://fb.watch/v/1znGKCFB1e/',
     title:{en:'Sormarí', el:'Sormarí'} },
-  { kind:'soon' }, { kind:'soon' }, { kind:'soon' }
+  { kind:'video', poster:'video4_poster.jpg', url:'https://fb.watch/v/9buaddFI8/',
+    title:{en:'Sormarí', el:'Sormarí'} },
+  { kind:'soon' }, { kind:'soon' }
 ];
 function openVideoModal(item){
   window.open(item.url, '_blank', 'noopener,noreferrer');
@@ -1097,7 +1156,7 @@ function initFilms(){
     const item = FILMS[i];
     const card = document.createElement('div');
     if(item.kind==='soon'){
-      card.innerHTML = `<img src="coming_soon.jpg" alt="">`;
+      card.innerHTML = `<img src="coming_soon_sormari.jpg" alt="Sormarí — Coming Soon">`;
       card.style.cursor = 'default';
     } else {
       card.innerHTML = `<img src="${item.poster}" alt=""><div class="g-play">▶</div>`;
