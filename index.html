@@ -43,6 +43,11 @@ em{font-style:italic; color:var(--bordeaux);}
 .kicker::before{ content:'•'; color:var(--bordeaux); font-size:1.1rem; }
 .section-head{ max-width:680px; margin-bottom:56px; }
 .section-head h2{ font-size:clamp(1.9rem,3.6vw,2.9rem); line-height:1.15; }
+/* titolo Projects: sempre su un solo rigo */
+#projects .section-head{ max-width:none; }
+#projects .section-head p{ max-width:680px; }
+.section-head h2.title-oneline{ white-space:nowrap; }
+@media (max-width:700px){ .section-head h2.title-oneline{ font-size:4.3vw; } }
 .section-head p{ margin-top:16px; color:var(--ink-soft); font-size:1.02rem; max-width:60ch; }
 .section.dark .section-head p{ color:rgba(239,231,214,.75); }
 .btn{ display:inline-flex; align-items:center; gap:10px; padding:14px 28px; border:1px solid var(--ink); font-size:.78rem; letter-spacing:1.6px; text-transform:uppercase; transition:background .35s ease, color .35s ease, border-color .35s ease; }
@@ -564,7 +569,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
   <div class="wrap">
     <div class="section-head">
       <div class="kicker i18n" data-en="Projects" data-el="Έργα">Projects</div>
-      <h2 class="i18n" data-en="From Santorini Island to Ningxia — China" data-el="Από τη Σαντορίνη έως τη Νινγκσιά — Κίνα">From Santorini Island to Ningxia — China</h2>
+      <h2 class="i18n title-oneline" data-en="From Santorini Island to Ningxia (China)" data-el="Από τη Σαντορίνη έως τη Νινγκσιά (Κίνα)">From Santorini Island to Ningxia (China)</h2>
       <p class="i18n" data-en="From unexplored volcanic varieties to centenarian, ungrafted vines — from scratch to success." data-el="Από ανεξερεύνητες ηφαιστειογενείς ποικιλίες έως εκατοντάχρονα, μη εμβολιασμένα κλήματα — από το μηδέν έως την επιτυχία.">From unexplored volcanic varieties to centenarian, ungrafted vines — from scratch to success.</p>
     </div>
     <div id="projectsList"></div>
@@ -874,7 +879,7 @@ function scrollToId(id){
    CONTENUTI
    ============================================================ */
 const PROJECTS = [
-  { video:'https://drive.google.com/file/d/19kB2tiPoWRTNLVt3BMtOGrVAVxxVub3e/preview', tag:{en:'Region Spotlight',el:'Ανάδειξη Περιοχής'}, title:{en:'Ningxia — China',el:'Νινγκσιά — Κίνα'},
+  { video:'https://drive.google.com/file/d/19kB2tiPoWRTNLVt3BMtOGrVAVxxVub3e/preview', tag:{en:'Region Spotlight',el:'Ανάδειξη Περιοχής'}, title:{en:'Ningxia (China)',el:'Νινγκσιά (Κίνα)'},
     body:{en:"With over 18,000 hectares of vineyards, a Bordeaux-inspired classification, and a growing interest in wine tourism, Ningxia represents the modern and dynamic face of Chinese wine: a region still to be discovered, but already determined to make its mark on the world's tables.",
           el:"Με πάνω από 18.000 εκτάρια αμπελώνων, μια ταξινόμηση εμπνευσμένη από το Μπορντό, και ένα αυξανόμενο ενδιαφέρον για τον οινοτουρισμό, η Νινγκσιά αντιπροσωπεύει το σύγχρονο και δυναμικό πρόσωπο του κινέζικου κρασιού: μια περιοχή που παραμένει προς ανακάλυψη, αλλά είναι ήδη αποφασισμένη να αφήσει το στίγμα της στα τραπέζια του κόσμου."} },
   { img:'ungrafted_roots.jpg', tag:{en:'',el:''}, title:{en:'Ungrafted',el:'Χωρίς εμβολιασμό'},
