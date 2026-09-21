@@ -1277,15 +1277,19 @@ const SEARCH_SECTIONS = [
   {id:'contact', label:{en:'Contact',el:'Επικοινωνία'}}
 ];
 function escapeHtml(s){ return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+const normText = t => (t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 function searchSite(query){
   const q = query.trim().toLowerCase();
   if(!q) return [];
+  const qn = normText(q);
   const results = [];
   SEARCH_SECTIONS.forEach(sec=>{
     const el = document.getElementById(sec.id);
     if(!el) return;
     const text = (el.innerText || el.textContent || '').toLowerCase();
-    if(text.includes(q)) results.push(sec);
+    /* anche il nome della sezione (EN/EL) conta: es. "contact" -> Contact, "επικοινωνια" -> Επικοινωνία */
+    const labelHit = qn.length >= 3 && [sec.label.en, sec.label.el].some(l => normText(l).includes(qn));
+    if(text.includes(q) || labelHit) results.push(sec);
   });
   return results;
 }
@@ -1331,8 +1335,8 @@ const BOT_FALLBACK = {en:"I couldn't find that anywhere on the site. Try a diffe
 const BOT_GREETING = {en:"Hello! I'm the Sormarí assistant. Type any word and I'll search the whole site for it.", el:"Γεια σας! Είμαι ο βοηθός της Sormarí. Γράψτε οποιαδήποτε λέξη και θα την αναζητήσω σε όλον τον ιστότοπο."};
 const BOT_CHIPS = [
   {en:'wine',el:'κρασί', k:'wine'},
-  {en:'services',el:'υπηρεσίες', k:'services'},
-  {en:'contact',el:'επικοινωνία', k:'contact'},
+  {en:'services',el:'υπηρεσίες', k:'services', goto:'services'},
+  {en:'contact',el:'επικοινωνία', k:'contact', goto:'contact'},
 ];
 
 const botFab = document.getElementById('botFab');
@@ -1359,9 +1363,19 @@ function renderBotChips(){
     const chip = document.createElement('button');
     chip.className = 'bot-chip';
     chip.textContent = c[lang];
-    chip.addEventListener('click', ()=> handleBotQuery(c[lang]));
+    chip.addEventListener('click', ()=> c.goto ? handleBotGoto(c.goto, c[lang]) : handleBotQuery(c[lang]));
     botChips.appendChild(chip);
   });
+}
+/* Chip rapido con destinazione: risponde e apre direttamente la sezione */
+function handleBotGoto(id, label){
+  const lang = document.documentElement.getAttribute('data-lang')||'en';
+  const sec = SEARCH_SECTIONS.find(x=> x.id===id);
+  botAddMessage(escapeHtml(label), 'user');
+  setTimeout(()=>{
+    botAddMessage(lang==='el' ? `Σας μεταφέρω στην ενότητα «${sec.label.el}»…` : `Taking you to the ${sec.label.en} section…`, 'bot');
+    setTimeout(()=>{ botPanel.classList.remove('open'); scrollToId(id); }, 600);
+  }, 300);
 }
 function handleBotQuery(query){
   const lang = document.documentElement.getAttribute('data-lang')||'en';
