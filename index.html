@@ -286,8 +286,12 @@ header.nav{
 .webradio-img img{ width:100%; max-width:380px; margin:0 auto; filter:drop-shadow(0 30px 50px rgba(0,0,0,.25)); }
 @media (max-width:800px){ .webradio-row{ grid-template-columns:1fr; } .webradio-img{ order:-1; } }
 /* SEZIONE: VIDEO sotto Web Radio — nera, stessa altezza della Web Radio (riquadro 16:9 alto 380px) */
-.section.video-band{ background:#000; padding:74px 0; }
+.section.video-band{ background:#000; padding:54px 0; }
+.video-caption{ font-family:var(--serif); font-size:1rem; letter-spacing:.32em; text-transform:uppercase; color:var(--gold-pale); text-align:center; line-height:1.2; }
+@media (max-width:560px){ .video-caption{ font-size:.8rem; letter-spacing:.2em; } }
 .video-band-inner{ display:flex; flex-direction:column; align-items:center; gap:22px; }
+.photo-band{ margin:0; padding:0; background:#000; line-height:0; }
+.photo-band img{ display:block; width:100%; height:auto; border:0; }
 .video-frame{ position:relative; box-sizing:border-box; width:min(675px,100%); aspect-ratio:16/9; background:#000; border:1px solid rgba(201,166,104,.28); box-shadow:0 30px 60px rgba(0,0,0,.55); }
 .video-frame .video-ph{ position:absolute; left:50%; top:50%; width:110px; height:110px; transform:translate(-50%,-50%); opacity:.85; pointer-events:none; }
 .video-frame iframe{ position:relative; z-index:1; display:block; width:100%; height:100%; border:0; }
@@ -317,10 +321,11 @@ header.nav{
 .socials-inline a:hover{ background:var(--bordeaux-deep); transform:translateY(-2px); }
 .socials-inline a img{ width:16px; height:16px; }
 .form-field{ margin-bottom:18px; }
-.privacy-link{ display:block; margin-top:16px; font-size:.72rem; letter-spacing:.5px; color:var(--ink-soft); text-decoration:underline; text-align:center; }
+.privacy-link{ display:block; margin-top:12px; font-size:.74rem; font-weight:600; letter-spacing:.5px; color:var(--ink-soft); text-decoration:underline; text-align:left; }
 .privacy-link:hover{ color:var(--bordeaux); }
 .form-field label{ display:block; font-size:.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
-.form-field input, .form-field textarea{ width:100%; background:#fff; border:1px solid var(--line); padding:13px 16px; font-family:var(--sans); font-size:.95rem; color:var(--ink); }
+.form-field input, .form-field textarea{ width:100%; background:#fff; border:1px solid var(--line); border-radius:4px; padding:13px 16px; font-family:var(--sans); font-size:.95rem; color:var(--ink); }
+#cfSendBtn{ border-radius:4px; }
 .form-field textarea{ min-height:120px; resize:vertical; }
 .form-field input:focus, .form-field textarea:focus{ outline:none; border-color:var(--bordeaux); }
 @media (max-width:800px){ .contact-grid{ grid-template-columns:1fr; } }
@@ -718,6 +723,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 <!-- INIZIO SEZIONE: VIDEO (sotto Web Radio, sfondo nero, video Facebook incorporato) -->
 <section class="section video-band" id="sormarivideo" aria-label="Sormarí video">
   <div class="wrap video-band-inner">
+    <div class="video-caption">SORMARÍ WEB RADIO TRAILER</div>
     <div class="video-frame">
       <img class="video-ph" src="Logo.png" alt="">
       <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Ffb.watch%2Fv%2F9buaddFI8%2F&amp;show_text=false&amp;width=734&amp;t=0" title="Sormarí video" loading="lazy" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
@@ -726,6 +732,12 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
   </div>
 </section>
 <!-- FINE SEZIONE: VIDEO -->
+
+<!-- INIZIO SEZIONE: FOTO CANTINA (a tutta larghezza, senza bordi) -->
+<section class="photo-band" id="cellar" aria-label="Sormarí">
+  <img src="sormari_cellar.jpg" alt="Sormarí — bottle among the barrels in the cellar">
+</section>
+<!-- FINE SEZIONE: FOTO CANTINA -->
 
 <!-- INIZIO SEZIONE: ISTITUTIONAL PARTNERS -->
 <section class="section dark ceo-standalone" id="instpartners">
