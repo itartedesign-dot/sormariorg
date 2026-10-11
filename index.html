@@ -283,6 +283,16 @@ header.nav{
 .partner-logos .partner-tile.logo-tile .pt-caption{ background:#fff; color:var(--ink-soft); text-align:center; height:26px; display:flex; align-items:center; justify-content:center; }
 #phoenixTile .pt-caption{ background:#0b0705; color:#fff; }
 
+/* SEZIONE: SORMARI AGRICULTURE LTD — logo largo 1/3 di quello del banner (computer ~384px -> 128px; telefono 280px -> 93px) */
+.agri-wrap{ max-width:820px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.agri-logo{ width:min(128px, 31%); height:auto; margin-bottom:26px; }
+.agri-title{ font-size:clamp(1.5rem, 3.2vw, 2.2rem); letter-spacing:2px; color:var(--bordeaux); margin-bottom:6px; }
+.agri-wrap p{ margin-bottom:18px; color:var(--ink-soft); }
+.agri-wrap p.agri-lead{ font-family:var(--serif); font-style:italic; font-size:1.35rem; color:var(--bordeaux); margin-bottom:28px; }
+.agri-wrap p.agri-close{ font-family:var(--serif); font-style:italic; font-size:1.2rem; color:var(--ink); margin-top:8px; }
+.agri-brands{ display:flex; justify-content:center; align-items:flex-end; gap:28px; margin-top:22px; }
+.agri-brands img{ width:84px; height:auto; }
+@media (max-width:700px){ .agri-logo{ width:93px; } .agri-brands{ gap:18px; } .agri-brands img{ width:68px; } }
 /* SEZIONE: MERCHANDISING — logo, video, catalogo sfogliabile, scarica PDF */
 .merch-wrap{ display:flex; flex-direction:column; align-items:center; gap:44px; }
 .merch-logo{ width:min(300px, 70%); height:auto; filter:drop-shadow(0 18px 36px rgba(0,0,0,.18)); }
@@ -310,6 +320,13 @@ header.nav{
 .fb-counter{ margin-top:-28px; font-size:.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--ink-soft); }
 .merch-download{ font-family:var(--serif); font-size:1.5rem; color:var(--bordeaux); border-bottom:1px solid var(--gold); padding-bottom:4px; margin-top:-10px; }
 .merch-download:hover{ color:var(--bordeaux-bright); }
+#merchandising .flipbook-box{ background:var(--dark-2); border-color:rgba(201,166,104,.28); }
+#merchandising .fb-prev{ border-right-color:var(--gold-pale); }
+#merchandising .fb-next{ border-left-color:var(--gold-pale); }
+#merchandising .fb-counter{ color:rgba(239,231,214,.6); }
+#merchandising .merch-download{ color:var(--gold-pale); }
+#merchandising .merch-download:hover{ color:var(--cream); }
+#merchandising .merch-logo{ filter:drop-shadow(0 18px 36px rgba(0,0,0,.6)); }
 @media (max-width:700px){
   .merch-wrap{ gap:32px; }
   .flipbook-box{ padding:26px 30px; }
@@ -522,6 +539,26 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 </section>
 <!-- FINE SEZIONE: HOME / HERO -->
 
+<!-- INIZIO SEZIONE: SORMARI AGRICULTURE LTD (evoluzione del marchio) -->
+<section class="section" id="agriculture">
+  <div class="wrap agri-wrap">
+    <img class="agri-logo" src="logo_agriculture.webp" alt="Sormarí Agriculture Ltd">
+    <h2 class="agri-title">SORMARÍ AGRICULTURE LTD</h2>
+    <p class="i18n agri-lead" data-en="The journey of brand evolution…" data-el="Η πορεία εξέλιξης του σήματος…">The journey of brand evolution…</p>
+    <p class="i18n" data-en="The concept of brand evolution is much like a journey, complex and fascinating. It is a process that captures the growth and transformation of a brand&#x27;s identity, values and market position over time. This metamorphosis is not limited to a simple change of logo or slogan; it is a complete overhaul that reflects the brand&#x27;s response to market dynamics, consumer behaviour and technological progress. The evolution of a brand is proof of its resilience and adaptability, showing how it has weathered the ups and downs of the business landscape." data-el="Η έννοια της εξέλιξης ενός σήματος μοιάζει με ένα ταξίδι, σύνθετο και συναρπαστικό. Είναι μια διαδικασία που περικλείει την ανάπτυξη και τον μετασχηματισμό της ταυτότητας, των αξιών και της θέσης ενός σήματος στην αγορά με την πάροδο του χρόνου. Αυτή η μεταμόρφωση δεν περιορίζεται σε μια απλή αλλαγή λογοτύπου ή σλόγκαν· είναι μια ολική αναθεώρηση που αντανακλά την απάντηση του σήματος στη δυναμική της αγοράς, στη συμπεριφορά των καταναλωτών και στις τεχνολογικές εξελίξεις. Η εξέλιξη ενός σήματος αποδεικνύει την ανθεκτικότητα και την προσαρμοστικότητά του, δείχνοντας πώς κατάφερε να αντιμετωπίσει τα σκαμπανεβάσματα του επιχειρηματικού τοπίου.">The concept of brand evolution is much like a journey, complex and fascinating. It is a process that captures the growth and transformation of a brand&#x27;s identity, values and market position over time. This metamorphosis is not limited to a simple change of logo or slogan; it is a complete overhaul that reflects the brand&#x27;s response to market dynamics, consumer behaviour and technological progress. The evolution of a brand is proof of its resilience and adaptability, showing how it has weathered the ups and downs of the business landscape.</p>
+    <p class="i18n" data-en="The genesis of SORMARÍ AGRICULTURE LTD perfectly embodies this journey of brand evolution. It was born as an entity conceived by a qualified international team of agronomists and oenologists, able to provide comprehensive consulting services centred on the science of oenology, the study of how grapes are transformed into wine: from the grape suited to its production (microbiology, chemistry and sensory characteristics), to the production process itself, including the related techniques (for example filtration, crushing, pumping over), through to the supply of oenological products and laboratory analyses." data-el="Η γένεση της SORMARÍ AGRICULTURE LTD ενσαρκώνει απόλυτα αυτή την πορεία εξέλιξης του σήματος. Γεννήθηκε ως οντότητα που συνέλαβε μια εξειδικευμένη διεθνής ομάδα γεωπόνων και οινολόγων, ικανή να παρέχει ολοκληρωμένες συμβουλευτικές υπηρεσίες με επίκεντρο την επιστήμη της οινολογίας, τη μελέτη της μετατροπής του σταφυλιού σε κρασί: από το κατάλληλο σταφύλι για την παραγωγή του (μικροβιολογία, χημεία και οργανοληπτικά χαρακτηριστικά), στην ίδια την παραγωγική διαδικασία, μαζί με τις σχετικές τεχνικές (για παράδειγμα διήθηση, σύνθλιψη, remontage), έως την προμήθεια οινολογικών προϊόντων και τις εργαστηριακές αναλύσεις.">The genesis of SORMARÍ AGRICULTURE LTD perfectly embodies this journey of brand evolution. It was born as an entity conceived by a qualified international team of agronomists and oenologists, able to provide comprehensive consulting services centred on the science of oenology, the study of how grapes are transformed into wine: from the grape suited to its production (microbiology, chemistry and sensory characteristics), to the production process itself, including the related techniques (for example filtration, crushing, pumping over), through to the supply of oenological products and laboratory analyses.</p>
+    <p class="i18n" data-en="Over the years, the journey of SORMARÍ AGRICULTURE LTD has evolved through the dynamics of trademarks and brands: in particular, this evolution has focused on the creation of the brands © SORMARÍ.ORG, © SORMARÍ WEB RADIO and © SORMARÍ MERCHANDISING." data-el="Με τα χρόνια, η πορεία της SORMARÍ AGRICULTURE LTD εξελίχθηκε μέσα από τη δυναμική των σημάτων και των brands: ειδικότερα, η εξέλιξη αυτή επικεντρώθηκε στη δημιουργία των σημάτων © SORMARÍ.ORG, © SORMARÍ WEB RADIO και © SORMARÍ MERCHANDISING.">Over the years, the journey of SORMARÍ AGRICULTURE LTD has evolved through the dynamics of trademarks and brands: in particular, this evolution has focused on the creation of the brands © SORMARÍ.ORG, © SORMARÍ WEB RADIO and © SORMARÍ MERCHANDISING.</p>
+    <p class="i18n" data-en="The primary function of each brand is to distinguish an activity, a product or a comprehensive service offered by SORMARÍ AGRICULTURE LTD from those of its competitors, contributing to brand recognition in national and international markets." data-el="Η κύρια λειτουργία κάθε σήματος είναι να διακρίνει μια δραστηριότητα, ένα προϊόν ή μια ολοκληρωμένη υπηρεσία της SORMARÍ AGRICULTURE LTD από εκείνες των ανταγωνιστών της, συμβάλλοντας στην αναγνωρισιμότητα του σήματος στις εθνικές και διεθνείς αγορές.">The primary function of each brand is to distinguish an activity, a product or a comprehensive service offered by SORMARÍ AGRICULTURE LTD from those of its competitors, contributing to brand recognition in national and international markets.</p>
+    <p class="i18n agri-close" data-en="The journey of SORMARÍ AGRICULTURE LTD is therefore one of continuous expansion and evolution… The story continues…" data-el="Η πορεία της SORMARÍ AGRICULTURE LTD χαρακτηρίζεται λοιπόν από συνεχή επέκταση και εξέλιξη… Η ιστορία συνεχίζεται…">The journey of SORMARÍ AGRICULTURE LTD is therefore one of continuous expansion and evolution… The story continues…</p>
+    <div class="agri-brands">
+      <img src="logo_sormari.webp" alt="Sormarí.org">
+      <img src="logo_webradio.webp" alt="Sormarí Web Radio">
+      <img src="logo_merchandising.webp" alt="Sormarí Merchandising">
+    </div>
+  </div>
+</section>
+<!-- FINE SEZIONE: SORMARI AGRICULTURE LTD -->
+
 <!-- INIZIO SEZIONE: CHI SIAMO (ABOUT) -->
 <section class="section alt" id="about">
   <div class="wrap">
@@ -711,7 +748,7 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 <!-- FINE SEZIONE: FILM / MEDIA -->
 
 <!-- INIZIO SEZIONE: MERCHANDISING -->
-<section class="section" id="merchandising">
+<section class="section dark" id="merchandising">
   <div class="wrap merch-wrap">
     <img class="merch-logo" src="logo_merchandising.webp" alt="Sormarí Merchandising">
 
@@ -1195,9 +1232,10 @@ const FILMS = [
     title:{en:'Foundation', el:'Θεμελίωση'} },
   { kind:'video', poster:'thirdvideo_poster.jpg', url:'https://fb.watch/v/1znGKCFB1e/',
     title:{en:'Sormarí', el:'Sormarí'} },
+  { kind:'video', poster:'poster_merchandising.jpg', url:'https://drive.google.com/file/d/12n14i_tdDnmBfGkfqKQuS9LCCnFDFaQV/view',
+    title:{en:'Merchandising', el:'Merchandising'} },
   { kind:'video', poster:'poster_bacchus_scene.jpg', url:'https://fb.watch/v/9buaddFI8/',
-    title:{en:'Sormarí', el:'Sormarí'} },
-  { kind:'soon' }, { kind:'soon' }
+    title:{en:'Sormarí Web Radio', el:'Sormarí Web Radio'} }
 ];
 function openVideoModal(item){
   window.open(item.url, '_blank', 'noopener,noreferrer');
@@ -1382,6 +1420,7 @@ document.getElementById('cfSendBtn').addEventListener('click', ()=>{
    ============================================================ */
 const SEARCH_SECTIONS = [
   {id:'home', label:{en:'Home',el:'Αρχική'}},
+  {id:'agriculture', label:{en:'Sormarí Agriculture Ltd',el:'Sormarí Agriculture Ltd'}},
   {id:'about', label:{en:'About',el:'Σχετικά'}},
   {id:'philosophy', label:{en:'Winemaking Philosophy',el:'Φιλοσοφία Οινοποίησης'}},
   {id:'projects', label:{en:'Projects',el:'Έργα'}},
