@@ -290,9 +290,9 @@ header.nav{
 .agri-wrap p{ margin-bottom:18px; color:var(--ink-soft); }
 .agri-wrap p.agri-lead{ font-family:var(--serif); font-style:italic; font-size:1.35rem; color:var(--bordeaux); margin-bottom:28px; }
 .agri-wrap p.agri-close{ font-family:var(--serif); font-style:italic; font-size:1.2rem; color:var(--ink); margin-top:8px; }
-.agri-brands{ display:flex; justify-content:center; align-items:flex-end; gap:28px; margin-top:22px; }
-.agri-brands img{ width:84px; height:auto; }
-@media (max-width:700px){ .agri-logo{ width:93px; } .agri-brands{ gap:18px; } .agri-brands img{ width:68px; } }
+.agri-brands{ display:flex; justify-content:center; align-items:flex-end; gap:12px; margin-top:26px; width:100%; }
+.agri-brands img{ width:210px; max-width:32%; height:auto; }
+@media (max-width:700px){ .agri-logo{ width:93px; } .agri-brands{ gap:12px; } .agri-brands img{ width:31%; } }
 /* SEZIONE: MERCHANDISING — logo, video, catalogo sfogliabile, scarica PDF */
 .merch-wrap{ display:flex; flex-direction:column; align-items:center; gap:44px; }
 .merch-logo{ width:min(300px, 70%); height:auto; filter:drop-shadow(0 18px 36px rgba(0,0,0,.18)); }
@@ -435,6 +435,15 @@ footer .fsocial a{ width:38px; height:38px; border:1px solid rgba(201,166,104,.3
 footer .fsocial a:hover{ background:var(--bordeaux); }
 footer .fsocial a img{ width:16px; height:16px; }
 footer .fcopy{ font-size:.72rem; letter-spacing:.5px; }
+
+/* SEZIONE: TORNA SU — quadrato fisso in basso a sinistra (a destra c'è l'assistente) */
+.to-top{ position:fixed; left:24px; bottom:24px; z-index:1400; width:48px; height:48px; display:flex; align-items:center; justify-content:center;
+  background:var(--dark); border:1px solid var(--gold); box-shadow:0 10px 26px rgba(0,0,0,.28);
+  opacity:0; transform:translateY(12px); pointer-events:none; transition:opacity .35s ease, transform .35s ease, background .3s ease; }
+.to-top.show{ opacity:1; transform:none; pointer-events:auto; }
+.to-top::before{ content:''; width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:11px solid var(--gold-pale); margin-top:-3px; }
+.to-top:hover{ background:var(--bordeaux); }
+@media (max-width:700px){ .to-top{ left:16px; bottom:16px; width:44px; height:44px; } }
 
 /* SEZIONE: BOT FINTO (assistente basato sui contenuti del sito) */
 .bot-fab{
@@ -780,8 +789,8 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
   <div class="wrap webradio-row">
     <div class="section-head" style="margin-bottom:0;">
       <div class="kicker i18n" data-en="Web Radio" data-el="Web Radio">Web Radio</div>
-      <h2 class="i18n" data-en="Sormarí, on air soon" data-el="Sormarí, σύντομα στον αέρα">Sormarí, on air soon</h2>
-      <p class="i18n" data-en="Music, conversations and stories from the vineyard — our web radio is coming soon." data-el="Μουσική, συζητήσεις και ιστορίες από τον αμπελώνα — το web radio μας έρχεται σύντομα.">Music, conversations and stories from the vineyard — our web radio is coming soon.</p>
+      <h2 class="i18n" data-en="Sormarí, on air" data-el="Sormarí, στον αέρα">Sormarí, on air</h2>
+      <p class="i18n" data-en="Music, conversations and stories from the vineyard." data-el="Μουσική, συζητήσεις και ιστορίες από τον αμπελώνα.">Music, conversations and stories from the vineyard.</p>
       <div class="ambient-player">
         <button class="ap-btn ap-play" aria-label="Play ambient sound">
           <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -803,12 +812,12 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
 <!-- INIZIO SEZIONE: VIDEO (sotto Web Radio, sfondo nero, video Facebook incorporato) -->
 <section class="section video-band" id="sormarivideo" aria-label="Sormarí video">
   <div class="wrap video-band-inner">
-    <div class="video-caption">SORMARÍ WEB RADIO TRAILER</div>
+    <div class="video-caption">SORMARÍ WEB RADIO</div>
     <div class="video-frame">
       <img class="video-ph" src="logo_sormari.webp" alt="">
-      <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Ffb.watch%2Fv%2F9buaddFI8%2F&amp;show_text=false&amp;width=734&amp;t=0" title="Sormarí video" loading="lazy" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+      <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Ffb.watch%2FKfDaSB4dFs%2F&amp;show_text=false&amp;width=734&amp;t=0" title="Sormarí video" loading="lazy" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
     </div>
-    <a class="btn on-dark i18n" href="https://fb.watch/v/9buaddFI8/" target="_blank" rel="noopener noreferrer" data-en="Watch on Facebook" data-el="Δείτε στο Facebook">Watch on Facebook</a>
+    <a class="btn on-dark i18n" href="https://fb.watch/KfDaSB4dFs/" target="_blank" rel="noopener noreferrer" data-en="Watch on Facebook" data-el="Δείτε στο Facebook">Watch on Facebook</a>
   </div>
 </section>
 <!-- FINE SEZIONE: VIDEO -->
@@ -1234,7 +1243,7 @@ const FILMS = [
     title:{en:'Sormarí', el:'Sormarí'} },
   { kind:'video', poster:'poster_merchandising.jpg', url:'https://drive.google.com/file/d/12n14i_tdDnmBfGkfqKQuS9LCCnFDFaQV/view',
     title:{en:'Merchandising', el:'Merchandising'} },
-  { kind:'video', poster:'poster_bacchus_scene.jpg', url:'https://fb.watch/v/9buaddFI8/',
+  { kind:'video', poster:'poster_bacchus_scene.jpg', url:'https://fb.watch/KfDaSB4dFs/',
     title:{en:'Sormarí Web Radio', el:'Sormarí Web Radio'} }
 ];
 function openVideoModal(item){
@@ -1671,6 +1680,16 @@ function handleScrollBlur(){
 window.addEventListener('scroll', handleScrollBlur, {passive:true});
 </script>
 
+<button class="to-top" id="toTop" aria-label="Back to top"></button>
+<script>
+/* SEZIONE: TORNA SU — compare dopo aver sceso un po', al click riporta in cima */
+(function(){
+  const b = document.getElementById('toTop');
+  const check = ()=> b.classList.toggle('show', window.scrollY > 500);
+  window.addEventListener('scroll', check, {passive:true}); check();
+  b.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+})();
+</script>
 <script src="stats.js"></script>
 </body>
 </html>
