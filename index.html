@@ -297,7 +297,10 @@ header.nav{
 .merch-wrap{ display:flex; flex-direction:column; align-items:center; gap:44px; }
 .merch-logo{ width:min(300px, 70%); height:auto; filter:drop-shadow(0 18px 36px rgba(0,0,0,.18)); }
 .merch-video{ width:min(860px,100%); aspect-ratio:16/9; background:#000; border:1px solid rgba(169,130,47,.35); box-shadow:0 30px 60px rgba(0,0,0,.25); }
-.merch-video iframe{ display:block; width:100%; height:100%; border:0; }
+.merch-video{ position:relative; }
+.merch-video .video-ph{ position:absolute; left:50%; top:50%; width:120px; transform:translate(-50%,-50%); opacity:.85; pointer-events:none; }
+.merch-video iframe{ position:relative; z-index:1; display:block; width:100%; height:100%; border:0; }
+.merch-fb{ margin-top:-22px; }
 .flipbook-box{ position:relative; width:100%; max-width:1100px; background:var(--cream-2); border:1px solid var(--line); padding:44px 70px; display:flex; justify-content:center; }
 .flipbook{ position:relative; width:100%; max-width:920px; aspect-ratio:1190/842; perspective:2600px; touch-action:pan-y; user-select:none; -webkit-user-select:none; cursor:grab; }
 .flipbook.dragging{ cursor:grabbing; }
@@ -762,8 +765,10 @@ mark.search-hit.fade-out{ background:transparent; color:inherit; padding:0; }
     <img class="merch-logo" src="logo_merchandising.webp" alt="Sormarí Merchandising">
 
     <div class="merch-video">
-      <iframe src="https://drive.google.com/file/d/12n14i_tdDnmBfGkfqKQuS9LCCnFDFaQV/preview" title="Sormarí Merchandising video" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <img class="video-ph" src="logo_merchandising.webp" alt="">
+      <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Ffb.watch%2FKgHuaXnM6K%2F&amp;show_text=false&amp;width=734&amp;t=0" title="Sormarí Merchandising video" loading="lazy" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
     </div>
+    <a class="btn on-dark i18n merch-fb" href="https://fb.watch/KgHuaXnM6K/" target="_blank" rel="noopener noreferrer" data-en="Watch on Facebook" data-el="Δείτε στο Facebook">Watch on Facebook</a>
 
     <div class="flipbook-box">
       <button class="fb-arrow fb-prev" id="fbPrev" aria-label="Previous page"></button>
@@ -1241,7 +1246,7 @@ const FILMS = [
     title:{en:'Foundation', el:'Θεμελίωση'} },
   { kind:'video', poster:'thirdvideo_poster.jpg', url:'https://fb.watch/v/1znGKCFB1e/',
     title:{en:'Sormarí', el:'Sormarí'} },
-  { kind:'video', poster:'poster_merchandising.jpg', url:'https://drive.google.com/file/d/12n14i_tdDnmBfGkfqKQuS9LCCnFDFaQV/view',
+  { kind:'video', poster:'poster_merchandising.jpg', url:'https://fb.watch/KgHuaXnM6K/',
     title:{en:'Merchandising', el:'Merchandising'} },
   { kind:'video', poster:'poster_bacchus_scene.jpg', url:'https://fb.watch/KfDaSB4dFs/',
     title:{en:'Sormarí Web Radio', el:'Sormarí Web Radio'} }
